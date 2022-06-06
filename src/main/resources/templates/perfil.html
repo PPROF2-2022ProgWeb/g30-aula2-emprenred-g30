@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible"
+    content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="EmprenRed es una red social para emprendedores y proveedores">
+  <meta name="keywords"
+    content="Red Social Emprendedores, Catálogo Productos, Emprendimientos , Emprendedores, Proveedores,Venta por Mayor,Empreder,Pymes" />
+  <title>Perfil</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="../static/css/style.css">
+  <link rel="icon"
+    type="image/vnd.microsoft.icon"
+    href="../static/iconos/favicon.ico">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body class="d-flex flex-column justify-content-between align-items-center border">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand "
+          href="index.html"><img id="logo-nav"
+            src="../static/images/Logo_Rectangular.png"
+            alt="Logo EmprenRed" /></a>
+        <button class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse displa "
+          id="navbarNavDropdown">
+          <ul class=" navbar-nav d-flex justify-content-between ">
+
+            <li class=" campo nav-item">
+              <a class="nav-link active "
+                aria-current="page"
+                href="index.html">Inicio</a>
+            </li>
+            <li class="  campo nav-item">
+              <a class="nav-link text-white "
+                aria-current="page"
+                href="contacto.html">Contacto</a>
+            </li>
+            <li class="nav-item dropdown ">
+              <a class="btn btn-warning dropdown-toggle"
+                href="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <img src="../static/images/avataaars.svg"
+                  alt="foto logo"
+                  width="37"
+                  height="37"
+                  id="fotoPerfil"
+                  class="rounded-circle me-2" />
+              </a>
+              <ul class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item"
+                    href="listadecontactos.html">Mis Contactos</a></li>
+                <li><a class="dropdown-item"
+                    href="catalogo.html">Mi Catálogo</a></li>
+                <li><a class="dropdown-item"
+                    href="editarPerfil.html">Editar Perfil</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li> <button class="dropdown-item"
+                    type="button"
+                    onclick="logout()"> Logout</button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+
+  </header>
+  <main class="d-flex flex-column align-items-center">
+    <div class=" mb-3 bg-warning text-black  bg-opacity-50 text-center  cabecera ">
+      <ion-icon name="person-circle-outline"
+        size="large"></ion-icon>
+      <h3 id="bienvenida"> Mi Perfil</h3>
+    </div>
+
+    <div class="crearPublicacion ">
+
+      <form action=""
+        class="bg-white d-flex flex-column mb-3">
+        <div class="row">
+          <div class=""
+            id="divMensaje"
+            style="height: 70px">
+            <textarea name="descripcion"
+              id="descripcion"
+              rows="3"
+              class="form-control form-control-sm border h-100"
+              placeholder="¿Que estas pensando?"></textarea>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between px-3 py-3 rounded-bottom"
+          style="background-color: #EAEDED;">
+          <label for="foto"
+            id="labelFoto"
+            class="btn btn-sm btn-warning"> <img src="../static/iconos/image.svg">FOTO</label>
+          <input type="file"
+            name="foto"
+            id="foto"
+            hidden>
+          <button type="submit"
+            class="btn btn-sm btn-warning">Publicar</button>
+        </div>
+      </form>
+
+    </div>
+
+    <!--el div de publicaciones se repetira la cantidad de publicaciones que tenga un perfil-->
+
+    <div class="publicaciones ">
+
+      <div class="card text-center mb-3 border border-warning">
+        <div class="card-header clearfix">
+          <!-- Foto usuario -->
+          <div class="float-start">
+            <div class="">
+              <img src="../static/images/avataaars.svg"
+                class="img-fluid rounded-circle"
+                width="50">
+            </div>
+          </div>
+          <!-- Nombre usuario -->
+          <div class="float-start ms-2">
+            <h5 class="mt-1 mb-0 text-capitalize"
+              id="usernamePublic"></h5>
+            <p class="text-muted my-0">12/10/2021</p>
+          </div>
+
+        </div>
+        <!-- Texpo de publicacion -->
+        <div class="card-body">
+          <p class="card-text text-start">Buen dia grupo! </p>
+          <hr class="w-75 mx-auto mb-0 mt-2 text-muted">
+        </div>
+
+        <!-- Foto de la publicacion -->
+        <img src="../static/images/ropa.jpg"
+          alt=""
+          id="fotoPublicacion"
+          class="card-img-top img-fluid w-50 mx-auto">
+
+
+        <!-- Comentarios -->
+        <div class="card-footer">
+          <ul class="list-group list-group-flush w-100">
+            <!-- Comentario -->
+            <li class="list-group-item clearfix bg-light ">
+              <div class=" d-flex justify-content-between">
+                <p class="mb-0 text-start fw-bold">Pablo Perez</p>
+                <div class="d-flex align-items-center">
+                  <p class="text-muted my-0 ms-auto">15/10/2021</p>
+                  <button class="btn btn-sm text-danger "
+                    type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      fill="currentColor"
+                      class="bi bi-trash"
+                      viewBox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                      <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="d-flex align-items-center ">
+                <img src="../static/images/avataaars (1).svg"
+                  width="40"
+                  id="fotoPerfil"
+                  class="img-fluid rounded-circle flex-shrink-1 ">
+                <p class="my-0 text-start fw-light lh-1 ms-2 pe-5 w-100 "> Que buena Foto!!! </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Publicar comentario -->
+      <div class="list-group-item d-flex align-items-center mb-3  ">
+        <div class="flex-shrink-1 ">
+          <img src="../static/images/avataaars.svg"
+            width="40"
+            id="fotoPerfil"
+            class="img-fluid rounded-circle">
+        </div>
+        <div class="w-100 ms-3 ">
+          <form action=""
+            method="post"
+            class="bg-white d-flex ">
+            <textarea name="descripcion"
+              id="descripcion"
+              rows="2"
+              class="form-control form-control-sm border-0"
+              placeholder="Agregar comentario"></textarea>
+            <button type="submit"
+              class="btn btn-sm btn-warning my-2 ms-1">Comentar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </main>
+
+
+  <!-- Boton subir -->
+
+  <p class="flotante"><a href="#top"
+      class="btn btn-sm btn-warning shadow">Subir</a></p>
+
+  <footer class="footer py-3 bg-dark fixed-bottom d-flex justify-content-center align-items-center ">
+    <div class=" text ">
+      <p>EmprenRed - 2021</p>
+    </div>
+    <div class="d-flex justify-content-center align-items-center  ms-3 ">
+      <p>Seguinos en nuestras <b>redes</b> </p>
+    </div>
+    <div class="iconos ms-3 ">
+      <a href="https://instagram.com/emprenRed/"><img class="icono"
+          src="../static/images/topinsta.png"
+          width="30"></a>
+      <a href="https://facebook.com/emprenRed/"><img class="icono"
+          src="../static/images/topface.png"
+          width="30"></a>
+    </div>
+
+
+  </footer>
+
+  <script>
+    (function () {
+
+
+      axios.get('http://localhost:8080/' + localStorage.getItem('id'), {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Access-Control-Allow-Origin': 'http://localhost:5500',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Methods': 'OPTIONS',
+          'Access-Control-Allow-Methods': 'content-type'
+        },
+        proxy: {
+          host: '127.0.0.1',
+          port: 5500
+        }
+      }
+
+      )
+        .then((response) => {
+
+          console.log(response.data);
+
+          let buttonName = document.getElementById("dropdownMenuLink");
+          buttonName.textContent = response.data.nombre + " " + response.data.apellido;
+
+          let namePublic = document.getElementById("usernamePublic");
+          namePublic.textContent = response.data.nombre + " " + response.data.apellido;
+
+          let bienvenida = document.getElementById("bienvenida");
+          bienvenida.textContent = "Bienvenid@ " + response.data.nombre + " " + response.data.apellido;
+
+          localStorage.setItem ("nombre", response.data.nombre + " " + response.data.apellido);
+          
+        }).catch((error) => {
+          window.location.href = "login.html";
+        });
+    })();
+  </script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script src="../static/js/registro/funcionesGrupo4.js"></script>
+</body>
+
+</html>

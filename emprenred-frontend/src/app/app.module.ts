@@ -8,6 +8,7 @@ import { HeaderComponentComponent } from './header-component/header-component.co
 import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import {RouterModule} from "@angular/router";
+import { DefaultComponent } from './default/default.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {RouterModule} from "@angular/router";
     HomeComponentComponent,
     HeaderComponentComponent,
     FooterComponentComponent,
-    LoginComponentComponent
+    LoginComponentComponent,
+    DefaultComponent
   ],
   imports: [
     BrowserModule,

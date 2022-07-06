@@ -19,18 +19,14 @@
              id="navbarNavDropdown">
           <ul class=" navbar-nav d-flex justify-content-between ">
 
-            <li class=" campo nav-item">
+            <li class=" campo nav-item" *ngFor= "let data of menuData">
               <a class="nav-link text-white "
                  aria-current="page"
-                 href="index.html">Inicio</a>
+                 href={{data.path}}>{{data.title}}</a>
             </li>
-            <li class="  campo nav-item">
-              <a class="nav-link text-white "
-                 aria-current="page"
-                 href="contacto.html">Contacto</a>
-            </li>
-
-            <li id= "menuSinNombre" class="nav-item  ">
+           
+            
+           <li id= "menuSinNombre" class="nav-item  ">
               <a class="btn btn-warning ps-5 pe-5 p-2"
                  href="login"
                  role="button"
@@ -40,7 +36,7 @@
               </a>
 
             </li>
-            <li id="menuNombre" class="nav-item dropdown ">
+           <!--  <li id="menuNombre" class="nav-item dropdown ">
               <a class="btn btn-warning dropdown-toggle"
                  href="#"
                  role="button"
@@ -70,7 +66,7 @@
                              onclick="logout()"> Cerrar Sesión</button>
                 </li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div>
       </form>

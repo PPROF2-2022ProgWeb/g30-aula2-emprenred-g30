@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { HeaderComponentComponent } from './header-component/header-component.component';
 import {LoginComponentComponent} from "./login-component/login-component.component";
+import {DefaultComponent} from "./default/default.component"
 const routes: Routes = [
   {
     path: '',
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponentComponent
+  },
+  {
+    path:'default',
+    component : DefaultComponent
   }
 ];
 

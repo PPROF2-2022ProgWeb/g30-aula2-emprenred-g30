@@ -1,0 +1,81 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand "
+         href="index.html"><img id="logo-nav"
+                                src="assets/static/images/Logo_Rectangular.png"
+                                alt="Logo EmprenRed" /></a>
+      <form class="form-inline my-2 my-lg-0 center-block">
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse displa "
+             id="navbarNavDropdown">
+          <ul class=" navbar-nav d-flex justify-content-between ">
+
+            <li class=" campo nav-item">
+              <a class="nav-link text-white "
+                 aria-current="page"
+                 href="index.html">Inicio</a>
+            </li>
+            <li class="  campo nav-item">
+              <a class="nav-link text-white "
+                 aria-current="page"
+                 href="contacto.html">Contacto</a>
+            </li>
+
+            <li id= "menuSinNombre" class="nav-item  ">
+              <a class="btn btn-warning ps-5 pe-5 p-2"
+                 href="login"
+                 role="button"
+                 aria-expanded="
+                false">
+                <b>Login </b>
+              </a>
+
+            </li>
+            <li id="menuNombre" class="nav-item dropdown ">
+              <a class="btn btn-warning dropdown-toggle"
+                 href="#"
+                 role="button"
+                 id="dropdownMenuLink"
+                 data-bs-toggle="dropdown"
+                 aria-expanded="false">
+                <img src="assets/static/images/avataaars.svg"
+                     alt="foto logo"
+                     width="37"
+                     height="37"
+                     id="fotoPerfil"
+                     class="rounded-circle me-2" />
+              </a>
+              <ul class="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item"
+                       href="listadecontactos.html">Mis Contactos</a></li>
+                <li><a class="dropdown-item"
+                       href="catalogo.html">Mi Catálogo</a></li>
+                <li><a class="dropdown-item"
+                       href="editarPerfil.html">Editar Perfil</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li> <button class="dropdown-item"
+                             type="button"
+                             onclick="logout()"> Cerrar Sesión</button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </nav>
+
+
+</header>

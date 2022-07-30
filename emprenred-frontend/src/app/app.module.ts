@@ -9,6 +9,8 @@ import { FooterComponentComponent } from './footer-component/footer-component.co
 import { LoginComponentComponent } from './login-component/login-component.component';
 import {RouterModule} from "@angular/router";
 import { DefaultComponent } from './default/default.component';
+import { RegisterComponent } from './register/register.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,16 @@ import { DefaultComponent } from './default/default.component';
     HeaderComponentComponent,
     FooterComponentComponent,
     LoginComponentComponent,
-    DefaultComponent
+    DefaultComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    SweetAlert2Module.forRoot()
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

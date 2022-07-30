@@ -8,22 +8,22 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponentComponent implements OnInit {
 
-   
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   menuData =  [{
-    title : 'Inicio',
+    title : 'Home',
     path  : '',
   },
   {
-    title : 'Tienda Online',
+    title : 'Online Store',
     path : 'default',
   },
   {
-    title : 'Contacto',
+    title : 'Contact Us',
     path  : 'default',
   }]
 

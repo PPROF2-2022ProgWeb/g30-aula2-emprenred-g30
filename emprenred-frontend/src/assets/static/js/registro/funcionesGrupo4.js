@@ -34,15 +34,15 @@ function validar(campo, min, max) {
     var msg = "";
 
     if (validity.tooShort || validity.tooLong) {
-        alert("El campo debe tener entre " + min + " y " + max + " caracteres.");
+        alert("The field must have between " + min + " and " + max + " characters.");
         //msg = "Excede el largo permitido";
     }
 
     if (validity.patternMismatch) {
         if (campo.name == "contrasenia") {
-            alert(" La contraseña debe tener al menos una letra en mayuscula, una letra en minuscula y un numero ");
+            alert("the password must have at least one uppercase letter, one lowercase letter and one number ");
         } else {
-            alert("Formato del campo incorrecto");
+            alert("Wrong field format");
         }
     }
 }
@@ -56,7 +56,7 @@ function validarContrasenia2(campo1, campo2) {
     let validity = campo2.validity;
 
     if (validity.patternMismatch) {
-        alert("Las dos Contraseñas debe coincidir");
+        alert("The two passwords must match");
     }
 }
 
@@ -139,8 +139,8 @@ async function login() {
             localStorage.setItem("id", response.data.id);
             this.axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
             Swal.fire(
-                'Ingreso Satisfactorio',
-                'Redirigiendose al Perfil...',
+                'successful login',
+                'Redirecting to profile...',
                 'success'
               )
             window.location.href = "perfil.html";
@@ -148,8 +148,8 @@ async function login() {
         .catch((error) => {
             Swal.fire({
                 icon: 'error',
-                title: 'Error en el Logueo',
-                text: 'Revise su Email y/o Contraseña y vuelva a intentarlo'
+                title: 'Login Error',
+                text: 'Please check your email and password and try again.',
               })
         });
 }
@@ -176,7 +176,7 @@ function validaSiEstaLogueado(){
 
         console.log(menu.classList)
 
-        
+
     }else{
         let menu = document.getElementById("menuNombre");
         menu.classList.add("hide");

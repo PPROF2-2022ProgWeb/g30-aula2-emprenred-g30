@@ -9,6 +9,8 @@ import { FooterComponentComponent } from './footer-component/footer-component.co
 import { LoginComponentComponent } from './login-component/login-component.component';
 import {RouterModule} from "@angular/router";
 import { DefaultComponent } from './default/default.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { DefaultComponent } from './default/default.component';
     HeaderComponentComponent,
     FooterComponentComponent,
     LoginComponentComponent,
-    DefaultComponent
+    DefaultComponent,
+    DashboardComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

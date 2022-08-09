@@ -5,6 +5,7 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 import { HeaderComponentComponent } from './header-component/header-component.component';
 import {LoginComponentComponent} from "./login-component/login-component.component";
 import {DefaultComponent} from "./default/default.component"
+import {RegisterComponent} from "./register/register.component";
 const routes: Routes = [
   {
     path: '',
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path:'default',
     component : DefaultComponent
+  }
+  ,
+  {
+    path:'register',
+    component : RegisterComponent
   }
 ];
 

@@ -1,0 +1,214 @@
+<main xmlns="http://www.w3.org/1999/html">
+  <div id="contentContainer"
+       class=" col-6 d-flex justify-content-center container border border-warning mt-5 "
+       style="background-color:whitesmoke; ">
+    <div class="row">
+      <div id="realContent"
+           class="col-xs-12">
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-sm-offset-0  ">
+          </div>
+        </div>
+        <div class="row">
+          <section class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-sm-offset-0 ">
+            <div class="well well-lg">
+              <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                  <div class="row">
+                    <div class="col-xs-12"> <br><br><br>
+                      <h3><b>Bienvenid@</b></h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- Instructions -->
+                    <div class="col-xs-12">
+                      <p class="lead">Unirse es fácil <span class="text-success">y gratis.</span></p>
+                      <ul class="list-unstyled"
+                          style="line-height: 3; font-size: 1.4em; font-weight: 500;">
+                        <li><span class="fa fa-check text-success"></span>Conectate con cientos de emprendimientos</li>
+                        <li><span class="fa fa-check text-success"></span>Publicá tu catalogo</li>
+                        <li><span class="fa fa-check text-success"></span>Encontrá clientes</li>
+                        <li><span class="fa fa-check text-success"></span> O también encontrá proveedores.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- Registration Form -->
+                <div class="col-sm-6 col-xs-12">
+                  <div class="row">
+                    <div class="col-xs-12">
+
+                      <form class="needs-validation"
+                            id="formulario"
+                            novalidate>
+                        <div id="nombreDiv">
+                          <span class="input-group-addon"><i class="fa fa-user icon-2x"></i></span>
+
+                          <label for="validationTooltip01"
+                                 class="form-label"><br>Nombre</label>
+                          <input id="nombre"
+                                 name="nombre"
+                                 type="text"
+                                 class="form-control"
+                                 required
+                                 onfocusout="validar(this, 2,30)"
+                                 minlength="2"
+                                 maxlength="30"
+                                 pattern="[A-Za-z].{2,}">
+                          <div class="invalid-feedback">
+                            please fill in the field correctly
+                          </div>
+                        </div>
+                        <div class="apellido">
+
+                          <span class="input-group-addon"><i class="fa fa-user icon-2x"></i></span>
+                          <label for="validationTooltip01"
+                                 class="form-label">Apellido</label>
+                          <input type="text"
+                                 name="apellido"
+                                 class="form-control"
+                                 onfocusout="validar(this, 2,30)"
+                                 minlength="2"
+                                 maxlength="30"
+                                 pattern="[A-Za-z].{2,}"
+                                 id="apellido"
+                                 required>
+                          <div class="invalid-feedback">
+                           Por favor, rellene el campo correctamente
+                          </div>
+
+                        </div>
+
+                        <div class="provincias">
+
+                          <body onload="ProvinciasArgentinas()">
+                          <span class="input-group-addon"><i class="fa fa-map-marker icon-2x"></i></span>
+                          <label for="validationTooltip01"
+                                 class="form-label">Provincias</label>
+                          <select class="form-select"
+                                  id="provincias"
+                                  name="provincia"
+                                  required>
+                            <option selected
+                                    disabled
+                                    value="">Selecciona una Provincia</option>
+
+                          </select>
+                          <div class="invalid-feedback">
+                           Por favor seleccione una provincia
+                          </div>
+                          </body>>
+
+
+                          <div class="fechaNac">
+                            <span class="input-group-addon"><i class="fa fa-calendar-o icon-2x"></i></span>
+                            <label for="validationTooltip01"
+                                   class="form-label">Fecha de Nacimiento</label>
+                            <input name="fechaNacimiento"
+                                   type="date"
+                                   class="form-control"
+                                   id="fechaNac"
+                                   oninput="agregarEdad(this,'edad')"
+                                   required>
+                            <div class="invalid-feedback">
+                              Por favor ingrese una fecha correcta
+                            </div>
+                          </div>
+                          <br>
+
+                          <div class="">
+                            <span class="input-group-addon"><i class="fa fa-calendar-o icon-2x"></i></span>
+                            <label for="validationTooltip01"
+                                   class="form-label"> Edad :  </label> <span id="edad"></span>
+
+                          </div>
+
+
+
+                          <div class="email">
+                            <span class="input-group-addon"><i class="fa fa-envelope icon-2x"></i></span>
+                            <label for="validationTooltip01"
+                                   class="form-label">Email</label>
+                            <input id="email"
+                                   name="email"
+                                   type="email"
+                                   class="form-control"
+                                   onfocusout="validar(this, 2,30)"
+                                   minlength="2"
+                                   maxlength="30"
+                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                   required>
+                            <div class="invalid-feedback">
+                              Porfavor complete el campo correctamente
+                            </div>
+                          </div>
+
+                          <div class="contraseña">
+                            <span class="input-group-addon"><i class="fa fa-key icon-2x"></i></span>
+                            <label for="validationTooltip01"
+                                   class="form-label">Contraseña</label>
+                            <input id="password"
+                                   name="password"
+                                   type="password"
+                                   class="form-control"
+                                   onfocusout="validar(this,8,15)"
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                   minlength="8"
+                                   maxlength="15"
+                                   required>
+                            <div class="invalid-feedback">
+                              Por favor complete correctamente el campo.
+                            </div>
+                          </div>
+
+                          <div class="">
+                            <span class="input-group-addon"><i class="fa fa-key icon-2x"></i></span>
+                            <label for="validationTooltip01"
+                                   class="form-label">Confirme Contraseña </label>
+                            <input id="password2"
+                                   name="contrasenia2"
+                                   onfocusout="validarContrasenia2('password',this)"
+                                   type="password"
+                                   class="form-control"
+                                   required>
+                            <div class="invalid-feedback">
+                              Por favor complete correctamente el campo.
+                            </div>
+                          </div>
+
+                          <br>
+
+                          <div class="">
+                            <input class="btn btn-primary"
+                                   type="button"
+                                   onclick="register()"
+                                   value="Registrarse">
+
+                          </div>
+                        </div>
+                      </form>
+
+                      <div class="topCushion">Ya tenés cuenta? <a href="/login">Ingresá acá</a></div>
+                    </div>
+                    <!-- /.row -->
+                  </div>
+
+
+                  <!-- /.col-sm-6 col-xs-12 -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.well well-lg -->
+            </div>
+            <!-- /.col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-sm-offset-0 -->
+          </section>
+          <!-- /.row -->
+        </div>
+        <!-- /#realContent -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /#contentContainer -->
+  </div>
+</main>
+

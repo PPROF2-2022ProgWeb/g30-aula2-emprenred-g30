@@ -99,7 +99,7 @@ async function register() {
         .post("http://localhost:8080/registro", data)
         .then(function (response) {
             alert(response.data);
-            window.location.href = "login.html";
+            window.location.href = "/login";
         })
         .catch(function (error) {
             console.log(error.response.data);
@@ -176,7 +176,7 @@ function validaSiEstaLogueado(){
 
         console.log(menu.classList)
 
-        
+
     }else{
         let menu = document.getElementById("menuNombre");
         menu.classList.add("hide");

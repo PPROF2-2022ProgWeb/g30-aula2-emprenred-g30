@@ -79,6 +79,6 @@ System.out.println("");
         String token = request.getHeader("Authorization");
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        return new ResponseEntity<>(userDetails.getUsername(), HttpStatus.OK);
+        return new ResponseEntity<>(userDetails.getAuthorities(), HttpStatus.OK);
     }
 }

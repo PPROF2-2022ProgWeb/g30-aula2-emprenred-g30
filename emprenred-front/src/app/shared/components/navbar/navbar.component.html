@@ -1,0 +1,101 @@
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<header class="section-header">
+
+    <section class="header-main border-bottom bg-white">
+        <div class="container-fluid">
+           <div class="row p-2 pt-3 pb-3 d-flex align-items-center">
+               <div class="col-md-2">
+                   <img  class="d-none d-md-flex" src="./assets/img/EmprenRED.png" width="250">
+               </div>
+               <div class="col-md-6">
+            <div class="d-flex form-inputs">
+            <input class="form-control" type="text" placeholder="Buscá cualquier producto">
+            <i class="bx bx-search"></i>
+            </div>
+               </div>
+               
+               <div class="col-md-2">
+                   <div class="d-flex d-none d-md-flex flex-row align-items-left">
+                       <span class="shop-bag"><i class='bx bxs-shopping-bag'></i></span>
+                       <div class="d-flex flex-column ms-2">
+                           <span class="qty">2 productos</span>
+                           <span class="fw-bold">$2500</span>
+                       </div>    
+                   </div>           
+               </div>
+
+               <div class="col-md-2">
+             
+         
+
+                    <ul class="navbar-nav d-flex align-items-center"
+                    *ngIf="this.usuario!=null">
+                      <li class="nav-item">
+                          <div class="d-flex flex-row">
+                              <img src="https://i.imgur.com/EYFtR83.jpg" class="rounded-circle" width="30">
+                          </div>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{this.usuario}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item" href="/dashboard">Mi Cuenta</a></li>
+                          <li><a class="dropdown-item" href="#">Publicar Producto</a></li>
+                          <li><a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesión</a></li>
+                        </ul>
+                      </li>
+                  
+                  
+                      </ul>
+
+                      <ul class="navbar-nav d-flex align-items-center"
+                      *ngIf="this.usuario===null">
+                        <li class="nav-item">
+                            <div class="d-flex flex-row">
+                                <button pButton onclick="location.href='/auth/login'" > Iniciar Sesion / Registrarse </button>
+                            </div>
+                        </li>                   
+                    
+                        </ul>
+
+
+                         
+            </div>
+
+
+           </div>
+        </div> 
+    </section>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand d-md-none d-md-flex" href="#">Categories</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Electronica</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Vestimenta</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Celulares
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Smart Phones</a></li>
+                <li><a class="dropdown-item" href="#">Accesorios Celulares</a></li>
+                <li><a class="dropdown-item" href="#">Fundas</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </header>

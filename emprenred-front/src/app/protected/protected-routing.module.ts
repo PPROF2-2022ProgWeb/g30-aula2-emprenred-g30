@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CarritoComponent } from './components/carrito/carrito.component';
+import { ComprasComponent } from './components/compras/compras.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -7,13 +11,24 @@ const routes: Routes = [
     {
 
       path: '',
+component: DashboardComponent,
       children: [
         {
-          path: '', component: DashboardComponent
+          path: 'carrito',
+          component: CarritoComponent
         },
         {
-          path: '**', redirectTo: ''
+          path: 'compras',
+          component: ComprasComponent
         },
+        {
+          path: 'perfil',
+          component: PerfilComponent
+        },
+        {
+          path: 'ventas',
+          component: VentasComponent
+        }
       ]
 
 

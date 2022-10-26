@@ -3,6 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+emprenred-front/node_modules
+emprenred-front/.angular
 
 ### STS ###
 .apt_generated

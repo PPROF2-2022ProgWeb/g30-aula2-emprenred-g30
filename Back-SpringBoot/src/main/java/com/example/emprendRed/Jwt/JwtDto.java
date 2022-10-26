@@ -5,6 +5,8 @@
  */
 package com.example.emprendRed.Jwt;
 
+import com.example.emprendRed.Enum.ROLE;
+
 /**
  *
  * @author Usuario
@@ -16,10 +18,16 @@ public class JwtDto {
     private String username;
     private Long id;
 
-    public JwtDto(String jwt, String username, Long id) {
-        this.token=jwt;
-        this.username=username;
+    private ROLE role;
+
+
+
+    public JwtDto(String token, String username, Long id, ROLE role) {
+        this.token = token;
+        this.bearer = bearer;
+        this.username = username;
         this.id = id;
+        this.role = role;
     }
 
     public Long getId() {
@@ -53,7 +61,12 @@ public class JwtDto {
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    
 
+    public ROLE getRole() {
+        return role;
+    }
+
+    public void setRole(ROLE role) {
+        this.role = role;
+    }
 }

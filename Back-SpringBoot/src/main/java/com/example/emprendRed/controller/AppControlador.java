@@ -1,20 +1,17 @@
 
 package com.example.emprendRed.controller;
 
-import com.example.emprendRed.Jwt.JwtDto;
-import com.example.emprendRed.model.PersonaUsuarioDto;
+import com.example.emprendRed.model.DTO.PersonaUsuarioDto;
 import com.example.emprendRed.model.Usuario;
 import com.example.emprendRed.repository.UsuarioRepositorio;
 import com.example.emprendRed.service.AppService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,14 +36,10 @@ public class AppControlador {
     
   // @CrossOrigin(origins = "http://localhost:5500")
    @PostMapping("/registro")
-   public ResponseEntity<?> crear (@RequestBody PersonaUsuarioDto personaRequest) throws Exception{
+   public ResponseEntity<?> crear (@RequestBody  PersonaUsuarioDto personaRequest) throws Exception{
        
       service.crear(personaRequest);
-//      HttpHeaders headers = new HttpHeaders();
-//      headers.add("Access-Control-Allow-Origin", "http://localhost/**");
-//headers.add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS");
-//headers.add("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-//       
+
        return new ResponseEntity (personaRequest,HttpStatus.CREATED);
        
    }
@@ -80,5 +73,11 @@ System.out.println("");
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         return new ResponseEntity<>(userDetails.getAuthorities(), HttpStatus.OK);
+    }
+
+    @GetMapping("users")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    public ResponseEntity<?> getUsers (){
+       return new ResponseEntity<>(service.getUsers(), HttpStatus.OK);
     }
 }

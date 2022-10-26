@@ -1,30 +1,31 @@
+package com.example.emprendRed.model.DTO;
 
-package com.example.emprendRed.model;
+import com.example.emprendRed.Enum.ROLE;
 
+import java.math.BigInteger;
 import java.util.Date;
 
+public class EditUserDTO {
 
-public class PersonaUsuarioDto {
-    
+    private Long id;
     private String nombre;
     private String apellido;
     private String localidad;
     private Date fechaNac;
     private String email;
-    private String contraseña;
+    private ROLE role;
 
-    public PersonaUsuarioDto() {
+    public EditUserDTO() {
     }
-
-    public PersonaUsuarioDto(String nombre, String apellido, String localidad, Date fechaNac, String email, String contraseña) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.localidad = localidad;
-        this.fechaNac = fechaNac;
-        this.email = email;
-        this.contraseña = contraseña;
+    public EditUserDTO(Object[] objet) {
+    this.id = ((BigInteger) objet[0]).longValue();
+    this.nombre = (String) objet[1];
+    this.apellido = (String) objet[2];
+    this.localidad = (String) objet[3];
+    this.fechaNac = (Date) objet[4];
+    this.email = (String) objet[5];
+    this.role = (Enum.valueOf(ROLE.class,(String) objet[6]));
     }
-
     public String getNombre() {
         return nombre;
     }
@@ -65,14 +66,19 @@ public class PersonaUsuarioDto {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public ROLE getRole() {
+        return role;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setRole(ROLE role) {
+        this.role = role;
     }
-    
-            
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

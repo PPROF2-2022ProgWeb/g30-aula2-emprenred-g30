@@ -1,24 +1,26 @@
 
 package com.example.emprendRed.service;
 
+import com.example.emprendRed.Enum.ROLE;
 import com.example.emprendRed.Jwt.JwtDto;
 import com.example.emprendRed.Jwt.JwtProvider;
 import com.example.emprendRed.Jwt.JwtUtils;
+import com.example.emprendRed.model.DTO.EditUserDTO;
 import com.example.emprendRed.model.Persona;
-import com.example.emprendRed.model.PersonaUsuarioDto;
+import com.example.emprendRed.model.DTO.PersonaUsuarioDto;
 import com.example.emprendRed.model.Usuario;
 import com.example.emprendRed.repository.PersonaRepositorio;
 import com.example.emprendRed.repository.UsuarioRepositorio;
+
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -63,9 +65,10 @@ public class AppService implements UserDetailsService{
              persona.setLocalidad(request.getLocalidad());
              
              usuario.setUsername(request.getEmail());
-             usuario.setPassword(encoder.encode(request.getContraseña()));
+             usuario.setPassword(encoder.encode(request.getPassword()));
              usuario.setPersona(persona);
-             
+             usuario.setRole(Enum.valueOf(ROLE.class,request.getRole()));
+
              personaRepositorio.save(persona);
              usuarioRepositorio.save(usuario);
     }
@@ -88,9 +91,7 @@ public class AppService implements UserDetailsService{
     
     
     public void eliminar (Long id){
-        
-        
-        
+
         Usuario usuario = usuarioRepositorio.getById(id);
         Persona persona = usuario.getPersona();
         
@@ -147,10 +148,20 @@ public class AppService implements UserDetailsService{
         }
 
        String jwt = jwtUtils.generateToken(loadUserByUsername(usuario.getUsername()));
-
-        return  new JwtDto(jwt, usuario.getUsername(),usuarioRepositorio.buscarUsuarioPorEmail(usuario.getUsername()).getId());
+        Usuario user = usuarioRepositorio.buscarUsuarioPorEmail(usuario.getUsername());
+        return  new JwtDto(jwt, usuario.getUsername(),user.getId(),user.getRole());
     }
-    
+
+
+    public List<EditUserDTO> getUsers (){
+        List<Object[]>objects =usuarioRepositorio.getAllUsers();
+        List<EditUserDTO> editUserDTOList = new ArrayList<>();
+        for (Object[] obj: objects) {
+            editUserDTOList.add(new EditUserDTO(obj));
+        }
+    return editUserDTOList;
+    }
+
     
     
 }

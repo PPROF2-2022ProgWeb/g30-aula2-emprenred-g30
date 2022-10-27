@@ -3,40 +3,6 @@ body {
     color: #000;
     overflow-x: hidden;
 }
-/*
-.card {
-    border-radius: 10px;
-    background-color: #E3F2FD;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    margin-top: 80px;
-    margin-bottom: 80px;
-}
-
-.left-side {
-    height: 100%;
-}
-
-.btn-pink {
-    background: #FF5252;
-    font-size: 16px;
-    color: #fff;
-    width: 150px;
-    height: 40px;
-    border: 1px solid #FF5252;
-    text-transform: uppercase;
-}
-
-.btn-pink:hover {
-    background: #F44336;
-}
-
-.shoe-img {
-    height: 220px;
-    width: 90%;
-}
-
-*/
 /*carrusel*/
 
 /*slider*/
@@ -52,7 +18,7 @@ body {
     display:flex;
     padding: 0;
     width: 300%;
-    animation: cambio 15s infinite;
+    animation: cambio 12s infinite;
     animation-direction:alternate;
     animation-timing-function:linear;
 }

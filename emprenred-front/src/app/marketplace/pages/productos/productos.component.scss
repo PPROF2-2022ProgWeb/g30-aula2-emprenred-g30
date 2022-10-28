@@ -1,0 +1,48 @@
+.titulo {
+    background-color: #2a2927;
+    padding: 2em 0 2em 3em;
+    margin-bottom: 3em;
+    color: #f0f8ff;
+}
+.titulo h2{
+    font-size: 40px;
+}
+.container{
+    text-align: center;
+    margin-bottom: 5em;
+}
+
+.card{
+    margin: 15px 5px 30px;
+
+}
+
+.detalleproducto{
+    background-color: #5eb8e8;
+    margin: 0 30px 5px 5px;
+    padding: 10px;
+    color: #000000;
+    border: none;
+}
+.detalleproducto:hover{
+    background-color: #52a4d0;
+}
+.botoncarrito{
+    background-color: #FFC107;
+    color: #000000;
+    border: none;
+    padding: 10px;
+    margin: 0 5px 5px 5px;
+}
+
+.botoncarrito:hover{
+    background-color: #eaba28;
+
+}
+
+.cardproducto{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+

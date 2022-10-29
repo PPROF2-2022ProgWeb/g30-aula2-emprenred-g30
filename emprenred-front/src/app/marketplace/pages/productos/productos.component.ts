@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MarketplaceService } from '../../services/marketplace.service';
 
 @Component({
   selector: 'app-productos',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductosComponent implements OnInit {
 
-  constructor() { }
+  categoria: String = ""; 
+
+  constructor(private activatedRoute : ActivatedRoute,
+              private marketplaceService : MarketplaceService) { }
+
+
 
   ngOnInit(): void {
-  }
 
+    this.marketplaceService.listarProductos();
+  
+
+
+}
 }

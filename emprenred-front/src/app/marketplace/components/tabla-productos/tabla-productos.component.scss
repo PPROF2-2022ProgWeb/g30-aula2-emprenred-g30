@@ -1,0 +1,39 @@
+.titulo {
+    background-color: #2a2927;
+    padding: 2em 0 2em 3em;
+    margin-bottom: 3em;
+    color: #f0f8ff;
+}
+.titulo h2{
+    font-size: 40px;
+}
+.container{
+    text-align: center;
+    margin-bottom: 5em;
+}
+
+.card{
+    margin: 15px 5px 30px;
+
+}
+.botoncarrito{
+    background-color: #FFC107;
+    color: #000000;
+    border: none;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.botoncarrito:hover{ 
+    background-color: #eaba28;
+
+}
+
+.cardproducto{
+    text-decoration: none;
+    cursor: pointer;
+}
+.card-img-top {
+   
+    //arreglar
+}

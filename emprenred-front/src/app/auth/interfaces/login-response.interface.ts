@@ -3,4 +3,5 @@ export interface LoginResponse {
     bearer:   string;
     username: string;
     id:       number;
+    role:     string; 
 }

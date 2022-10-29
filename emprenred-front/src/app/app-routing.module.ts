@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
  },
  {
+  path: 'productos',
+  loadChildren: () => import('./marketplace/marketplace.module').then(m => m.MarketplaceModule)
+},
+ {
   path: 'dashboard',
   loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule),
   canActivate: [

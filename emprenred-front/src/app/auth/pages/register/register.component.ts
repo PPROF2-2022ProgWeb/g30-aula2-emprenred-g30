@@ -23,10 +23,10 @@ export class RegisterComponent {
     'nombre': ['', [Validators.required, Validators.minLength(3)] ],
     'apellido': ['', [Validators.required, Validators.minLength(3)] ],
     'email': ['', [Validators.required, Validators.minLength(3), Validators.email] ],
-    'provincia': ['', [Validators.required, Validators.minLength(3)] ],
+    'localidad': ['', [Validators.required, Validators.minLength(3)] ],
     'fechaNac': ['', [Validators.required, DateValidator.LessThanToday] ],
-    'contraseña':['', [Validators.required, Validators.minLength(8)] ],
-    'contraseña2':['', [Validators.required, Validators.minLength(8)] ]
+    'password':['', [Validators.required, Validators.minLength(8)] ],
+    'password2':['', [Validators.required, Validators.minLength(8)] ]
 
 
   })
@@ -82,14 +82,14 @@ guardar(){
 
 registro() {
 
-  const {nombre,apellido,email,provincia,fechaNac,contraseña,contraseña2} = this.formularioRegistro.value;
+  const {nombre,apellido,email,localidad,fechaNac,password,password2} = this.formularioRegistro.value;
   console.log(nombre)
-  this.authService.register(nombre,apellido,email,provincia,fechaNac,contraseña,contraseña2)
+  this.authService.register(nombre,apellido,email,localidad,fechaNac,password,password2)
 
 }
 repitaPassword() {
 
-if(this.formularioRegistro.value["contraseña"] != this.formularioRegistro.value["contraseña2"]  ){
+if(this.formularioRegistro.value["password"] != this.formularioRegistro.value["password2"]  ){
  return true
 } else {
   return false

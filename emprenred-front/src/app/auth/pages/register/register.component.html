@@ -43,11 +43,11 @@
                      <!--- Campo Provincia -->
                      <div>
                     <label>Provincia</label>
-                    <select class="form-control" formControlName="provincia">
+                    <select class="form-control" formControlName="localidad">
                         <option [value]="item" *ngFor="let item of provincias">{{item.toString()}}</option>
                     </select>
                     <span class="form-text text-danger"
-                    *ngIf="campoEsValido('provincia')">
+                    *ngIf="campoEsValido('localidad')">
                        Debe seleccionar una provincia
                     </span>
                      </div>
@@ -63,7 +63,7 @@
                     <!--- Campos contraseña / Repita  -->
                     <div>
                     <label for="password">Contraseña</label>
-                    <input type="text" formControlName="contraseña" class="form-control" />
+                    <input type="text" formControlName="password" class="form-control" />
                     <span class="form-text text-danger"
                     *ngIf="campoEsValido('contraseña')">
                         El mínimo de carácteres para una contraseña es 8.
@@ -73,7 +73,7 @@
 
                    
                     <label for="password">Repita la contraseña</label>
-                    <input type="text" class="form-control" formControlName="contraseña2"/> 
+                    <input type="text" class="form-control" formControlName="password2"/> 
                     <div class="form-text text-danger" *ngIf="repitaPassword()">
                         <div >Las contraseñas deben coincidir</div>
                     </div><br>

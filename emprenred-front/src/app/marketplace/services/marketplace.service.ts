@@ -22,4 +22,14 @@ export class MarketplaceService {
 
 }
 
+
+getProducto(id:number): Observable<Producto>{
+   
+  const url = `${ this.baseUrl}/productos/${id}`;
+
+ return this.http.get<Producto>(url)
+
+
+}
+
 }

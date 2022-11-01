@@ -60,8 +60,6 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
-
-
 		</dependency>
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
@@ -69,12 +67,17 @@
 			<version>2.3.3</version>
 		</dependency>
 
-	<!---	<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-ri</artifactId>
-			<version>2.3.3</version>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
 		</dependency>
-	</dependencies> -->
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

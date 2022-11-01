@@ -6,6 +6,10 @@ import com.example.emprendRed.model.Usuario;
 import com.example.emprendRed.repository.UsuarioRepositorio;
 import com.example.emprendRed.service.AppService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +30,7 @@ import static java.lang.Long.parseLong;
 
 @RestController
 @RequestMapping
+@Api(value = "AppController")
 public class AppControlador {
     
     @Autowired
@@ -74,7 +79,12 @@ System.out.println("");
 
         return new ResponseEntity<>(userDetails.getAuthorities(), HttpStatus.OK);
     }
-
+    @ApiOperation(value = "Retorna lista de usaurios")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna a lista de usuarios"),
+            @ApiResponse(code = 403, message = "No autorizado para hacer la transacsion"),
+            @ApiResponse(code = 500, message = "Ups! error de sistema "),
+    })
     @GetMapping("users")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public ResponseEntity<?> getUsers (){

@@ -1,0 +1,20 @@
+<div class="titulo">
+	<h2>Productos | {{categoria}}</h2>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-3" 
+		*ngFor="let producto of productos">
+			<div class="card">
+				<img title="" alt="titulo"class="card-img-top" src="{{producto.imagen}}">
+				<div class="card-body">
+					<h5 class="card-title">{{producto.nombre}}</h5>
+					<p class="card-text">{{producto.descripcion}}</p>
+					<p class="card-precio">${{producto.precio}}</p>
+					<a class="btn btn-primary detallesproducto" routerLink="producto">Detalles</a>
+					<button class="btn btn-primary botoncarrito" name="btnAccion" value="Agregar" onclick="llamarCategoria()">Agregar al carrito</button>
+				</div>
+			</div>
+		</div>
+				</div>
+			</div>

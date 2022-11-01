@@ -1,0 +1,57 @@
+.titulo {
+    background-color: #2a2927;
+    padding: 2em 0 2em 3em;
+    margin-bottom: 3em;
+    color: #f0f8ff;
+}
+.titulo h2{
+    font-size: 40px;
+}
+.container{
+    text-align: center;
+    margin-bottom: 5em;
+}
+
+.col-3{
+    width: 350px;
+}
+
+.card{
+    margin: 15px 5px 30px;
+
+}
+.card-img-top {
+    width: 300px;
+    height: 400px;
+}
+.card-title{
+    height: 60px;
+    font-size: 25px;
+}
+
+.card-text{
+    height: 60px;
+}
+.card-precio{
+    height: 40px;
+}
+
+.botoncarrito{
+    background-color: #FFC107;
+    color: #000000;
+    border: none;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.botoncarrito:hover{ 
+    background-color: #eaba28;
+
+}
+
+.detallesproducto{
+    color: #000000;
+    border: none;
+    padding: 10px;
+    margin: 0 10px 5px 10px;
+}

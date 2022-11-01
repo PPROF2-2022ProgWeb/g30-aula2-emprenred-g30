@@ -1,3 +1,7 @@
+
+
+
+
 <div class="titulo">
     <h2>Categoría: {{categoria}}</h2>
 </div>
@@ -5,9 +9,9 @@
     <div class="detallecontainer">
         <div class="row" >
             <div class="card">
-            <img title="" alt="titulo"class="card-img-top" src="{{producto.imagen}}" height="550">
+            <img title="" alt="titulo"class="card-img-top" src="{{producto.imagen}}">
                 <div class="card-body">
-                    <h5 class="card-title">{{producto.nombre}}</h5>
+                    <h5 class="card-title">{{producto.nombre}} </h5>
                     <p class="card-text">{{producto.descripcion}}</p>
                     <p class="card-precio">${{producto.precio}}</p>
                     <button class="btn btn-primary botoncarrito" name="btnAccion" value="Agregar" onclick="llamarCategoria()">Agregar al carrito</button>

@@ -1,41 +1,94 @@
-<h5>Datos de Usuario</h5>
-<div class="grid p-fluid">
-    <div class="col-12 md:col-4">
-        <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">Nombre</span>
-            <input type="text" pInputText [(ngModel)]="usuario.nombre">         
+<p-panel header="Datos Personales">
+    <br>
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Nombre</span>
+                <input type="text" pInputText [(ngModel)]="usuario.nombre">         
+            </div>
+        </div>
+        
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup"> 
+                <span class="p-inputgroup-addon">Apellido</span>
+                <input type="text" pInputText [(ngModel)]="usuario.apellido">   
+             
+            </div>
+        </div>
+                
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Fecha Nacimiento</span>
+                <input type="date" class="form-control" [(ngModel)]="usuario.fechaNac" disabled="true">     
+            </div>
         </div>
     </div>
     
-    <div class="col-12 md:col-4">
-        <div class="p-inputgroup"> 
-            <span class="p-inputgroup-addon">Apellido</span>
-            <input type="text" pInputText [(ngModel)]="usuario.apellido">   
-         
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Tipo de Usuario</span>
+                <input type="text" pInputText [(ngModel)]="rol.authority" disabled="true">         
+            </div>
         </div>
-    </div>
-            
-    <div class="col-12 md:col-4">
-        <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">Fecha Nacimiento</span>
-            <input type="date" class="form-control" [(ngModel)]="usuario.fechaNac" disabled="true">     
+    
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup"> 
+                <span class="p-inputgroup-addon">Provincia</span>
+                <input type="text" pInputText [(ngModel)]="usuario.localidad">   
+             
+            </div>
         </div>
-    </div>
+    
+        
+            <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">Email</span>
+                    <input type="email" pInputText [(ngModel)]="email">         
+                </div>
+            </div>
+
 </div>
+<br>
 
-<div class="grid p-fluid">
-    <div class="col-12 md:col-4">
-        <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">Tipo de Usuario</span>
-            <input type="text" pInputText [(ngModel)]="rol.authority" disabled="true">         
+<p-button label="Guardar Cambios" icon="pi pi-check" iconPos="left"></p-button>
+<br>
+
+</p-panel>
+
+<br><br>
+<p-panel header="Contraseña">
+
+    <br>
+
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Contraseña Actual</span>
+                <input type="password" pInputText placeholder="Ingrese contraseña actual">         
+            </div>
         </div>
-    </div>
-
-    <div class="col-12 md:col-4">
-        <div class="p-inputgroup"> 
-            <span class="p-inputgroup-addon">Provincia</span>
-            <input type="text" pInputText [(ngModel)]="usuario.localidad">   
-         
+        
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup"> 
+                <span class="p-inputgroup-addon">Nueva Contraseña</span>
+                <input type="password" pInputText placeholder="Ingrese nueva contraseña">   
+             
+            </div>
         </div>
+                
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup"> 
+                <span class="p-inputgroup-addon">Repetir Contraseña</span>
+                <input type="password" pInputText placeholder="Repita su nueva contraseña">   
+             
+            </div>
+        </div>
+    
     </div>
-
+<br>
+<div class="izquierdo">
+    <p-button  label="Cambiar Contraseña" icon="pi pi-check" iconPos="left"></p-button>
+    </div>
+    <br>
+</p-panel>

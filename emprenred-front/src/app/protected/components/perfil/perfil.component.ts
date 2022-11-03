@@ -29,6 +29,8 @@ localidad: ""
 
 }
 
+email = localStorage.getItem('username');
+
   constructor(private protectedService : ProtectedService,
               private authService: AuthService           ) { }
 

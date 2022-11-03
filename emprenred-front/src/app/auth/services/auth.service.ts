@@ -25,7 +25,7 @@ private baseUrl: string = "http://localhost:8080";
 
   // REGISTRO
 
-  register(nombre: string ,apellido: string ,email: string ,localidad: string ,fechaNac: Date ,password:string ,password2:string ) {
+  register(nombre: string ,apellido: string ,email: string ,localidad: string ,fechaNac: string ,password:string ,password2:string ) {
 
    let role = "USUARIO"; 
 

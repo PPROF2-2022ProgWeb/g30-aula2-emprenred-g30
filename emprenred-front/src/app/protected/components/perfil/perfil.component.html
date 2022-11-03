@@ -1,1 +1,33 @@
-<p>perfil works!</p>
+<h5>Datos de Usuario</h5>
+<div class="grid p-fluid">
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">Nombre</span>
+            <input type="text" pInputText [(ngModel)]="usuario.nombre">         
+        </div>
+    </div>
+    
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup"> 
+            <span class="p-inputgroup-addon">Apellido</span>
+            <input type="text" pInputText [(ngModel)]="usuario.apellido">   
+         
+        </div>
+    </div>
+            
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">Fecha Nacimiento</span>
+            <input type="date" class="form-control" [(ngModel)]="usuario.fechaNac" disabled="true">     
+        </div>
+    </div>
+</div>
+
+<div class="grid p-fluid">
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">Tipo de Usuario</span>
+            <input type="text" pInputText [(ngModel)]="rol.authority">         
+        </div>
+    </div>
+

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.emprendRed.model.Productos;
@@ -41,6 +42,16 @@ public class ProductosController {
 		}
 		return ResponseEntity.ok(oProductos);
 			}
+	
+	//Leer carrito de un usuario
+	@GetMapping("/search")
+		public ResponseEntity<?>searchNativo(@RequestParam String filtro){
+				try {
+					return ResponseEntity.status(HttpStatus.OK).body(productosService.searchNativo(filtro));
+				}catch (Exception e) {
+						return  ResponseEntity.status(HttpStatus.NOT_FOUND).body((e.getMessage()));
+					}
+						}
 	//Actualizar
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update (@RequestBody Productos ProductosDetails, @PathVariable(value="id") Long id){
@@ -51,6 +62,7 @@ public class ProductosController {
 		//Otromodo BeanUtils.copyProperties(ProductosDetails, productos.get());
 
 		productos.get().setNombre(ProductosDetails.getNombre());
+		productos.get().setId_usuario(ProductosDetails.getId_usuario());
 		productos.get().setPrecio(ProductosDetails.getPrecio());
 		productos.get().setDescripcion(ProductosDetails.getFecha_de_baja());
 		productos.get().setCatalogo_id(ProductosDetails.getCatalogo_id());

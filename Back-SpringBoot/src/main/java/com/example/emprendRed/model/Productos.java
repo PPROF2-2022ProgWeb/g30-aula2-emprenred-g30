@@ -15,6 +15,7 @@ public class Productos {
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Long id;
 	
+	private Long id_usuario;
 	@Column(length=100)
 	private String descripcion;
 	
@@ -38,6 +39,14 @@ public class Productos {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(Long id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 	public String getDescripcion() {
@@ -104,9 +113,6 @@ public class Productos {
 		this.imagen = imagen;
 	}
 
-	
-
-	
 	
 	
 }

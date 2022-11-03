@@ -27,7 +27,15 @@
     <div class="col-12 md:col-4">
         <div class="p-inputgroup">
             <span class="p-inputgroup-addon">Tipo de Usuario</span>
-            <input type="text" pInputText [(ngModel)]="rol.authority">         
+            <input type="text" pInputText [(ngModel)]="rol.authority" disabled="true">         
+        </div>
+    </div>
+
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup"> 
+            <span class="p-inputgroup-addon">Provincia</span>
+            <input type="text" pInputText [(ngModel)]="usuario.localidad">   
+         
         </div>
     </div>
 

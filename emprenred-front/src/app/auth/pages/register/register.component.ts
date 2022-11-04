@@ -1,6 +1,8 @@
-import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ok } from 'assert';
+import { catchError, tap } from 'rxjs';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
 import { DateValidator } from '../../validator/date.validator';
@@ -9,8 +11,7 @@ import { DateValidator } from '../../validator/date.validator';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
-  providers: [DatePipe]
+  styleUrls: ['./register.component.scss']
 })
 
 
@@ -31,8 +32,7 @@ export class RegisterComponent {
   })
 
   constructor( private formBuilder: FormBuilder,
-              private authService: AuthService,
-              private datePipe: DatePipe ) {}
+              private authService: AuthService ) {}
 
 
 provincias: string[] = [
@@ -82,13 +82,9 @@ guardar(){
 
 registro() {
 
-  //transformar fecha a formato regional (si no en el json llega como yyyy-mm-dd)
- const fechaNac1 = this.datePipe.transform(this.formularioRegistro.get('fechaNac').value, 'dd-MM-yyyy')
-
-
-  const {nombre,apellido,email,localidad,password,password2} = this.formularioRegistro.value;
-
-  this.authService.register(nombre,apellido,email,localidad,fechaNac1,password,password2)
+  const {nombre,apellido,email,localidad,fechaNac,password,password2} = this.formularioRegistro.value;
+  console.log(nombre)
+  this.authService.register(nombre,apellido,email,localidad,fechaNac,password,password2)
 
 }
 repitaPassword() {

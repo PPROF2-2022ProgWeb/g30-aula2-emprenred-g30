@@ -4,8 +4,6 @@ import {MenubarModule} from 'primeng/menubar';
 import {InputTextModule} from 'primeng/inputtext';
 import {TabViewModule} from 'primeng/tabview';
 import {ButtonModule} from 'primeng/button';
-import {PanelModule} from 'primeng/panel';
-
 @NgModule({
   declarations: [],
   exports: [
@@ -13,8 +11,7 @@ import {PanelModule} from 'primeng/panel';
     MenubarModule,
     InputTextModule,
     TabViewModule,
-    ButtonModule,
-    PanelModule
+    ButtonModule
   ]
 })
 export class PrimeNgModule { }

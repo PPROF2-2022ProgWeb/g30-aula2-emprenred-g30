@@ -1,6 +1,5 @@
 package com.example.emprendRed.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.emprendRed.model.Carrito;
 import com.example.emprendRed.model.Productos;
 import com.example.emprendRed.repository.ProductosRepositorio;
 
@@ -50,14 +48,5 @@ public class ProductosServiceimpl implements ProductosService{
 	public void deleteById(Long id) {
 		productoRepositorio.deleteById(id);
 	}
-	@Override
-	public List<Productos> searchNativo(String filtro) throws Exception {
-		try {
-			List<Productos> productos = productoRepositorio.searchNativo(filtro);
-		return productos;
-		}catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
-		
-	}
+
 }

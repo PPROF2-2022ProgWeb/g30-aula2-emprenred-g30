@@ -6,7 +6,7 @@
 
 .titulo h2{
     margin: 20px 20px 40px;
-    font-size: 40px;
+    font-size: 45px;
     }
 
 .container{
@@ -15,15 +15,20 @@
     height: 500px;
     display: flex;
     overflow: hidden;
-    background-color: #fff;
+    background-color: rgba(240, 240, 226, 0.315);
     box-shadow: 0 5px 5px #eaa44f89;
 }
 
+.imagencontainer{
+    width: 500px;
+    height:100%;
+    padding: 15px;
+}
+
 .card-img{
+    object-fit: cover;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    padding: 20px;
 }
 
 .containertexto{
@@ -37,20 +42,26 @@
 
 .card-title{
     color: #2a2222;
-    font-size: 30px;
+    font-size: 40px;
     margin-top: 50px;
 }
 
-.texto p{
-    font-size: 20px;
+
+.card-precio{
+    font-size: 35px;
+}
+
+.card-text{
+    font-size: 25px;
 }
 
 .botoncarrito{
     padding: 15px;
     float: right;
-    margin:15em 5em ;
+    margin:10em 5em ;
     background-color: #FFC107;
     border: none;
+    font-size: 20px;
     color: #000000;
 }
 

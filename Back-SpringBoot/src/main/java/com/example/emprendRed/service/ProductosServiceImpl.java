@@ -3,6 +3,7 @@ package com.example.emprendRed.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import com.example.emprendRed.Enum.DIRECTION;
@@ -10,11 +11,14 @@ import com.example.emprendRed.Enum.FILTERS;
 import com.example.emprendRed.Enum.ORDER_BY;
 import com.example.emprendRed.exceptions.BadRequestException;
 import com.example.emprendRed.model.DTO.BasicResponseDTO;
+import com.example.emprendRed.model.DTO.ProductoDTO;
+import com.example.emprendRed.model.TipoProducto;
 import com.example.emprendRed.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +31,8 @@ public class ProductosServiceImpl implements ProductosService{
 	@Autowired
 	private ProductosRepositorio productoRepositorio;
 
+	 @Autowired
+	 private TipoProductoService tipoProductoService;
 	@Autowired
 	private  Utils utils;
 	@Override
@@ -81,9 +87,20 @@ public class ProductosServiceImpl implements ProductosService{
 
 	@Override
 	@Transactional
-	public Productos save(Productos producto) {
-		producto.setVendedor(utils.getPersonContext());
-		return productoRepositorio.save(producto);
+	public Productos save(ProductoDTO producto) {
+		Productos productoDB = new Productos();
+		productoDB.setNombre(producto.getNombre());
+
+		TipoProducto tipoProducto = tipoProductoService.findById(producto.getId_tipo_producto()).orElseThrow(()->
+				new BadRequestException("Categoria invalida")
+		);
+		productoDB.setPrecio(producto.getPrecio());
+		productoDB.setDescripcion(producto.getDescripcion());
+		productoDB.setStock(producto.getStock());
+		productoDB.setTipoProducto(tipoProducto);
+		productoDB.setImagen(producto.getImagen());
+		productoDB.setVendedor(utils.getPersonContext());
+		return productoRepositorio.save(productoDB);
 	}
 
 	@Override
@@ -111,6 +128,11 @@ public class ProductosServiceImpl implements ProductosService{
 
 		oldProducto.setImagen(filePath);
 		productoRepositorio.save(oldProducto);
+	}
+
+	@Override
+	public List<Productos> searchNativo(String filtro) throws Exception {
+		return productoRepositorio.searchNativo(filtro);
 	}
 
 }

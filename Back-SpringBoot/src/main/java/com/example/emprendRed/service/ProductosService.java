@@ -30,4 +30,6 @@ public interface ProductosService {
 
 	List<Productos> searchNativo(String filtro) throws Exception;
 
+	Productos update(ProductoDTO productoDTO,ProductoDTO producto);
+
 }

@@ -1,5 +1,6 @@
 package com.example.emprendRed.service;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -28,111 +29,118 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ProductosServiceImpl implements ProductosService{
-	@Autowired
-	private ProductosRepositorio productoRepositorio;
+    @Autowired
+    private ProductosRepositorio productoRepositorio;
 
-	 @Autowired
-	 private TipoProductoService tipoProductoService;
-	@Autowired
-	private  Utils utils;
-	@Override
-	@Transactional(readOnly=true)
-	
-	
-	public BasicResponseDTO<Productos> findAll(String filters, String value, String orderBy, String dir, Integer size, Integer page,Boolean available) {
+    @Autowired
+    private TipoProductoService tipoProductoService;
+    @Autowired
+    private  Utils utils;
+    @Override
+    @Transactional(readOnly=true)
+    public BasicResponseDTO<Productos> findAll(String filters, String value, String orderBy, String dir, Integer size, Integer page,Boolean available) {
 
-		HashMap<String,Object> map = new HashMap<>();
+        HashMap<String,Object> map = new HashMap<>();
 
-		if (filters!= null && Enum.valueOf(FILTERS.class,filters.toUpperCase())!=null&& value!=null){
-			map.put("filters",Enum.valueOf(FILTERS.class,filters.toUpperCase()));
-			map.put("value",value);
-		}
+        if (filters!= null && Enum.valueOf(FILTERS.class,filters.toUpperCase())!=null&& value!=null){
+            map.put("filters",Enum.valueOf(FILTERS.class,filters.toUpperCase()));
+            map.put("value",value);
+        }
 
-		if (orderBy!=null && dir!= null
-			&& Enum.valueOf(ORDER_BY.class,orderBy.toUpperCase())!=null
-			&& Enum.valueOf(DIRECTION.class,dir.toUpperCase()) != null){
-			map.put("orderBy",Enum.valueOf(ORDER_BY.class,orderBy.toUpperCase()));
-			map.put("dir",Enum.valueOf(DIRECTION.class,dir.toUpperCase()));
-		}
+        if (orderBy!=null && dir!= null
+                && Enum.valueOf(ORDER_BY.class,orderBy.toUpperCase())!=null
+                && Enum.valueOf(DIRECTION.class,dir.toUpperCase()) != null){
+            map.put("orderBy",Enum.valueOf(ORDER_BY.class,orderBy.toUpperCase()));
+            map.put("dir",Enum.valueOf(DIRECTION.class,dir.toUpperCase()));
+        }
 
-		if (available!=null){
-			map.put("available",available);
-		}
+        if (available!=null){
+            map.put("available",available);
+        }
 
 
-		if (size!= null && page!=null){
-			map.put("size",size);
-			map.put("offset",(page - 1) * size + 1);
-		}
+        if (size!= null && page!=null){
+            map.put("size",size);
+            map.put("offset",(page - 1) * size + 1);
+        }
 
-		Page<Productos> productos = productoRepositorio.findAllWithFilters(map);
+        Page<Productos> productos = productoRepositorio.findAllWithFilters(map);
 
 
-		return new BasicResponseDTO<Productos>(productos.getTotalElements(),productos.getContent());
-	}
+        return new BasicResponseDTO<Productos>(productos.getTotalElements(),productos.getContent());
+    }
 
-	@Override
-	@Transactional(readOnly=true)
+    @Override
+    @Transactional(readOnly=true)
 
-	public Page<Productos> findAll(Pageable pageable) {
-		return productoRepositorio.findAll(pageable);
-	}
+    public Page<Productos> findAll(Pageable pageable) {
+        return productoRepositorio.findAll(pageable);
+    }
 
-	@Override
-	@Transactional(readOnly=true)
+    @Override
+    @Transactional(readOnly=true)
 
-	public Optional<Productos> findById(Long id) {
-		return productoRepositorio.findById(id);
-	}
+    public Optional<Productos> findById(Long id) {
+        return productoRepositorio.findById(id);
+    }
 
-	@Override
-	@Transactional
-	public Productos save(ProductoDTO producto) {
-		Productos productoDB = new Productos();
-		productoDB.setNombre(producto.getNombre());
+    @Override
+    @Transactional
+    public Productos save(ProductoDTO producto) {
+        Productos productoDB = new Productos();
+        productoDB.setNombre(producto.getNombre());
 
-		TipoProducto tipoProducto = tipoProductoService.findById(producto.getId_tipo_producto()).orElseThrow(()->
-				new BadRequestException("Categoria invalida")
-		);
-		productoDB.setPrecio(producto.getPrecio());
-		productoDB.setDescripcion(producto.getDescripcion());
-		productoDB.setStock(producto.getStock());
-		productoDB.setTipoProducto(tipoProducto);
-		productoDB.setImagen(producto.getImagen());
-		productoDB.setVendedor(utils.getPersonContext());
-		return productoRepositorio.save(productoDB);
-	}
+        TipoProducto tipoProducto = tipoProductoService.findById(producto.getId_tipo_producto()).orElseThrow(()->
+                new BadRequestException("Categoria invalida")
+        );
+        if (producto.getId()!=null){
+            productoDB.setId(producto.getId());
+        }
+        productoDB.setPrecio(producto.getPrecio());
+        productoDB.setDescripcion(producto.getDescripcion());
+        productoDB.setStock(producto.getStock());
+        productoDB.setTipoProducto(tipoProducto);
+        productoDB.setImagen(producto.getImagen());
+        productoDB.setVendedor(utils.getPersonContext());
+        return productoRepositorio.save(productoDB);
+    }
 
-	@Override
-	@Transactional
-	public void deleteById(Long id) {
-		productoRepositorio.deleteById(id);
-	}
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        productoRepositorio.deleteById(id);
+    }
 
-	@Override
-	@Transactional
-	public void uploadFile (Long idProducto, MultipartFile file ) throws IOException {
+    @Override
+    @Transactional
+    public void uploadFile (Long idProducto, MultipartFile file ) throws IOException {
 
-		Productos oldProducto = productoRepositorio.findById(idProducto).orElseThrow(
-				()-> new BadRequestException("No se encontro el producto id :" + idProducto)
-		);
+        Productos oldProducto = productoRepositorio.findById(idProducto).orElseThrow(
+                ()-> new BadRequestException("No se encontro el producto id :" + idProducto)
+        );
 
-		if(file.isEmpty()){
-			throw new BadRequestException("La imagen no puede ser vacia");
-		}
-		if (file.getContentType().equals(MediaType.IMAGE_JPEG) || file.getContentType().equals(MediaType.IMAGE_PNG) ){
-			throw new BadRequestException("Formato invalido");
-		}
-		String filePath = "src/main/resources/static/images/"+idProducto;
-		file.transferTo(new File(filePath));
+        if(file.isEmpty()){
+            throw new BadRequestException("La imagen no puede ser vacia");
+        }
+        if (file.getContentType().equals(MediaType.IMAGE_JPEG) || file.getContentType().equals(MediaType.IMAGE_PNG) ){
+            throw new BadRequestException("Formato invalido");
+        }
+        String filePath = "src/main/resources/static/images/"+idProducto;
+        file.transferTo(new File(filePath));
 
-		oldProducto.setImagen(filePath);
-		productoRepositorio.save(oldProducto);
-	}
+        oldProducto.setImagen(filePath);
+        productoRepositorio.save(oldProducto);
+    }
 
-	@Override
-	public List<Productos> searchNativo(String filtro) throws Exception {
-		return productoRepositorio.searchNativo(filtro);
-	}
+    @Override
+    public List<Productos> searchNativo(String filtro) throws Exception {
+        return productoRepositorio.searchNativo(filtro);
+    }
+
+    @Override
+    public Productos update(ProductoDTO productoDTO, ProductoDTO producto) {
+        return null;
+    }
 
 }
+

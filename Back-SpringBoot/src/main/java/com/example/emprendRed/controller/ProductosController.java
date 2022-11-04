@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.emprendRed.model.DTO.BasicResponseDTO;
 import com.example.emprendRed.model.DTO.ProductoDTO;
+import com.example.emprendRed.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,8 @@ public class ProductosController {
 	
 	@Autowired
 	private ProductosService productosService;
+	@Autowired
+	private Utils utils;
 
 	//Crear Producto
 	@PostMapping
@@ -61,6 +64,10 @@ public class ProductosController {
 		Optional<Productos> productos = productosService.findById(id);
 		if(!productos.isPresent()) {
 			return ResponseEntity.notFound().build();
+		}
+
+		if (!productos.get().getVendedor().getId().equals(utils.getPersonContext().getId())){
+			return ResponseEntity.badRequest().build();
 		}
 		//Otromodo BeanUtils.copyProperties(ProductosDetails, productos.get());
 		productosDetails.setId(productos.get().getId());

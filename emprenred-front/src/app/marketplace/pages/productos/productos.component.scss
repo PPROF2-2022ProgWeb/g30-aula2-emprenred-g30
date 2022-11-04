@@ -16,12 +16,23 @@
     margin: 15px 5px 30px;
 
 }
+
+.detalleproducto{
+    background-color: #5eb8e8;
+    margin: 0 30px 5px 5px;
+    padding: 10px;
+    color: #000000;
+    border: none;
+}
+.detalleproducto:hover{
+    background-color: #52a4d0;
+}
 .botoncarrito{
     background-color: #FFC107;
     color: #000000;
     border: none;
     padding: 10px;
-    margin-bottom: 5px;
+    margin: 0 5px 5px 5px;
 }
 
 .botoncarrito:hover{
@@ -33,3 +44,5 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+

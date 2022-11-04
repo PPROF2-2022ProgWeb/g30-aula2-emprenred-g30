@@ -4,11 +4,12 @@ export interface Producto {
         descripcion:    string;
         nombre:         string;
         precio:         number;
-        fechaDeBaja:    Date;
+        categoria:      string;
+        fechaDeBaja:    string;
         catalogoID:     number;
         stock:          number;
         idTipoProducto: number;
         imagen:         string;
-    
+     
     
 }

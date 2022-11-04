@@ -9,7 +9,7 @@ public class Productos {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(length=100)
 	private String descripcion;
 	
@@ -36,6 +36,7 @@ public class Productos {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getDescripcion() {
 		return descripcion;
@@ -101,4 +102,5 @@ public class Productos {
 	public void setVendedor(Persona vendedor) {
 		this.vendedor = vendedor;
 	}
+
 }

@@ -1,5 +1,6 @@
 package com.example.emprendRed.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,16 @@ public class CarritoServiceimpl implements CarritoService {
 	public void deleteById(Long id) {
 		carritoRepositorio.deleteById(id);
 	}
-
+	@Override
+	public List<Carrito> searchNativo(String filtro) throws Exception {
+		try {
+			List<Carrito> carritos = carritoRepositorio.searchNativo(filtro);
+		return carritos;
+		}catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
+	}
 }
+
+

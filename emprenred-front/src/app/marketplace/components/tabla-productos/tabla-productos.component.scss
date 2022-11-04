@@ -10,24 +10,36 @@
     .container{
     text-align: center;
     margin-bottom: 5em;
+    
     }
     
 
     .col-3{
-    width: 350px;
+    width: 400px;
+    
     }
     
 
     .card{
     margin: 15px 5px 30px;
+    background-color: rgba(240, 240, 226, 0.315);
     
 
     }
+
+    .imagencontainer{
+        width: 100%x;
+        height: 400px;
+    }
     .card-img-top {
-    width: 100%;
-    height: 450px;
-    background-size: cover;
-    padding: 10px;
+        object-fit: cover;
+        width:100%;
+        height:100%;
+        padding: 15px 15px 0;
+        border-bottom: 1px solid #0000001d;
+    }
+    .titulo{
+        margin-top: 10px;
     }
     .card-title{
     height: 60px;
@@ -48,7 +60,8 @@
     color: #000000;
     border: none;
     padding: 10px;
-    margin-bottom: 5px;
+    margin: 0 15px 5px 0;
+    float: right;
     }
     
 
@@ -61,8 +74,10 @@
 
     .detallesproducto{
     color: #000000;
-    background-color: #286cea;
+    background-color: #457de6b3;
     border: none;
     padding: 10px;
-    margin: 0 10px 5px 10px;
+    margin:0 0 5px 15px;
+    
+    float: left;
     }

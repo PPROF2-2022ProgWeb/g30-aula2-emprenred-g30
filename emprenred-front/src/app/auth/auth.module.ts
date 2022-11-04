@@ -37,7 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
    
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'es-AR'},
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
   ]
 })

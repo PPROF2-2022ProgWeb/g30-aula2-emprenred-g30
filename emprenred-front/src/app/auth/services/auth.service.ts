@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { LoginResponse } from '../interfaces/login-response.interface';
 import { async, catchError, map, Observable, of } from 'rxjs';
-import { rol } from '../interfaces/rol.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +24,7 @@ private baseUrl: string = "http://localhost:8080";
 
   // REGISTRO
 
-  register(nombre: string ,apellido: string ,email: string ,localidad: string ,fechaNac: string ,password:string ,password2:string ) {
+  register(nombre: string ,apellido: string ,email: string ,localidad: string ,fechaNac: Date ,password:string ,password2:string ) {
 
    let role = "USUARIO"; 
 
@@ -71,7 +70,6 @@ private baseUrl: string = "http://localhost:8080";
         localStorage.setItem('token', 'Bearer '+resp.token)
         localStorage.setItem('username', resp.username)
         localStorage.setItem('role', resp.role )
-        localStorage.setItem('id', resp.id.toString())
         Swal.fire({
           icon: 'success',
           title: 'Ingreso Exitoso',
@@ -117,19 +115,13 @@ private baseUrl: string = "http://localhost:8080";
 
         return true
       }), catchError (err => of(false))
-    );    
+    );
+
+      
+       
+       
+    
 }
-
-getRole():Observable<rol[]>{
-
-  const url = `${this.baseUrl}/valid`;
-  const headers = new HttpHeaders()
-  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio. 
-
-return this.http.get<rol[]>(url, { headers })
-
-}
-
 
 
 }

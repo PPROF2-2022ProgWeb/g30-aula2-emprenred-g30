@@ -12,6 +12,7 @@ import { DefaultComponent } from './components/default/default.component';
 
 
 
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -23,9 +24,7 @@ import { DefaultComponent } from './components/default/default.component';
   ],
   imports: [
     CommonModule,
-    ProtectedRoutingModule,
-    PrimeNgModule,
-    FormsModule
+    ProtectedRoutingModule
   ]
 })
 export class ProtectedModule { }

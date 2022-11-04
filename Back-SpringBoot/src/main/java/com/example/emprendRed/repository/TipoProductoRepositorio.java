@@ -8,4 +8,5 @@ import com.example.emprendRed.model.TipoProducto;
 @Repository
 public interface TipoProductoRepositorio extends JpaRepository<TipoProducto, Long>{
 
+    Boolean existsByDescripcion(String description);
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import {MenuItem} from 'primeng/api';
 import { delay } from 'rxjs';
+import { TipoProducto } from 'src/app/marketplace/interfaces/producto.interface';
+import { MarketplaceService } from 'src/app/marketplace/services/marketplace.service';
 import Swal from 'sweetalert2';
 
 
@@ -12,38 +14,35 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
 
+  categorias: TipoProducto[] = [];
+
     usuario: string = ""
   items!: MenuItem[];
 
-  constructor() { }
+  constructor(private marketplaceService: MarketplaceService) { }
 
   ngOnInit() {
-    this.items = [
-        {
-            label: 'File',
-            items: [{
-                    label: 'New', 
-                    icon: 'pi pi-fw pi-plus',
-                    items: [
-                        {label: 'Project'},
-                        {label: 'Other'},
-                    ]
-                },
-                {label: 'Open'},
-                {label: 'Quit'}
-            ]
-        },
-        {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-                {label: 'Delete', icon: 'pi pi-fw pi-trash'},
-                {label: 'Refresh', icon: 'pi pi-fw pi-refresh'}
-            ]
-        }
-    ];
-
+   
     this.usuario = localStorage.getItem('username')!
+
+
+    this.marketplaceService.getCategorias()
+    .subscribe( (categorias) => {
+    
+      this.categorias = categorias;
+      console.log("Query OK"); 
+
+      console.log(this.categorias)
+    
+     
+    }, (err) => {
+
+      this.categorias= [];
+      console.log("error")
+    })
+  
+
+
 }
 
 

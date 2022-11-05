@@ -8,6 +8,7 @@ import { VentasComponent } from './components/ventas/ventas.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { FormsModule } from '@angular/forms';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { DefaultComponent } from './components/default/default.component';
 
 
 
@@ -17,7 +18,8 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
     PerfilComponent,
     ComprasComponent,
     VentasComponent,
-    CarritoComponent
+    CarritoComponent,
+    DefaultComponent
   ],
   imports: [
     CommonModule,

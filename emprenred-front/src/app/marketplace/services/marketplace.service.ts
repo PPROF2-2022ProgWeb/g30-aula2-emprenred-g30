@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Producto } from '../interfaces/producto.interface';
+import { Producto, RespuestaProductos, TipoProducto } from '../interfaces/producto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,31 @@ export class MarketplaceService {
   constructor(private http: HttpClient) { }
   productos: Producto[] = [];
 
-  listarProductos( ): Observable<Producto[]>{
+  listarProductos( ): Observable<RespuestaProductos>{
    
     const url = `${ this.baseUrl}/productos`;
 
-   return this.http.get<Producto[]>(url)
+   return this.http.get<RespuestaProductos>(url)
+
+
+}
+
+
+getProducto(id:number): Observable<Producto>{
+   
+  const url = `${ this.baseUrl}/productos/${id}`;
+
+ return this.http.get<Producto>(url)
+
+
+}
+
+
+getCategorias(): Observable<TipoProducto[]>{
+   
+  const url = `${ this.baseUrl}/tipoproducto`;
+
+ return this.http.get<TipoProducto[]>(url)
 
 
 }

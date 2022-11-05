@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.emprendRed.model.Carrito;
@@ -42,7 +45,16 @@ public class CarritoController {
 			}
 			return ResponseEntity.ok(oCarrito);
 				}
-		
+
+		//Leer carrito de un usuario
+	@GetMapping("/search")
+		public ResponseEntity<?>searchNativo(@RequestParam String filtro){
+				try {
+					return ResponseEntity.status(HttpStatus.OK).body(carritoService.searchNativo(filtro));
+				}catch (Exception e) {
+						return  ResponseEntity.status(HttpStatus.NOT_FOUND).body((e.getMessage()));
+					}
+						}
 		//Actualizar
 		@PutMapping("/{id}")
 		public ResponseEntity<?> update (@RequestBody Carrito CarritoDetails, @PathVariable(value="id") Long id){
@@ -76,5 +88,6 @@ public class CarritoController {
 					.collect(Collectors.toList());
 			return carrito;
 		}
+	
 		
 }

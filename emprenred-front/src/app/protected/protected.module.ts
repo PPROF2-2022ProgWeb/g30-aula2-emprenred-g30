@@ -6,6 +6,9 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { ComprasComponent } from './components/compras/compras.component';
 import { VentasComponent } from './components/ventas/ventas.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { FormsModule } from '@angular/forms';
+import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { DefaultComponent } from './components/default/default.component';
 
 
 
@@ -15,11 +18,14 @@ import { CarritoComponent } from './components/carrito/carrito.component';
     PerfilComponent,
     ComprasComponent,
     VentasComponent,
-    CarritoComponent
+    CarritoComponent,
+    DefaultComponent
   ],
   imports: [
     CommonModule,
-    ProtectedRoutingModule
+    ProtectedRoutingModule,
+    PrimeNgModule,
+    FormsModule
   ]
 })
 export class ProtectedModule { }

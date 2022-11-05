@@ -5,9 +5,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.example.emprendRed.model.DTO.BasicResponseDTO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +32,7 @@ public class TipoProductoController {
 
 	//Crear Producto
 	@PostMapping
+	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 	public ResponseEntity<?> create(@RequestBody TipoProducto tipoproducto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(tipoproductoService.save(tipoproducto));
 	}
@@ -43,6 +47,7 @@ public class TipoProductoController {
 				}
 		//Actualizar
 		@PutMapping("/{id}")
+		@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 		public ResponseEntity<?> update (@RequestBody TipoProducto ProductosDetails, @PathVariable(value="id") Long id){
 			Optional<TipoProducto> tipoproducto = tipoproductoService.findById(id);
 			if(!tipoproducto.isPresent()) {
@@ -50,12 +55,12 @@ public class TipoProductoController {
 			}
 			//Otromodo BeanUtils.copyProperties(ProductosDetails, productos.get());
 			tipoproducto.get().setDescripcion(ProductosDetails.getDescripcion());
-			
-		
+
 			return ResponseEntity.status(HttpStatus.CREATED).body(tipoproductoService.save(tipoproducto.get()));
 		}
 		//Borrar Usuario
 		@DeleteMapping("/{id}")
+		@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 		public ResponseEntity <?> delete (@PathVariable(value="id")Long id){
 		
 			if(!tipoproductoService.findById(id).isPresent())	{

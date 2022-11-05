@@ -11,7 +11,9 @@
 					<h5 class="card-title">{{producto.nombre}}</h5>
 					<p class="card-text">{{producto.descripcion}}</p>
 					<p class="card-precio">${{producto.precio}}</p>
-					<a class="detallesproducto" routerLink="producto">Detalles</a>
+					<a  
+					class="btn btn-primary detallesproducto" routerLink="/productos/{{producto.tipoProducto.descripcion}}/{{producto.id}}">Detalles</a>
+				
 					<button class="btn btn-primary botoncarrito" name="btnAccion" value="Agregar" onclick="llamarCategoria()">Agregar al carrito</button>
 				</div>
 			</div>

@@ -113,6 +113,7 @@ public class ProductosServiceImpl implements ProductosService{
 
     @Override
     @Transactional
+
     public void uploadFile (Long idProducto, MultipartFile file ) throws IOException {
 
         Productos oldProducto = productoRepositorio.findById(idProducto).orElseThrow(
@@ -125,7 +126,7 @@ public class ProductosServiceImpl implements ProductosService{
         if (file.getContentType().equals(MediaType.IMAGE_JPEG) || file.getContentType().equals(MediaType.IMAGE_PNG) ){
             throw new BadRequestException("Formato invalido");
         }
-        String filePath = "src/main/resources/static/images/"+idProducto;
+        String filePath = "C:/Users/rebofel/Pictures/emprenred"+idProducto+".png";
         file.transferTo(new File(filePath));
 
         oldProducto.setImagen(filePath);

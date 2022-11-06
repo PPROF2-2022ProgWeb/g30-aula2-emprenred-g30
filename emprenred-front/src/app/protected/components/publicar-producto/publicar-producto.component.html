@@ -1,0 +1,41 @@
+<p-panel header="Crear Producto">
+<div>
+    <label>Categoría</label>
+    <select class="form-control" >
+        <option [value]="item.idTipoProducto" *ngFor="let item of categorias">{{item.descripcion}}</option>
+    </select>
+</div>
+
+<br>
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Nombre del Producto</span>
+                <input type="text" pInputText >         
+            </div>
+        </div>
+        
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup"> 
+                <span class="p-inputgroup-addon">Precio $</span>
+                <input type="text" pInputText >   
+             
+            </div>
+        </div>
+    </div>
+    <br>
+    <div>
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Descripción</span>
+                <input type="text" class="form-control">     
+            </div>
+        </div>
+    </div>
+
+    <app-upload></app-upload>
+
+
+  
+
+    </p-panel>

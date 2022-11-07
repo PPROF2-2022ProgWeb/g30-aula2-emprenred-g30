@@ -1,2 +1,35 @@
-<p>carrito works!</p>
-ASDASDASDASD
+<div class="carrito">
+    <h2>Carrito de Compras</h2>
+    <div class="botonvolver">
+        <button class="btn"><a class="enlacevolver" routerLink="">Seguir comprando</a></button>
+    </div>
+	<div class="tablacarrito">
+		<table class="table table-light table-striped carritocontainer">
+  			<thead>
+    			<tr>
+					<td>#</td>
+      				<th>Imagen</th> 
+      				<th>Producto</th>
+      				<th>Precio Unitario</th>
+					<th>Cantidad</th>
+					<th></th>
+    			</tr>
+  			</thead>
+			<tbody>
+    			<ng-container *ngFor="let producto of productos">
+    				<tr>
+						<td>1</td>
+      					<td class="tdimagen"><img class="imagentabla" src="{{producto.imagen}}"></td>
+      					<td>{{producto.nombre}}</td>
+						  <td>{{producto.precio | currency:'$'}}</td>
+      					<td><input type="number" class="cantidadtabla" min="1" value="1"></td>
+						<td><button class="delete btn">x</button></td>
+						</tr>
+    		</ng-container>
+  		</tbody>
+	</table>
+	<p class="totalcarrito">Total {{total() | currency:'$'}}</p>
+	<div class="text-end">
+    	<button class="botoncomprar" >Comprar</button>
+	</div>
+</div>

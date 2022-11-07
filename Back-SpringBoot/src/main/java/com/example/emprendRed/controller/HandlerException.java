@@ -2,6 +2,7 @@
 package com.example.emprendRed.controller;
 
 
+import com.example.emprendRed.exceptions.BadRequestException;
 import com.example.emprendRed.model.Message;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
@@ -25,5 +26,10 @@ public class HandlerException extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = UsernameNotFoundException.class)
     public ResponseEntity<?> usernameNotFoundException(UsernameNotFoundException ex){
         return new ResponseEntity(new Message(ex.getMessage()),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<?>badRequestException(BadRequestException ex){
+       return new ResponseEntity<>(new Message(ex.getMessage()),HttpStatus.BAD_REQUEST );
     }
 }

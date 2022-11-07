@@ -14,19 +14,7 @@ export class TablaProductoComponent implements OnInit {
 categoria = "";
 idProducto = 0;
 
-producto: Producto = {
-  id: 0,
-  catalogoID: 0,
-  descripcion: "",
-  fechaDeBaja: '2012-04-23T18:25:43.511Z',
-  idTipoProducto: 1,
-  categoria: "GENERAL",
-  imagen: "",
-  nombre: "",
-  precio: 0,
-  stock: 0
-
-};
+producto: Producto;
 
   constructor(private activatedRoute: ActivatedRoute,
               private marketplaceService: MarketplaceService) { }
@@ -56,7 +44,7 @@ producto: Producto = {
     this.marketplaceService.getProducto(this.idProducto)
     .subscribe( (producto) => {
       this.producto = producto;
-      this.producto.categoria = "GENERAL"
+    
       console.log("Query OK");
       console.log(producto)
     

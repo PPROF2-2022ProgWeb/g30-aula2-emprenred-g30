@@ -32,7 +32,7 @@ public class Usuario implements UserDetails {
     @Temporal(TemporalType.DATE)
     private Date fechaDeBaja;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="persona_id")
     private Persona persona;
 

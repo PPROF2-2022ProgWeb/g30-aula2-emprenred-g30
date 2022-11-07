@@ -1,5 +1,6 @@
 package com.example.emprendRed.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -19,5 +20,9 @@ public interface CarritoService {
 	
 	public void deleteById(Long id);
 	
- 
+	List<Carrito> searchNativo(Long filtro) throws Exception;
+
+	void addProducto(Long productoId) throws Exception;
+		
+	void deleteProductoToCarrito (List<Long> productoIds ) throws Exception;
 }

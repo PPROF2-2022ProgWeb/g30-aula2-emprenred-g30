@@ -23,12 +23,8 @@ productos: Producto[] = [];
     this.marketplaceService.listarProductos()
     .subscribe( (productos) => {
     
-      this.productos = productos; 
-      console.log("Query OK");
-
-      this.productos.forEach(function(item){  
-        item.categoria = "GENERAL"
-      });  
+      this.productos = productos.data; 
+      console.log("Query OK"); 
 
       console.log(this.productos)
     
@@ -47,7 +43,7 @@ productos: Producto[] = [];
    
       
       if(categoria != ''){
-        this.categoria = categoria; 
+        this.categoria = categoria;  
       }
   
     });

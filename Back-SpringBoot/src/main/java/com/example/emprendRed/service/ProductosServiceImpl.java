@@ -126,10 +126,10 @@ public class ProductosServiceImpl implements ProductosService{
         if (file.getContentType().equals(MediaType.IMAGE_JPEG) || file.getContentType().equals(MediaType.IMAGE_PNG) ){
             throw new BadRequestException("Formato invalido");
         }
-        String filePath = "C:/Users/rebofel/Pictures/emprenred"+idProducto+".png";
+        String filePath = "C:/g30-aula2-emprenred-g30/emprenred-front/src/assets/img/products"+idProducto+".png";
         file.transferTo(new File(filePath));
 
-        oldProducto.setImagen(filePath);
+        oldProducto.setImagen("./assets/img/products"+idProducto+".png");
         productoRepositorio.save(oldProducto);
     }
 

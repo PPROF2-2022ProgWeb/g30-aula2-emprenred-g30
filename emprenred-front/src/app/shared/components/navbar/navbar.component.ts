@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
     usuario: string = ""
   items!: MenuItem[];
-
+rol: string = localStorage.getItem('role')
   constructor(private marketplaceService: MarketplaceService) { }
 
   ngOnInit() {

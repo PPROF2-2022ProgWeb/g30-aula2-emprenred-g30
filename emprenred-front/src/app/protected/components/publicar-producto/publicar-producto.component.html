@@ -1,0 +1,121 @@
+<p-panel header="Crear Producto" *ngIf="idNuevoProducto!=0">
+
+    <form  (ngSubmit)="guardar()" autocomplete="off" [formGroup]="nuevoProducto">
+<div>
+    <label>Categoría</label>
+    <input type="text" [disabled]="true" placeholder="{{productoCreado.tipoProducto.descripcion}}">
+  
+</div>
+
+<br>
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-6">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Nombre del Producto</span>
+                <input type="text" [disabled]="true" placeholder="{{productoCreado.nombre}}">  
+            </div>
+        </div>
+        
+        <div class="col-12 md:col-6">
+            <div class="p-inputgroup"> 
+                <span class="p-inputgroup-addon">Precio $</span>
+                <input type="text" [disabled]="true" placeholder="{{productoCreado.precio}}">
+             
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-7">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Descripción</span>
+                <input type="textarea" [disabled]="true" placeholder="{{productoCreado.descripcion}}">
+            </div>
+        </div>
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon">Stock</span>
+                <input type="text" [disabled]="true" placeholder="{{productoCreado.stock}}">
+          
+            </div>
+        </div>
+
+
+  </div>
+  <p-button type="submit" [disabled]="true">Producto Guardado</p-button>
+
+  </form>
+    </p-panel>
+ 
+    <p-panel header="Crear Producto" *ngIf="idNuevoProducto==0">
+
+        <form  (ngSubmit)="guardar()" autocomplete="off" [formGroup]="nuevoProducto">
+    <div>
+        <label>Categoría</label>
+        <select class="form-control" formControlName="id_tipo_producto" >
+            <option [value]="item.id_TipoProducto" *ngFor="let item of categorias" >{{item.descripcion}}</option>
+        </select>
+    </div>
+    
+    <br>
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-6">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">Nombre del Producto</span>
+                    <input type="text" pInputText formControlName="nombre">         
+                </div>
+            </div>
+            
+            <div class="col-12 md:col-6">
+                <div class="p-inputgroup"> 
+                    <span class="p-inputgroup-addon">Precio $</span>
+                    <input type="text" pInputText formControlName="precio" >   
+                 
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-7">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">Descripción</span>
+                    <input type="textarea" class="form-control" formControlName="descripcion" >     
+                </div>
+            </div>
+            <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">Stock</span>
+                <p-inputNumber mode="decimal" ngModel="1" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100" formControlName="stock">
+                </p-inputNumber>
+                </div>
+            </div>
+    
+    
+      </div>
+    
+      <p-button type="submit">Guardar</p-button>
+        </form>
+        </p-panel>
+
+    <p-panel header="Subir Imagen de Producto" >
+
+        <input type="file" class="file-input"
+       (change)="onFileSelected($event)" #fileUpload>
+<div 
+*ngIf="idNuevoProducto==0">
+<h6>Podrás subir la imagen una vez completes y guardes los datos del producto</h6>
+</div>
+<div
+ class="file-upload"
+ *ngIf="idNuevoProducto!=0">
+  
+   {{fileName || "Solo archivos .PNG / .JPG"}}
+
+    <button mat-mini-fab color="primary" class="upload-btn"
+      (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+    </button>
+</div> 
+
+
+    </p-panel>

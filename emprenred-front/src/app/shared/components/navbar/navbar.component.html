@@ -44,7 +44,9 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                           <li><a class="dropdown-item" href="/dashboard">Mi Cuenta</a></li>
-                          <li><a class="dropdown-item" href="#">Publicar Producto</a></li>
+                          <li><a class="dropdown-item" 
+                            *ngIf="rol==='VENDEDOR'"
+                            routerLink="/dashboard/subir-producto">Publicar Producto</a></li>
                           <li><a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesión</a></li>
                         </ul>
                       </li>

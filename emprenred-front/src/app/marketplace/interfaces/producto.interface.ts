@@ -16,7 +16,7 @@ export interface RespuestaProductos {
     }
     
     export interface TipoProducto {
-        idTipoProducto: number;
+        id_TipoProducto: number;
         descripcion:    string;
     }
     
@@ -29,3 +29,14 @@ export interface RespuestaProductos {
         fechaDeBaja: string | null;
     }
     
+    export interface ProductoCreado {
+        id:           number;
+        descripcion:  string;
+        nombre:       string;
+        precio:       number;
+        fechaDeBaja:  null;
+        stock:        number;
+        tipoProducto: TipoProducto;
+        vendedor:     Vendedor;
+        imagen:       null;
+    }

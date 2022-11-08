@@ -2,6 +2,15 @@
 	<h2>Productos | {{categoria}}</h2>
 </div>
 <div class="container">
+	<div class="filtros">
+		<div class="menufiltros">Ordenar por:</div>
+		<div class="opcionesfiltro">
+			<div class="filtro-item">Precio:menor a mayor</div>
+			<div class="filtro-item">Precio:mayor a menor</div>
+			<div class="filtro-item">Mas antiguos a reciente</div>
+			<div class="filtro-item">Mas recientes</div>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-3" 
 		*ngFor="let producto of productos">
@@ -20,3 +29,4 @@
 		</div>
 	</div>
 </div>
+

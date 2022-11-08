@@ -1,8 +1,13 @@
+.p-inputgroup-addon{
+    padding: 10px;
+    width: 100px;
+}
+
 /*boton volver*/
 
 .botonvolver{
     float: right;
-    margin: 20px;
+    margin: 40px 20px;
 }
 .botonvolver button{
     background-color: #e6e2ba3f;
@@ -56,6 +61,11 @@
     border: 2px solid #00000038;
     text-align: right;
     padding: 5px 20px;
+}
+
+.formadepago{
+    padding: 30px 20px;
+    border: 2px solid #91909091;
 }
 
 .botoncomprar{

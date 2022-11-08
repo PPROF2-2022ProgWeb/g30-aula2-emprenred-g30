@@ -13,6 +13,7 @@ export class CarritoComponent implements OnInit {
 
   categoria = "";
 productos: Producto[] = [];
+email = localStorage.getItem('username');
 
   constructor(private activatedRoute : ActivatedRoute,
              private marketplaceService: MarketplaceService) { }
@@ -33,14 +34,8 @@ productos: Producto[] = [];
       this.productos= [];
       console.log("error")
     })
-  
-
-
-
 
     this.activatedRoute.params.subscribe(({categoria})=>{
-   
-      
       if(categoria != ''){
         this.categoria = categoria; 
       }

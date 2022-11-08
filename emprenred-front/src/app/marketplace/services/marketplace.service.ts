@@ -53,4 +53,15 @@ enviarProducto(nombre: string ,descripcion: string,id_tipo_producto: number ,pre
   return this.http.post<ProductoCreado>(url, body, {headers})
 
 }
+
+modificarCategoria(id: number, descripcion: string): Observable<TipoProducto>{
+   
+  const url = `${ this.baseUrl}/tipoproducto/${id}`;
+  
+ return this.http.put<TipoProducto>(url, descripcion)
+
+
+}
+
+
 }

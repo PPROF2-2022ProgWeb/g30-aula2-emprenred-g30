@@ -48,17 +48,18 @@ public class TipoProductoController {
 		//Actualizar
 		@PutMapping("/{id}")
 		@PreAuthorize("hasAuthority('ADMINISTRADOR')")
-		public ResponseEntity<?> update (@RequestBody TipoProducto ProductosDetails, @PathVariable(value="id") Long id){
+		public ResponseEntity<?> update (@RequestBody TipoProducto ProductosDetails, @PathVariable(value="id") Long id) {
 			Optional<TipoProducto> tipoproducto = tipoproductoService.findById(id);
-			if(!tipoproducto.isPresent()) {
+			if (!tipoproducto.isPresent()) {
 				return ResponseEntity.notFound().build();
 			}
 			//Otromodo BeanUtils.copyProperties(ProductosDetails, productos.get());
 			tipoproducto.get().setDescripcion(ProductosDetails.getDescripcion());
 
-			return ResponseEntity.status(HttpStatus.CREATED).body(tipoproductoService.save(tipoproducto.get()));
+			return ResponseEntity.status(HttpStatus.CREATED).body(tipoproductoService.update(tipoproducto.get()));
+
 		}
-		//Borrar Usuario
+			//Borrar Usuario
 		@DeleteMapping("/{id}")
 		@PreAuthorize("hasAuthority('ADMINISTRADOR')")
 		public ResponseEntity <?> delete (@PathVariable(value="id")Long id){

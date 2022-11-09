@@ -57,11 +57,40 @@ enviarProducto(nombre: string ,descripcion: string,id_tipo_producto: number ,pre
 modificarCategoria(id: number, descripcion: string): Observable<TipoProducto>{
    
   const url = `${ this.baseUrl}/tipoproducto/${id}`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio. 
+  const categoria: TipoProducto = {
+id_TipoProducto: id,
+descripcion: descripcion
+  }
   
- return this.http.put<TipoProducto>(url, descripcion)
+ return this.http.put<TipoProducto>(url, categoria, {headers})
 
 
 }
 
+putCategoria(descripcion: string): Observable<TipoProducto>{
+   //hacer que mande string no objeto completo 
+  const url = `${ this.baseUrl}/tipoproducto`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio. 
+  const categoria = {
+
+descripcion: descripcion
+  }
+  
+ return this.http.post<TipoProducto>(url, categoria, {headers})
+
+
+}
+
+deleteCategoria(id:number) {
+
+  const url = `${ this.baseUrl}/tipoproducto/${id}`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+  return this.http.delete(url, {headers})
+}
 
 }

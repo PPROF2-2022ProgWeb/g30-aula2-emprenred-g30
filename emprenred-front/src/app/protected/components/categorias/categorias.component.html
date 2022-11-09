@@ -1,20 +1,20 @@
 <p-panel header="Crear Categoría">
 
-
+<form (ngSubmit)="subirCategoria()" autocomplete="off" [formGroup]="nuevaCategoria">
     <br>
     <div class="grid p-fluid">
         <div class="col-12 md:col-6">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon">Nombre Categoría</span>
-                <input type="text" pInputText >         
+                <input type="text" pInputText formControlName="descripcion" >         
             </div>
         </div>
         
         <div class="col-12 md:col-2">
-        <p-button>Publicar Categoría</p-button>
+        <p-button type="submit">Publicar</p-button>
         </div>
     </div>
-
+</form>
     </p-panel>
 
     <br>
@@ -25,8 +25,8 @@
         <p-table [value]="categorias" responsiveLayout="scroll">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Code</th>
-                    <th>Name</th>
+                    <th>Identificador</th>
+                    <th>Nombre</th>
                     <th>Acciones</th>
                   
                 </tr>
@@ -37,7 +37,7 @@
                     <td>{{categoria.descripcion}}</td>
                      <td> 
                         <button pButton label="Modificar" (click)="modificarCategoria(categoria.id_TipoProducto, categoria.descripcion)"></button> &nbsp;  &nbsp;
-                        <button pButton type="button" label="Eliminar" class="p-button-danger"></button>
+                        <button pButton type="button" label="Eliminar" class="p-button-danger" (click)="delete(categoria.id_TipoProducto, categoria.descripcion)"></button>
                      </td>
                 </tr>
             </ng-template>
@@ -45,8 +45,13 @@
 
     </p-panel>
 
-    <p-dialog header="{{nombreCategoria}}" [(visible)]="display">
-        {{nombreCategoria}}
+    <p-dialog header="{{nombreCategoria}}" [(visible)]="display" (closable)="true">
+        <small>Nuevo nombre para categoria <b>{{nombreCategoria}}</b></small>
+        <br><br>
+        <form  (ngSubmit)="enviar()" autocomplete="off" [formGroup]="cambioCategoria">
+        <input type="text" pInputText formControlName="descripcion" >  
+        &nbsp; <button type="submit" pButton>Guardar</button>   &nbsp;&nbsp;<button pButton (click)="display=false">Cancelar</button> 
+    </form>
     </p-dialog>
-    <button pButton (click)="showDialog()" icon="pi pi-info-circle" label="Show"></button>
+ 
     

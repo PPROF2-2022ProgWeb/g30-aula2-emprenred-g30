@@ -6,6 +6,9 @@ import {TabViewModule} from 'primeng/tabview';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
+
 
 @NgModule({
   declarations: [],
@@ -16,7 +19,10 @@ import {InputNumberModule} from 'primeng/inputnumber';
     TabViewModule,
     ButtonModule,
     PanelModule,
-    InputNumberModule
+    InputNumberModule,
+    TableModule,
+    DialogModule
+
   ]
 })
 export class PrimeNgModule { }

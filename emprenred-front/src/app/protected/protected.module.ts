@@ -10,8 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { DefaultComponent } from './components/default/default.component';
 import { PublicarProductoComponent } from './components/publicar-producto/publicar-producto.component';
-import { UploadComponent } from './components/upload/upload.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { CategoriasComponent } from './components/categorias/categorias.component';
 
 
 
@@ -24,7 +24,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
     CarritoComponent,
     DefaultComponent,
     PublicarProductoComponent,
-    UploadComponent
+    CategoriasComponent,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { CategoriasComponent } from './components/categorias/categorias.component';
 import { ComprasComponent } from './components/compras/compras.component';
 import { DefaultComponent } from './components/default/default.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
@@ -34,6 +35,10 @@ component: DashboardComponent,
         {
           path: 'subir-producto',
           component: PublicarProductoComponent
+        },
+        {
+          path: 'categoria',
+          component: CategoriasComponent
         },
         {
           path: '**',

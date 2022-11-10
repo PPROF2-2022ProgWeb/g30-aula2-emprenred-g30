@@ -12,7 +12,7 @@
 .container{
     width: 100%;
     margin: 20px auto;
-    height: 500px;
+    height: 450px;
     display: flex;
     overflow: hidden;
     background-color: rgba(240, 240, 226, 0.446);
@@ -36,7 +36,7 @@
     width: 80%;
     height: 100%;
     display: grid;
-    grid-template-rows: 100px 150px 50px;
+    grid-template-rows: 100px 200px 150px;
     padding: 10px 15px;
     margin-left: 30px;
 
@@ -57,12 +57,20 @@
     font-size: 25px;
 }
 
+.botones{
+    margin:120px 20px 10px auto;
+    padding: 10px;
+}
+.botonfavoritos{
+    padding: 15px 30px;
+    float: left;
+    margin: 10px;
+    font-size: 15px;
+}
 .botoncarrito{
-    padding: 15px;
+    padding: 15px 30px;
+    margin: 10px;
     float: right;
-    margin:10em 5em ;
-    background-color: #FFC107;
-    border: none;
     font-size: 20px;
     color: #000000;
 }

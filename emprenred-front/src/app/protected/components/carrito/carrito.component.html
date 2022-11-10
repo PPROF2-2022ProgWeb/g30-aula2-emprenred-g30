@@ -1,24 +1,5 @@
 <div class="carrito">
     <h2>Carrito de Compras</h2>
-<!--
-	<div class="col-md-7 col-lg-8">
-        <h4 class="">Datos de contacto</h4>
-        <form class="needs-validation" novalidate>
-          <div class="row g-3">
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon">Email</span>
-                    <input type="email" pInputText [(ngModel)]="email">         
-                </div>
-              <div class="p-inputgroup g-3"> 
-                  <span class="p-inputgroup-addon">Dirección</span>
-                  <input type="text">   
-              </div>
-              <div class="p-inputgroup g-3"> 
-                  <span class="p-inputgroup-addon">Provincia</span>
-                  <input type="text">   
-               
-              </div>
-        -->    
     <div class="botonvolver">
         <button class="btn"><a class="enlacevolver" routerLink="">Seguir comprando</a></button>
     </div>
@@ -49,7 +30,24 @@
 	</table>
 	<p class="totalcarrito">Total {{total() | currency:'$'}}</p>
 
-	<hr class="my-4">
+
+  <div class="datospersonales">
+    <h4>Datos Personales</h4>
+    <div class="row g-3">
+      <div class="p-inputgroup dato-email">
+          <span class="p-inputgroup-addon">Email</span>
+          <input type="email" pInputText [(ngModel)]="email">         
+      </div>
+      <div class="p-inputgroup dato-direccion"> 
+        <span class="p-inputgroup-addon">Dirección</span>
+        <input type="text" placeholder="Ingresa tu dirección">   
+      </div>
+      <div class="p-inputgroup dato-provincia"> 
+        <span class="p-inputgroup-addon">Provincia</span>
+        <input type="text">   
+      </div>
+    </div>
+  </div>  
           <div class="formadepago">
           <h4 class="mb-3">Forma de pago</h4>
 

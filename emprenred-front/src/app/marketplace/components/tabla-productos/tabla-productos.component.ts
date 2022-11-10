@@ -10,6 +10,11 @@ import { MarketplaceService } from '../../services/marketplace.service';
 })
 export class TablaProductosComponent implements OnInit {
 
+  isMenuOpened: boolean = false;
+
+  filtromenu(): void {
+    this.isMenuOpened = !this.isMenuOpened;
+ }
 
 
   categoria = "";
@@ -19,7 +24,7 @@ productos: Producto[] = [];
              private marketplaceService: MarketplaceService) { }
 
   ngOnInit(): void {
-
+    
     this.marketplaceService.listarProductos()
     .subscribe( (productos) => {
     

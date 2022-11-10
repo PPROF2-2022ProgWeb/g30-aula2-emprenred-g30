@@ -14,6 +14,41 @@
     margin-bottom: 5em;
     }
     
+
+/*filtro */
+.filtros{
+    width: 200px;
+    background:#ffe60034;
+    border: 2px solid #00000031;
+    font-size: 20px;
+    cursor:pointer;
+    margin: 20px auto;
+    padding: 10px;
+    height: 100%;
+}
+
+.menufiltro{
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.opcionfiltro{
+    background: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.filtro-item{
+    cursor: pointer;
+    padding: 5px 0;
+    border-bottom: 1px solid #00000027;
+    font-size: 15px;
+    display: block;
+}
+
+.filtro-item:hover{
+    text-decoration: underline;
+}
 .col-3{
     width: 400px;
     }

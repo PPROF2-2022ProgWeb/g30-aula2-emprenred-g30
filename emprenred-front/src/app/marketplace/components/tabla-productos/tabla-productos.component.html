@@ -3,8 +3,8 @@
 </div>
 <div class="container">
 	<div class="filtros">
-		<div class="menufiltros">Ordenar por:</div>
-		<div class="opcionesfiltro">
+		<div class="menufiltros" (click)="filtromenu()">Ordenar por:</div>
+		<div class="opcionesfiltro" *ngIf="isMenuOpened">
 			<div class="filtro-item">Precio:menor a mayor</div>
 			<div class="filtro-item">Precio:mayor a menor</div>
 			<div class="filtro-item">Mas antiguos a reciente</div>

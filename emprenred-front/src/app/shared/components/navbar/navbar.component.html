@@ -19,7 +19,7 @@
                
                <div class="col-md-2">
                    <div class="d-flex d-none d-md-flex flex-row align-items-left">
-                       <span class="shop-bag"><a class="carritornlace" routerLink="carrito"><i class='bx bxs-shopping-bag'></i></a></span>
+                       <span class="shop-bag"><a class="carritornlace" routerLink="dashboard/carrito"><i class='bx bxs-shopping-bag'></i></a></span>
                        <div class="d-flex flex-column ms-2">
                            <span class="qty">2 productos</span>
                            <span class="fw-bold">$2500</span>
@@ -45,7 +45,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                           <li><a class="dropdown-item" href="/dashboard">Mi Cuenta</a></li>
                           <li><a class="dropdown-item" 
-                            *ngIf="rol=='VENDEDOR'"
+                            *ngIf="rol=='VENDEDOR' || 'ADMINISTRADOR'"
                             routerLink="/dashboard/subir-producto">Publicar Producto</a></li>
                             <li><a class="dropdown-item" 
                               *ngIf="rol=='ADMINISTRADOR'"

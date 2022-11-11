@@ -45,6 +45,7 @@ public class AppControlador {
        
       service.crear(personaRequest);
 
+
        return new ResponseEntity (personaRequest,HttpStatus.CREATED);
        
    }
@@ -57,7 +58,7 @@ public class AppControlador {
    
    
   
-   @GetMapping("/{id}")
+   @GetMapping("/users/{id}")
    public ResponseEntity<?> getByid (@PathVariable Long id){
        
 //        HttpHeaders headers = new HttpHeaders();
@@ -65,6 +66,7 @@ public class AppControlador {
 //    headers.add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS");
 //    headers.add("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 System.out.println("");
+      //Añadir alguna restricción para que solo el usuario pueda ver sus datos y no el de otr@s
        return new ResponseEntity (service.mostraPorId(id),HttpStatus.OK);
    }
 
@@ -79,13 +81,13 @@ System.out.println("");
 
         return new ResponseEntity<>(userDetails.getAuthorities(), HttpStatus.OK);
     }
-    @ApiOperation(value = "Retorna lista de usaurios")
+    @ApiOperation(value = "Retorna lista de usuarios")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna a lista de usuarios"),
-            @ApiResponse(code = 403, message = "No autorizado para hacer la transacsion"),
+            @ApiResponse(code = 200, message = "Retorna lista de usuarios"),
+            @ApiResponse(code = 403, message = "No autorizado para hacer la transaccion"),
             @ApiResponse(code = 500, message = "Ups! error de sistema "),
     })
-    @GetMapping("users")
+    @GetMapping("/users")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public ResponseEntity<?> getUsers (){
        return new ResponseEntity<>(service.getUsers(), HttpStatus.OK);

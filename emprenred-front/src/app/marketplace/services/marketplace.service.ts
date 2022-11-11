@@ -10,6 +10,7 @@ import { Producto, ProductoCreado, RespuestaProductos, TipoProducto } from '../i
 export class MarketplaceService {
 
   baseUrl = 'http://localhost:8080/api' 
+  baseUrl0 = 'http://localhost:8080/'
   
   constructor(private http: HttpClient) { }
   productos: Producto[] = [];
@@ -91,6 +92,18 @@ deleteCategoria(id:number) {
   .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
 
   return this.http.delete(url, {headers})
+}
+
+
+getMyProducts(id:number): Observable<Producto[]> {
+
+  const url = `${ this.baseUrl}/productos/search?filtro=${id}`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+
+return this.http.get<Producto[]>(url, {headers})
+
 }
 
 }

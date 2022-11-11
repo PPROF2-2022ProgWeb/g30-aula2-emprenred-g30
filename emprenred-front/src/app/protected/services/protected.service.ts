@@ -15,7 +15,7 @@ export class ProtectedService {
 
   getUser(id:number): Observable<User>{
    
-    const url = `${ this.baseUrl}/${id}`;
+    const url = `${ this.baseUrl}/users/${id}`;
     const headers = new HttpHeaders()
     .set('Authorization',localStorage.getItem('token') || '');
    return this.http.get<User>(url, {headers})

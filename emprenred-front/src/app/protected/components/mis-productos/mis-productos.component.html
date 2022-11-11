@@ -1,0 +1,29 @@
+<p-panel header="Mis Productos">
+    <p-table [value]="misproductos" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Identificador</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-misproductos>
+            <tr>
+                <td>{{misproductos.id}}</td>
+                <td class="tdimagen"><img class="imagentabla" src="{{misproductos.imagen}}"></td>
+                <td>{{misproductos.nombre}}</td>
+                <td>{{misproductos.tipoProducto.descripcion}}</td>
+                <td>$ {{misproductos.precio}}</td>
+                 <td> 
+                    <button pButton label="Modificar"></button> &nbsp;  &nbsp;
+                    <button pButton type="button" label="Eliminar" class="p-button-danger"></button>
+                 </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-panel>

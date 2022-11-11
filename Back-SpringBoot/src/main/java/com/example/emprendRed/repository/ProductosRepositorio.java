@@ -22,4 +22,7 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
 			  nativeQuery=true)
 	 List<Productos> searchNativo(@Param("filtro")String filtro);
 
+	 @Query(value = "SELECT * FROM productos WHERE id IN (:ids) ; " , nativeQuery = true)
+	List<Productos> getAllByIds (@Param("ids") List<Long> ids);
+
 }

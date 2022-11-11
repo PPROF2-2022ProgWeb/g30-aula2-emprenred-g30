@@ -80,6 +80,11 @@ public class CarritoServiceimpl implements CarritoService {
 			carrito.setPersona(persona);
 		}
 
+		if (carrito.getProductos().size()>0
+				&& producto.getVendedor().getId()!= carrito.getProductos().get(0).getVendedor().getId() ){
+			throw new BadRequestException("Producto de vendedor diferente. ");
+		}
+
 		carrito.getProductos().add(producto);
 
 		carritoRepositorio.save(carrito);

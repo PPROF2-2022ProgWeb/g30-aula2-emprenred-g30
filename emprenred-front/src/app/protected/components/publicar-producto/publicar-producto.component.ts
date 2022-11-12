@@ -81,7 +81,7 @@ export class PublicarProductoComponent implements OnInit {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
                 
-                  window.location.href = 'http://localhost:4200'; 
+                  window.location.href = 'dashboard/misproductos'; 
                   //TODO : cambiar luego a /misProductos
               
                 

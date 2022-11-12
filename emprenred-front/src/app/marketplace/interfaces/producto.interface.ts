@@ -40,3 +40,13 @@ export interface RespuestaProductos {
         vendedor:     Vendedor;
         imagen:       null;
     }
+export interface UpdateProducto
+    {
+        descripcion: string,
+    id: number,
+        id_tipo_producto: number,
+        imagen: string,
+    nombre: string,
+        precio: number,
+        stock: number
+      }

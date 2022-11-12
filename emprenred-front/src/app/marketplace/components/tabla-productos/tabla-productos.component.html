@@ -5,15 +5,15 @@
 	<div class="filtros">
 		<div class="menufiltros" (click)="filtromenu()">Ordenar por:</div>
 		<div class="opcionesfiltro" *ngIf="isMenuOpened">
-			<div class="filtro-item">Precio:menor a mayor</div>
-			<div class="filtro-item">Precio:mayor a menor</div>
-			<div class="filtro-item">Mas antiguos a reciente</div>
-			<div class="filtro-item">Mas recientes</div>
+			<div class="filtro-item" (click)="filtro='precioDsc'">Precio:menor a mayor</div>
+			<div class="filtro-item" (click)="filtro='precioAsc'">Precio:mayor a menor</div>
+			<div class="filtro-item" (click)="filtro='fechaDsc'">Mas antiguos a reciente</div>
+			<div class="filtro-item" (click)="filtro='fechaAsc'">Mas recientes</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-3" 
-		*ngFor="let producto of productos">
+		*ngFor="let producto of productos | ordenar:filtro">
 			<div class="card">
 				<div class="imagencontainer">
 					<img title="" alt="titulo"class="card-img-top" src="{{producto.imagen}}">
@@ -21,7 +21,7 @@
 				<div class="card-body">
 					<h5 class="card-title">{{producto.nombre}}</h5>
 					<p class="card-text">{{producto.descripcion}}</p>
-					<p class="card-precio">${{producto.precio}}</p>
+					<p class="card-precio">{{producto.precio | currency}}</p>
 					<a class="btn btn-primary detallesproducto" routerLink="/productos/{{producto.tipoProducto.descripcion}}/{{producto.id}}">Detalles</a>
 					<button class="btn btn-primary botoncarrito" name="btnAccion" value="Agregar" onclick="llamarCategoria()">Agregar al carrito</button>
 				</div>

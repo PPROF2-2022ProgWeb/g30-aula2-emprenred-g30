@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import { Producto, ProductoCreado, RespuestaProductos, TipoProducto } from '../interfaces/producto.interface';
+import { Producto, ProductoCreado, RespuestaProductos, TipoProducto, UpdateProducto } from '../interfaces/producto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -103,6 +103,18 @@ getMyProducts(id:number): Observable<Producto[]> {
 
 
 return this.http.get<Producto[]>(url, {headers})
+
+}
+
+
+updateProduct(id:number, producto: UpdateProducto): Observable<UpdateProducto> {
+
+  const url = `${ this.baseUrl}/productos/${id}`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+  
+
+return this.http.put<UpdateProducto>(url, producto, {headers})
 
 }
 

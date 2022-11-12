@@ -1,5 +1,13 @@
 <p-panel header="Mis Productos">
-    <p-table [value]="misproductos" responsiveLayout="scroll">
+    <select class="form-control" >
+        <option [disabled]="true">Ordenar por: </option>
+        <option (click)="filtro='precioAsc'">Precio: Mayor a menor </option>
+        <option >Precio: Menor a mayor </option>
+        <option >Fecha: Mas Recientes </option>
+        <option >Fecha: Mas Antiguos </option>
+    </select>
+    <p-table [value]="misproductos | ordenar:filtro" responsiveLayout="scroll">
+     
         <ng-template pTemplate="header">
             <tr>
                 <th>Identificador</th>
@@ -14,12 +22,12 @@
         <ng-template pTemplate="body" let-misproductos>
             <tr>
                 <td>{{misproductos.id}}</td>
-                <td class="tdimagen"><img class="imagentabla" src="{{misproductos.imagen}}"></td>
+                <td class="tdimagen"> <img class="imagentabla" src="{{misproductos.imagen}}" (click)="cambiarImagen(misproductos.id,misproductos.imagen)"></td>
                 <td>{{misproductos.nombre}}</td>
                 <td>{{misproductos.tipoProducto.descripcion}}</td>
-                <td>$ {{misproductos.precio}}</td>
+                <td>{{misproductos.precio | currency}}</td>
                  <td> 
-                    <button pButton label="Modificar"></button> &nbsp;  &nbsp;
+                    <button pButton (click)="productoSeleccionado(misproductos.id)" label="Modificar"></button> &nbsp;  &nbsp;
                     <button pButton type="button" label="Eliminar" class="p-button-danger"></button>
                  </td>
             </tr>
@@ -27,3 +35,78 @@
     </p-table>
 
 </p-panel>
+
+
+<p-dialog header="{{this.getProducto.nombre}}" [(visible)]="display" (closable)="true">
+    
+    <form  (ngSubmit)="enviar()" autocomplete="off" [formGroup]="modificarProducto">
+        <div>
+            <label>Categoría</label> <br>
+            <small>Categoría Actual: {{this.getProducto.tipoProducto.descripcion}}</small>
+            <select class="form-control" formControlName="id_tipo_producto">
+                <option [value]="item.id_TipoProducto" *ngFor="let item of categorias">{{item.descripcion}}</option>
+            </select>
+        </div>
+        
+        <br>
+            <div class="grid p-fluid">
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Nombre del Producto</span>
+                        <input type="text" pInputText formControlName="nombre" [ngModel]="this.getProducto.nombre">         
+                    </div>
+                </div>
+                
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup"> 
+                        <span class="p-inputgroup-addon">Precio $</span>
+                        <input type="text" pInputText formControlName="precio" [ngModel]="this.getProducto.precio" >   
+                     
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="grid p-fluid">
+                <div class="col-12 md:col-7">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Descripción</span>
+                        <input type="textarea" class="form-control" formControlName="descripcion" [ngModel]="this.getProducto.descripcion" >     
+                    </div>
+                </div>
+                <div class="col-12 md:col-4">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">Stock</span>
+                    <p-inputNumber mode="decimal" [ngModel]="this.getProducto.stock" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100" formControlName="stock">
+                    </p-inputNumber>
+                    </div>
+                </div>
+        
+        
+          </div>
+        
+       
+            
+    &nbsp; <button type="submit" pButton>Guardar</button>   &nbsp;&nbsp;<button pButton (click)="display=false">Cancelar</button> 
+</form>
+</p-dialog>
+
+
+<p-dialog header="{{this.getProducto.nombre}}" [(visible)]="displayImagen" (closable)="true">
+    <img class="imgeditar" [src]="this.imagen">
+
+
+    <input type="file" class="file-input"
+    (change)="onFileSelected($event)" #fileUpload>
+
+<div
+class="file-upload">
+
+{{fileName || "Solo archivos .PNG / .JPG"}}
+
+ <button mat-mini-fab color="primary" class="upload-btn"
+   (click)="fileUpload.click()">
+     <mat-icon>attach_file</mat-icon>
+ </button>
+</div>
+    
+</p-dialog>

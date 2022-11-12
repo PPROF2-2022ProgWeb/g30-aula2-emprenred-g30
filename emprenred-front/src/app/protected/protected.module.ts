@@ -15,6 +15,9 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { ControlusuariosComponent } from './components/controlusuarios/controlusuarios.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { MisProductosComponent } from './components/mis-productos/mis-productos.component';
+import { OrdenarPipe } from '../marketplace/pipes/ordenar.pipe';
+import { MarketplaceModule } from '../marketplace/marketplace.module';
+
 
 
 
@@ -37,7 +40,8 @@ import { MisProductosComponent } from './components/mis-productos/mis-productos.
     PrimeNgModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    MarketplaceModule
   ]
 })
 export class ProtectedModule { }

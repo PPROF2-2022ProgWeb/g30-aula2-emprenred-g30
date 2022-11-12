@@ -48,6 +48,9 @@
                             *ngIf="rol=='VENDEDOR' || 'ADMINISTRADOR'"
                             routerLink="/dashboard/subir-producto">Publicar Producto</a></li>
                             <li><a class="dropdown-item" 
+                              *ngIf="rol=='VENDEDOR' || 'ADMINISTRADOR'"
+                              routerLink="/dashboard/misproductos">Ver Mis Productos</a></li>
+                            <li><a class="dropdown-item" 
                               *ngIf="rol=='ADMINISTRADOR'"
                               routerLink="/dashboard/categoria">Panel Categorias</a></li>
                           <li><a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesión</a></li>

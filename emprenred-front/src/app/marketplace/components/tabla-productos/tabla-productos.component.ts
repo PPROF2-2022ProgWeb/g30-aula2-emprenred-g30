@@ -10,9 +10,11 @@ import { MarketplaceService } from '../../services/marketplace.service';
 })
 export class TablaProductosComponent implements OnInit {
 
+
+  filtro: string = '';
   isMenuOpened: boolean = false;
 
-  filtromenu(): void {
+  filtromenu() {
     this.isMenuOpened = !this.isMenuOpened;
  }
 
@@ -59,5 +61,6 @@ productos: Producto[] = [];
   
 
 }
+
   
 }

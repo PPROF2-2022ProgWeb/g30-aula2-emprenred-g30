@@ -18,4 +18,9 @@ public class Utils {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return usuarioRepositorio.buscarUsuarioPorEmail(userDetails.getUsername()).getPersona();
     }
+
+    public String getRoleContext (){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+     return userDetails.getAuthorities().toArray()[0].toString();
+    }
 }

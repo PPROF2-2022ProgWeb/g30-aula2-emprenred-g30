@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import {MenuItem} from 'primeng/api';
 import { delay } from 'rxjs';
+import { rol } from 'src/app/auth/interfaces/rol.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { TipoProducto } from 'src/app/marketplace/interfaces/producto.interface';
 import { MarketplaceService } from 'src/app/marketplace/services/marketplace.service';
 import Swal from 'sweetalert2';
@@ -14,18 +16,31 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
 
+  role: rol;
+
+
   categorias: TipoProducto[] = [];
 
     usuario: string = ""
   items!: MenuItem[];
+rol: string = localStorage.getItem('role')
+  constructor(private marketplaceService: MarketplaceService,
+              private authService: AuthService) { }
 
-  constructor(private marketplaceService: MarketplaceService) { }
-
+             
   ngOnInit() {
    
     this.usuario = localStorage.getItem('username')!
 
+    this.authService.getRole().subscribe((rol => {
 
+      console.log( rol[0].authority)
+     // this.role.authority=rol[0].authority
+      setTimeout(function(){
+        localStorage.setItem('role' , rol[0].authority)
+     }, 3000);
+
+    }))
     this.marketplaceService.getCategorias()
     .subscribe( (categorias) => {
     
@@ -41,6 +56,7 @@ export class NavbarComponent implements OnInit {
       console.log("error")
     })
   
+ 
 
 
 }

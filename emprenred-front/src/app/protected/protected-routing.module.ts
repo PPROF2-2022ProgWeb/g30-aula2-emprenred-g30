@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { CategoriasComponent } from './components/categorias/categorias.component';
 import { ComprasComponent } from './components/compras/compras.component';
 import { DefaultComponent } from './components/default/default.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { PublicarProductoComponent } from './components/publicar-producto/publicar-producto.component';
 import { VentasComponent } from './components/ventas/ventas.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
@@ -29,6 +31,14 @@ component: DashboardComponent,
         {
           path: 'ventas',
           component: VentasComponent
+        },
+        {
+          path: 'subir-producto',
+          component: PublicarProductoComponent
+        },
+        {
+          path: 'categoria',
+          component: CategoriasComponent
         },
         {
           path: '**',

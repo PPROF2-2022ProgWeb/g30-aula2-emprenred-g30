@@ -20,7 +20,9 @@ public interface CarritoService {
 	
 	public void deleteById(Long id);
 	
-	List<Carrito> searchNativo(String filtro) throws Exception;
+	List<Carrito> searchNativo(Long filtro) throws Exception;
+
+	void addProducto(Long productoId) throws Exception;
 		
-	 
+	void deleteProductoToCarrito (List<Long> productoIds ) throws Exception;
 }

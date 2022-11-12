@@ -48,6 +48,16 @@ public class TipoProductoimpl implements TipoProductoService{
 
 		return tipoProductoRepositorio.save(producto);
 	}
+	@Override
+	@Transactional
+	public TipoProducto update(TipoProducto producto) {
+		//	Boolean isValid = tipoProductoRepositorio.existsByDescripcion(producto.getDescripcion());
+		//	if (isValid){
+		//		throw new BadRequestException("Ya existe nombre de la categoria");
+		//	}
+
+		return tipoProductoRepositorio.save(producto);
+	}
 
 	@Override
 	@Transactional

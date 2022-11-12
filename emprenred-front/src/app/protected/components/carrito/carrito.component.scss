@@ -1,0 +1,105 @@
+.p-inputgroup-addon{
+    padding: 10px;
+    width: 100px;
+}
+
+/*boton volver*/
+
+.botonvolver{
+    float: right;
+    margin: 40px 20px;
+}
+.botonvolver button{
+    background-color: #e6e2ba3f;
+    border-color: #000000;
+}
+.enlacevolver{
+    text-decoration: none;
+    text-transform: none;
+    color: #000000;
+}
+
+.botonvolver button:hover{
+    background-color: #e6e2baa4;
+}
+
+/*container carrito*/
+
+.tablacarrito{
+    margin: 50px 20px 10px;
+    width: 90% auto;
+}
+.tablacarrito thead{
+    font-size: 18px;
+}
+
+.tdimagen{
+    width: 100px;
+    height: 100px;
+}
+
+.imagentabla{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cantidadtabla{
+    width: 80px;
+    text-align: center;
+}
+
+.delete{
+    background-color: #00000011;
+}
+
+.delete:hover{
+    background-color: #0000002d;
+}
+.totalcarrito{
+    font-size: 20px;
+    border: 2px solid #00000038;
+    text-align: right;
+    padding: 5px 20px;
+}
+
+.formadepago{
+    padding: 30px 20px;
+    border: 2px solid #91909091;
+}
+
+.botoncomprar{
+    background-color: #FFC107;
+    margin: 20px 50px 20px 0;
+    padding: 10px;
+    width: 200px;
+    font-size: 20px;
+}
+
+.botoncomprar:hover{
+    background-color: #ffae00;
+}
+
+.datospersonales{
+    padding: 30px 20px;
+    border: 2px solid #91909091;
+    margin:50px 0;
+}
+
+.dato-email{
+    width: 50%;
+    
+}
+
+.dato-direccion{
+    width: 450px;
+}
+
+.dato-direccion input{
+    padding-left: 5px;
+    width: 300px;
+}
+
+.dato-provincia{
+    width: 450px;
+}

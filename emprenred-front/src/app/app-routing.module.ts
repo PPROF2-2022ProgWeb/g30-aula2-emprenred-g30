@@ -29,8 +29,18 @@ const routes: Routes = [
   path: '',
   component: HomeComponent
 },
-{path: 'productos',component:ProductosComponent},
-{path: 'producto',component:ProductoComponent}
+{path: 'productos',
+component:ProductosComponent},
+{path: 'producto',
+component:ProductoComponent},
+{
+  path: 'carrito',
+  loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule),
+  canActivate: [
+   ValidarTokenGuard
+  ]
+    
+},
 ];
 
 

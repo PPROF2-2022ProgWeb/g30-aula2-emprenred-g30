@@ -15,6 +15,7 @@ export class MarketplaceService {
   constructor(private http: HttpClient) { }
   productos: Producto[] = [];
 
+
   listarProductos( ): Observable<RespuestaProductos>{
    
     const url = `${ this.baseUrl}/productos`;
@@ -126,6 +127,16 @@ consultarCarrito(idUsuario: number): Observable<Carrito> {
   .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
 
 return this.http.get<Carrito>(url, {headers})
+
+
+}
+
+
+  buscarProducto(busqueda:string ): Observable<RespuestaProductos>{
+   
+    const url = `${ this.baseUrl}/productos?filter=DESCRIPCION&value=${busqueda}`;
+
+   return this.http.get<RespuestaProductos>(url)
 
 
 }

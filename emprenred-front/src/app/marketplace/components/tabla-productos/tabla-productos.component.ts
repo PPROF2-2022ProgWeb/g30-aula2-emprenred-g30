@@ -25,6 +25,8 @@ export class TablaProductosComponent implements OnInit {
 productos: Producto[] = [];
 productosFilter: Producto[] = [];
 
+busqueda: string; 
+
   constructor(private activatedRoute : ActivatedRoute,
              private marketplaceService: MarketplaceService,
              private titleCase: TitleCasePipe) { }
@@ -33,24 +35,29 @@ productosFilter: Producto[] = [];
     
 
 
+    this.activatedRoute.params.subscribe((param) =>{
+    
+      this.busqueda = (param['params'])
 
+    })  
 
 
     this.marketplaceService.listarProductos()
     .subscribe( (productos) => {
+
+      let categoria = this.categoria
+
+    this.activatedRoute.params.subscribe(({categoria})=>{        
+      
+
+
+        this.categoria = categoria;
+        console.log(this.categoria)
     
-      
-    this.activatedRoute.params.subscribe(({categoria})=>{
-   
-      
-      if(categoria != ''){
-        this.categoria = categoria;  
-      }
-  
-      console.log(this.categoria)
+    
     });
 
-      if(this.categoria==undefined) {
+      if(this.categoria==undefined && this.busqueda == undefined) {
 
         this.productos = productos.data; 
         console.log("Query OK"); 
@@ -59,29 +66,43 @@ productosFilter: Producto[] = [];
 
       } else {
 
-        console.log('por aca padre')
+        if(this.categoria!=undefined) {
 
-        let categoria = this.categoria
-      this.productos = productos.data.filter(function (producto)
-      {
-        
-      return producto.tipoProducto.descripcion ===  categoria
-      }
-
-      );
-            if(this.productos.length === 0)  {
+          this.productos = productos.data.filter(function (producto)
+          {
             
-              categoria = this.titleCase.transform(this.categoria)  
-              this.productos = productos.data.filter(function (producto)
-              {
+          return producto.tipoProducto.descripcion ===  categoria
+          }
+    
+          );
+                if(this.productos.length === 0)  {
                 
-              return producto.tipoProducto.descripcion ===  categoria
-              }
-        
-              );
+                  categoria = this.titleCase.transform(this.categoria)  
+                  this.productos = productos.data.filter(function (producto)
+                  {
+                    
+                  return producto.tipoProducto.descripcion ===  categoria
+                  }
+            
+                  );
+    
+                }
+              
+            
+        } else { 
 
-            }
+             
+        this.marketplaceService.buscarProducto(this.busqueda).subscribe((productos)=>{
+
+  this.productos = productos.data; 
+
+        }), (err) =>{
+
+          alert('Falla en el motor de Busqueda')
+        }
+
            
+        }
       }
 
     

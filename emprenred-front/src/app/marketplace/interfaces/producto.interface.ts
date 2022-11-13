@@ -50,3 +50,22 @@ export interface UpdateProducto
         precio: number,
         stock: number
       }
+
+      export interface Carrito {
+        id:        number;
+        persona:   Persona;
+        productos: Producto[];
+        precio:    number;
+    }
+    
+    export interface Persona {
+        id:          number;
+        nombre:      string;
+        apellido:    string;
+        localidad:   null;
+        fechaNac:    Date;
+        fechaDeBaja: null;
+    }
+    
+
+    

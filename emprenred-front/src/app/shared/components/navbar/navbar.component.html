@@ -43,10 +43,10 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                           <li><a class="dropdown-item" href="/dashboard">Mi Cuenta</a></li>
                           <li><a class="dropdown-item" 
-                            *ngIf="rol=='VENDEDOR' || 'ADMINISTRADOR'"
+                            *ngIf="rol!='USUARIO'"
                             routerLink="/dashboard/subir-producto">Publicar Producto</a></li>
                             <li><a class="dropdown-item" 
-                              *ngIf="rol=='VENDEDOR' || 'ADMINISTRADOR'"
+                              *ngIf="rol!='USUARIO'"
                               routerLink="/dashboard/misproductos">Ver Mis Productos</a></li>
                             <li><a class="dropdown-item" 
                               *ngIf="rol=='ADMINISTRADOR'"

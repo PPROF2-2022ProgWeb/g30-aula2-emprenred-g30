@@ -11,7 +11,7 @@
       				<th>Imagen</th> 
       				<th>Producto</th>
       				<th>Precio Unitario</th>
-					<th>Cantidad</th>
+				    	<th>Cantidad</th>
 			
     			</tr>
   			</thead>
@@ -119,3 +119,11 @@
     <button class="botoncomprar">Comprar</button>
 </div>
 </div>
+
+
+<p-dialog [visible]="isLoading" >
+
+	<img src="assets/img/loading.gif" alt="PROCESANDO... ESPERE">
+	<p>Procesando... espere</p>
+
+</p-dialog>

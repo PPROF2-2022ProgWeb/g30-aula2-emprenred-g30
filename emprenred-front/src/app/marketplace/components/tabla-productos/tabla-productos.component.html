@@ -23,10 +23,19 @@
 					<p class="card-text">{{producto.descripcion}}</p>
 					<p class="card-precio">{{producto.precio | currency}}</p>
 					<a class="btn btn-primary detallesproducto" routerLink="/productos/{{producto.tipoProducto.descripcion}}/{{producto.id}}">Detalles</a>
-					<button class="btn btn-primary botoncarrito" name="btnAccion" value="Agregar" (click)="agregarAlCarrito(producto.id, producto.nombre)">Agregar al carrito</button>
+					<button class="btn btn-primary botoncarrito" name="btnAccion" value="Agregar" (click)="evaluarStock(producto.id,producto.nombre)" [disabled]="isLoading">Agregar al carrito</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
 </div>
+
+<p-dialog [visible]="isLoading" >
+
+	<img src="assets/img/loading.gif" alt="AGREGANDO PRODUCTO... ESPERE">
+	<p>Agregando el producto... espere</p>
+
+</p-dialog>
 

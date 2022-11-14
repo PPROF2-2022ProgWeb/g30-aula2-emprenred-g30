@@ -2,7 +2,7 @@ import { TitleCasePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Producto } from '../../interfaces/producto.interface';
+import { Producto, ProductosCarrito } from '../../interfaces/producto.interface';
 import { MarketplaceService } from '../../services/marketplace.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { MarketplaceService } from '../../services/marketplace.service';
 })
 export class TablaProductosComponent implements OnInit {
 
+  isLoading: boolean = false;
 
   filtro: string = '';
   isMenuOpened: boolean = false;
@@ -23,8 +24,10 @@ export class TablaProductosComponent implements OnInit {
 
 
   categoria: string;
-productos: Producto[] = [];
-productosFilter: Producto[] = [];
+productos: Producto[];
+productosCarrito: ProductosCarrito[];
+encontrado: ProductosCarrito;
+
 
 busqueda: string; 
 
@@ -129,10 +132,10 @@ busqueda: string;
 agregarAlCarrito(id:number,nombre:string) {
 
 
-
+  this.isLoading=true
   
     this.marketplaceService.agregarProductoCarrito(id).subscribe((resp)=>{
-
+this.isLoading=false
       Swal.fire({
         icon: 'success',
         position: 'top-end',
@@ -144,13 +147,61 @@ agregarAlCarrito(id:number,nombre:string) {
    
  
     }),(err) =>{
-
+      this.isLoading=false
 console.log(err)
 
     }
 
   
 
+
+}
+
+
+//Para evitar sobre-ventas 
+evaluarStock(id:number, nombre:string) {
+
+this.isLoading = true;   
+this.marketplaceService.consultarCarrito().subscribe((carrito)=>{
+
+this.productosCarrito = carrito.productos
+
+
+this.encontrado = this.productosCarrito.find(producto => producto.producto.id === id)
+
+
+if(this.encontrado!=undefined){
+console.log('producto encontrado actualmente en carrito, evaluando stock y cantidad')
+  if(this.encontrado.producto.stock<=this.encontrado.cantidad){
+        
+    //mandar el alert, se pasó el stock 
+this.isLoading=false;
+
+    return Swal.fire({
+      icon: 'error',
+      position: 'top-end',
+      title: 'No se puede añadir el producto',
+      text:  'Ha sobrepasado la cantidad de stock proporcionada por el vendedor para este producto, revise su carrito',
+      showConfirmButton: false,
+      timer: 2000
+    })
+
+
+  } else {
+
+    this.isLoading=false;
+   //lo tiene en carrito, pero se puede agregar. 
+   return this.agregarAlCarrito(id,nombre)
+
+  }
+
+
+}
+
+//si está undefined, no está en el carrito mandar a agregar el producto
+this.agregarAlCarrito(id,nombre)
+
+})
 
 }
 

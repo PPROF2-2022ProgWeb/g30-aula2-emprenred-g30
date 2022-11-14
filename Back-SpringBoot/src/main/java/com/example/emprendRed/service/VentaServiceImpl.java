@@ -1,12 +1,10 @@
 package com.example.emprendRed.service;
 
-import com.example.emprendRed.Enum.FILTERS;
 import com.example.emprendRed.Enum.PAYMENT_TYPE;
 import com.example.emprendRed.Enum.ROLE;
 import com.example.emprendRed.Enum.VENTA_STATUS;
 import com.example.emprendRed.exceptions.BadRequestException;
 import com.example.emprendRed.model.Carrito;
-import com.example.emprendRed.model.DTO.VentaDTO;
 import com.example.emprendRed.model.Persona;
 import com.example.emprendRed.model.Productos;
 import com.example.emprendRed.model.Venta;
@@ -32,6 +30,9 @@ public class VentaServiceImpl implements VentaService {
 
     @Autowired
     private CarritoRepositorio carritoRepositorio;
+
+    @Autowired
+    private ProductosRepositorio productosRepositorio;
     @Autowired
     private Utils utils;
     @Override
@@ -48,6 +49,13 @@ public class VentaServiceImpl implements VentaService {
                 !paymentType.equalsIgnoreCase(PAYMENT_TYPE.MERCADO_PAGO.toString())){
             throw new BadRequestException("forma de pago invalido");
         }
+        for (Productos producto : carrito.getProductos()) {
+            if (producto.getStock()<=0){
+                throw new BadRequestException(" El producto " + producto.getNombre() + " no tiene stock");
+            }
+
+        }
+
         Persona vendedor = carrito.getProductos().get(0).getVendedor();
 
         Venta venta = new Venta();
@@ -64,10 +72,12 @@ public class VentaServiceImpl implements VentaService {
         carrito.setProductos(new ArrayList<>());
         carritoRepositorio.save(carrito);
 
+        updateStrockProducto(venta.getProductos());
         return newVenta.getId();
     }
 
     @Override
+    @Transactional
     public void cancelVenta(Long id) {
         Persona persona = utils.getPersonContext();
         Venta venta = ventaRepositorio.findById(id).orElseThrow(()->new BadRequestException("No se encontro la venta id " + id));
@@ -83,6 +93,7 @@ public class VentaServiceImpl implements VentaService {
         venta.setEstado(VENTA_STATUS.CANCELADO);
 
         ventaRepositorio.save(venta);
+        updateStrockProducto(venta.getProductos());
     }
 
     @Override
@@ -124,6 +135,15 @@ public class VentaServiceImpl implements VentaService {
         }
 
         return venta;
+    }
+
+    private void  updateStrockProducto (List<Productos> productos){
+
+        for ( Productos producto : productos) {
+            producto.setStock(producto.getStock()-ventaRepositorio.countStocKProducto(producto.getId()));
+            productosRepositorio.save(producto);
+        }
+
     }
 
 }

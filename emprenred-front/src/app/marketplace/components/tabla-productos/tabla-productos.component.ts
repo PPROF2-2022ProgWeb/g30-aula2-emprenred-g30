@@ -1,6 +1,7 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Producto } from '../../interfaces/producto.interface';
 import { MarketplaceService } from '../../services/marketplace.service';
 
@@ -125,4 +126,32 @@ busqueda: string;
 }
 
   
+agregarAlCarrito(id:number,nombre:string) {
+
+
+
+  
+    this.marketplaceService.agregarProductoCarrito(id).subscribe((resp)=>{
+
+      Swal.fire({
+        icon: 'success',
+        position: 'top-end',
+        title: 'Producto Agregado al Carrito',
+        text: nombre,
+        showConfirmButton: false,
+        timer: 2000
+      })
+   
+ 
+    }),(err) =>{
+
+console.log(err)
+
+    }
+
+  
+
+
+}
+
 }

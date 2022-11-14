@@ -67,13 +67,13 @@ public class AppService implements UserDetailsService{
              usuario.setUsername(request.getEmail());
              usuario.setPassword(encoder.encode(request.getPassword()));
              usuario.setPersona(persona);
-             usuario.setRole(ROLE.USUARIO);
+             usuario.setRole(Enum.valueOf(ROLE.class,request.getRole()));
 
              personaRepositorio.save(persona);
              usuarioRepositorio.save(usuario);
     }
     
-
+    
     
     private void validacion (PersonaUsuarioDto personaRequest) throws Exception{
         

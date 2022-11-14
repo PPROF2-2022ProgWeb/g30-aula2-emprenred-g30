@@ -2,7 +2,7 @@
 package com.example.emprendRed.controller;
 
 
-import com.example.emprendRed.Jwt.exceptions.BadRequestException;
+import com.example.emprendRed.exceptions.BadRequestException;
 import com.example.emprendRed.model.Message;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;

@@ -3,11 +3,13 @@ package com.example.emprendRed.service;
 import com.example.emprendRed.Enum.PAYMENT_TYPE;
 import com.example.emprendRed.Enum.ROLE;
 import com.example.emprendRed.Enum.VENTA_STATUS;
-import com.example.emprendRed.Jwt.exceptions.BadRequestException;
+import com.example.emprendRed.exceptions.BadRequestException;
 import com.example.emprendRed.model.Carrito;
 import com.example.emprendRed.model.Persona;
+import com.example.emprendRed.model.Productos;
 import com.example.emprendRed.model.Venta;
 import com.example.emprendRed.repository.CarritoRepositorio;
+import com.example.emprendRed.repository.ProductosRepositorio;
 import com.example.emprendRed.repository.VentaRepositorio;
 import com.example.emprendRed.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class VentaServiceImpl implements VentaService {

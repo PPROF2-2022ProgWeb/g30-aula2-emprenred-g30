@@ -12,18 +12,29 @@
       				<th>Producto</th>
       				<th>Precio Unitario</th>
 					<th>Cantidad</th>
-					<th></th>
+			
     			</tr>
   			</thead>
 			<tbody>
     			<ng-container *ngFor="let producto of productos">
     				<tr>
 						<td>1</td>
-      					<td class="tdimagen"><img class="imagentabla" src="{{producto.imagen}}"></td>
-      					<td>{{producto.nombre}}</td>
-						  <td>{{producto.precio | currency:'$'}}</td>
-      					<td><input type="number" class="cantidadtabla" min="1" value="1"></td>
-						<td><button class="delete btn">x</button></td>
+      					<td class="tdimagen"><img class="imagentabla" src="{{producto.producto.imagen}}"></td>
+      					<td>{{producto.producto.nombre}}</td>
+						  <td>{{producto.producto.precio | currency:'$'}}</td>
+                 
+      					<td> 
+                  <div *ngIf="isLoading===false">
+                  <button class="delete btn" (click)="borrarProducto(producto.producto.id)"> - </button>  
+                  <input type="number" class="cantidadtabla" disabled min="1" value="{{producto.cantidad}}">
+                  	<button class="delete btn" (click)="aumentarProducto(producto.producto.id, producto.producto.stock, producto.cantidad)"> + </button> 
+                  </div>
+                <div *ngIf="isLoading">
+
+                  <smalL>Realizando operación... aguarde</smalL>
+                </div>
+                  </td>
+                  
 						</tr>
     		</ng-container>
   		</tbody>
@@ -51,21 +62,19 @@
           <div class="formadepago">
           <h4 class="mb-3">Forma de pago</h4>
 
-          <div class="my-3">
-            <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-              <label class="form-check-label" for="credit">Tarjeta de crédito</label>
-            </div>
-            <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="debit">Tarjeta de débito</label>
-            </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="paypal">PayPal</label>
-            </div>
-          </div>
 
+          <div class="my-3">
+           
+            <button pButton (click)="mp()">MercadoPago</button> &nbsp; &nbsp;
+            <button pButton (click)="acordar()">Acordar con el Vendedor</button>
+
+            <div *ngIf="this.compra.paymentType!='No seleccionado'"> 
+              <small> Metodo Seleccionado : {{this.compra.paymentType}}</small>
+            
+            </div>
+
+            </div>
+    
           <div class="row gy-3">
             <div class="col-md-6">
               <label for="cc-name" class="form-label">Titular de la tarjeta </label>
@@ -102,7 +111,11 @@
           </div>
   </div>
 
-	<div class="text-end">
-    	<button class="botoncomprar" >Comprar</button>
+	<div class="text-end" *ngIf="this.compra.paymentType=='No seleccionado'">
+    	<button class="botoncomprar" disabled>Comprar</button>
 	</div>
+
+  <div class="text-end" *ngIf="this.compra.paymentType!='No seleccionado' && this.productos.length > 0 ">
+    <button class="botoncomprar">Comprar</button>
+</div>
 </div>

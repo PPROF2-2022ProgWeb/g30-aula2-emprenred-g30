@@ -83,8 +83,11 @@ public class CarritoController {
 		}
 		//Leer Todos
 		@GetMapping
-		public ResponseEntity getCarritoByContext() throws Exception {
-			return new ResponseEntity(carritoService.getCarritoByContext(),HttpStatus.OK);
+		public List<Carrito> readAll(){
+			List<Carrito> carrito = StreamSupport
+					.stream(carritoService.findAll().spliterator(), false)
+					.collect(Collectors.toList());
+			return carrito;
 		}
 
 		@PostMapping ("/add-product")

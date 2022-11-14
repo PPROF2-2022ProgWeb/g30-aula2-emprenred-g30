@@ -29,21 +29,6 @@ public class Productos {
 	private  Persona vendedor;
 	private String imagen;
 
-	public Productos() {
-	}
-
-	public Productos(Long id, String descripcion, String fechaDeBaja, String imagen, String nombre, Double precio, Long stock, TipoProducto tipoProducto, Persona vendedor) {
-		this.id = id;
-		this.descripcion = descripcion;
-		this.nombre = nombre;
-		this.precio = precio;
-		this.fechaDeBaja = fechaDeBaja;
-		this.stock = stock;
-		this.tipoProducto = tipoProducto;
-		this.vendedor = vendedor;
-		this.imagen = imagen;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -117,7 +102,5 @@ public class Productos {
 	public void setVendedor(Persona vendedor) {
 		this.vendedor = vendedor;
 	}
-
-
 
 }

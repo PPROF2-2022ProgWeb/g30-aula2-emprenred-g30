@@ -6,8 +6,10 @@ import com.example.emprendRed.Enum.VENTA_STATUS;
 import com.example.emprendRed.Jwt.exceptions.BadRequestException;
 import com.example.emprendRed.model.Carrito;
 import com.example.emprendRed.model.Persona;
+import com.example.emprendRed.model.Productos;
 import com.example.emprendRed.model.Venta;
 import com.example.emprendRed.repository.CarritoRepositorio;
+import com.example.emprendRed.repository.ProductosRepositorio;
 import com.example.emprendRed.repository.VentaRepositorio;
 import com.example.emprendRed.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class VentaServiceImpl implements VentaService {
@@ -27,6 +30,9 @@ public class VentaServiceImpl implements VentaService {
 
     @Autowired
     private CarritoRepositorio carritoRepositorio;
+
+    @Autowired
+    private ProductosRepositorio productosRepositorio;
     @Autowired
     private Utils utils;
     @Override
@@ -43,6 +49,13 @@ public class VentaServiceImpl implements VentaService {
                 !paymentType.equalsIgnoreCase(PAYMENT_TYPE.MERCADO_PAGO.toString())){
             throw new BadRequestException("forma de pago invalido");
         }
+        for (Productos producto : carrito.getProductos()) {
+            if (producto.getStock()<=0){
+                throw new BadRequestException(" El producto " + producto.getNombre() + " no tiene stock");
+            }
+
+        }
+
         Persona vendedor = carrito.getProductos().get(0).getVendedor();
 
         Venta venta = new Venta();
@@ -59,10 +72,12 @@ public class VentaServiceImpl implements VentaService {
         carrito.setProductos(new ArrayList<>());
         carritoRepositorio.save(carrito);
 
+        updateStrockProducto(venta.getProductos(),true);
         return newVenta.getId();
     }
 
     @Override
+    @Transactional
     public void cancelVenta(Long id) {
         Persona persona = utils.getPersonContext();
         Venta venta = ventaRepositorio.findById(id).orElseThrow(()->new BadRequestException("No se encontro la venta id " + id));
@@ -78,6 +93,7 @@ public class VentaServiceImpl implements VentaService {
         venta.setEstado(VENTA_STATUS.CANCELADO);
 
         ventaRepositorio.save(venta);
+        updateStrockProducto(venta.getProductos(),false);
     }
 
     @Override
@@ -119,6 +135,20 @@ public class VentaServiceImpl implements VentaService {
         }
 
         return venta;
+    }
+
+    private void  updateStrockProducto (List<Productos> productos, Boolean isVenta){
+
+        for ( Productos producto : productos) {
+            if (isVenta){
+                producto.setStock(producto.getStock()-ventaRepositorio.countStocKProducto(producto.getId()));
+
+            } else{
+                producto.setStock(producto.getStock()+ventaRepositorio.countStocKProducto(producto.getId()));
+            }
+            productosRepositorio.save(producto);
+        }
+
     }
 
 }

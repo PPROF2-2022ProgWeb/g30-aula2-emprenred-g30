@@ -3,6 +3,7 @@ package com.example.emprendRed.repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.emprendRed.model.Productos;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -33,8 +34,14 @@ public interface CarritoRepositorio extends JpaRepository<Carrito, Long> {
 
 	@Transactional
 	@Modifying
-	@Query (value = "DELETE FROM carritos_productos WHERE carrito_id = :carritoId AND producto_id IN (:productoIds) " , nativeQuery = true)
-	void deleteProducts(@Param("carritoId") Long carritoId, @Param("productoIds") List<Long> productosId);
+	@Query (value = "DELETE FROM carritos_productos WHERE id = (" +
+			"SELECT id FROM carritos_productos WHERE producto_id = :productoId AND carrito_id = :carritoId LIMIT 1 ) " , nativeQuery = true)
+	void deleteProducts(@Param("carritoId") Long carritoId, @Param("productoId") Long productosId);
 
 
+
+	@Query(value = "SELECT COUNT(*) FROM carritos_productos cp" +
+			" WHERE cp.carrito_id = :carritoId AND  cp.producto_id = :productoId  " , nativeQuery = true)
+
+	Long countProducts(@Param("carritoId") Long carritoId, @Param("productoId") Long productosId);
 }

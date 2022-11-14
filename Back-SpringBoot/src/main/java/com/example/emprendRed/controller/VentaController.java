@@ -40,7 +40,7 @@ public class VentaController {
         return new ResponseEntity<>(ventaService.getVenta(dateTo,dateFrom,status,paymentType,size,page),HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{ig}")
     public ResponseEntity<Venta> getVentaById (@PathVariable Long id){
         return new ResponseEntity<>(ventaService.getVentaById(id),HttpStatus.OK);
     }

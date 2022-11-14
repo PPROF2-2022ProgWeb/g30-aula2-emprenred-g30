@@ -3,7 +3,6 @@ package com.example.emprendRed.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.emprendRed.model.DTO.CarritoDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -26,6 +25,4 @@ public interface CarritoService {
 	void addProducto(Long productoId) throws Exception;
 		
 	void deleteProductoToCarrito (List<Long> productoIds ) throws Exception;
-
-	CarritoDTO getCarritoByContext () throws Exception;
 }

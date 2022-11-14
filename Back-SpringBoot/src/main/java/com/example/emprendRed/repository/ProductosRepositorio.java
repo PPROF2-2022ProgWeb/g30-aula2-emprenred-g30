@@ -25,9 +25,4 @@ public interface ProductosRepositorio extends JpaRepository<Productos, Long> {
 	 @Query(value = "SELECT * FROM productos WHERE id IN (:ids) ; " , nativeQuery = true)
 	List<Productos> getAllByIds (@Param("ids") List<Long> ids);
 
-	@Query (value = "SELECT DISTINCT p.* FROM productos p " +
-			"INNER JOIN carritos_productos  ON carritos_productos.producto_id = p.id " +
-			" WHERE carritos_productos.carrito_id = :carritoId ;  "
-			, nativeQuery = true)
-	List<Productos> getProductosByCarrito(@Param("carritoId") Long carritoId);
 }

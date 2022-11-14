@@ -44,7 +44,7 @@ public class VentaRepositorioImpl {
                     break;
                 case "estado":
                 case "tipoDePago":
-                    predicates.add(cb.equal(root.get(entry.getKey()),entry.getValue()));
+                    predicates.add(cb.equal(root.get(entry.getKey()),entry.getValue().toString()));
             }
         }
 
@@ -79,15 +79,15 @@ public class VentaRepositorioImpl {
 
         for (Map.Entry<String, Object> entry : filters.entrySet()){
             switch (entry.getKey()){
-                case "dateFrom":
+                case "dateTo":
                     predicates.add(cb.greaterThanOrEqualTo(root.get("fechaDeCreacion"),(Date)entry.getValue()));
                     break;
-                case "dateTo":
+                case "dateFrom":
                     predicates.add(cb.lessThanOrEqualTo(root.get("fechaDeCreacion"),(Date)entry.getValue()));
                     break;
                 case "estado":
                 case "tipoDePago":
-                    predicates.add(cb.equal(root.get(entry.getKey()),entry.getValue()));
+                    predicates.add(cb.equal(root.get(entry.getKey()),entry.getValue().toString()));
             }
         }
 

@@ -2,7 +2,8 @@ package com.example.emprendRed.service;
 
 import java.util.Optional;
 
-import com.example.emprendRed.Jwt.exceptions.BadRequestException;
+import com.example.emprendRed.exceptions.BadRequestException;
+import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.emprendRed.model.TipoProducto;
 import com.example.emprendRed.repository.TipoProductoRepositorio;
+
+import javax.swing.text.BadLocationException;
 
 @Service
 public class TipoProductoimpl implements TipoProductoService{

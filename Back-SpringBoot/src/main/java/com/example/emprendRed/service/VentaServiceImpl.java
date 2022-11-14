@@ -3,7 +3,7 @@ package com.example.emprendRed.service;
 import com.example.emprendRed.Enum.PAYMENT_TYPE;
 import com.example.emprendRed.Enum.ROLE;
 import com.example.emprendRed.Enum.VENTA_STATUS;
-import com.example.emprendRed.Jwt.exceptions.BadRequestException;
+import com.example.emprendRed.exceptions.BadRequestException;
 import com.example.emprendRed.model.Carrito;
 import com.example.emprendRed.model.Persona;
 import com.example.emprendRed.model.Productos;

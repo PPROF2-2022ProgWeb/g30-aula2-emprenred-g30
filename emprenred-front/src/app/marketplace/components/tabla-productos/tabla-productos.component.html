@@ -23,7 +23,7 @@
 					<p class="card-text">{{producto.descripcion}}</p>
 					<p class="card-precio">{{producto.precio | currency}}</p>
 					<a class="btn btn-primary detallesproducto" routerLink="/productos/{{producto.tipoProducto.descripcion}}/{{producto.id}}">Detalles</a>
-					<button class="btn btn-primary botoncarrito" name="btnAccion" value="Agregar" onclick="llamarCategoria()">Agregar al carrito</button>
+					<button class="btn btn-primary botoncarrito" name="btnAccion" value="Agregar" (click)="agregarAlCarrito(producto.id, producto.nombre)">Agregar al carrito</button>
 				</div>
 			</div>
 		</div>

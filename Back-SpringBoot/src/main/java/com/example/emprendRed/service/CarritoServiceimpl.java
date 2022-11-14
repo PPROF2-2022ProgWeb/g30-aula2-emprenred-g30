@@ -3,8 +3,7 @@ package com.example.emprendRed.service;
 import java.util.List;
 import java.util.Optional;
 
-
-import com.example.emprendRed.Jwt.exceptions.BadRequestException;
+import com.example.emprendRed.exceptions.BadRequestException;
 import com.example.emprendRed.model.DTO.CarritoDTO;
 import com.example.emprendRed.model.DTO.ProductoResponseDTO;
 import com.example.emprendRed.model.Persona;

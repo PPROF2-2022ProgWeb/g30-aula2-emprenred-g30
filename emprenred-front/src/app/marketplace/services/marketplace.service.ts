@@ -120,14 +120,26 @@ return this.http.put<UpdateProducto>(url, producto, {headers})
 }
 
 
-consultarCarrito(idUsuario: number): Observable<Carrito> {
+consultarCarrito(): Observable<Carrito> {
 
-  const url = `${ this.baseUrl}/carrito/search?personaId=${idUsuario}`;
+  const url = `${ this.baseUrl}/carrito/`;
   const headers = new HttpHeaders()
   .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
 
+
 return this.http.get<Carrito>(url, {headers})
 
+}
+
+quitarProductoCarrito(id: number) {
+
+  const url = `${ this.baseUrl}/carrito/quit-product/?productoIds=${id}`;
+ 
+  const body = "";
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+  return this.http.post(url, body, {headers})
 
 }
 
@@ -138,6 +150,32 @@ return this.http.get<Carrito>(url, {headers})
 
    return this.http.get<RespuestaProductos>(url)
 
+
+}
+
+
+generarCompra(idCarrito: number, paymentType: string) { 
+
+  const url = `${ this.baseUrl}/ventas?carritoId=${idCarrito}&paymentType=${paymentType}`;
+ const body = "";
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+  return this.http.post(url, body, {headers} )
+
+}
+
+
+agregarProductoCarrito(id: number) {
+
+  const url = `${ this.baseUrl}/carrito/add-product?productoId=${id}`;
+
+  const body = ""; //mandar un body vacío, al ser post, para no cagarla. 
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+  console.log(headers)
+  return this.http.post(url, body, {headers} )
 
 }
 

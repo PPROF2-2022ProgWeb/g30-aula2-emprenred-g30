@@ -99,7 +99,7 @@ public class ProductosController {
 	}
 
 	@PutMapping ("/{id}/file")
-	@PreAuthorize("hasAnyAuthority('VENDEDOR', 'ADMINISTRADOR')")
+	@PreAuthorize("hasAuthority('VENDEDOR')")
 	public ResponseEntity<?> uploadFile (	@PathVariable(value = "id") Long id,
 											 @RequestParam ("file")MultipartFile file) throws IOException {
 		productosService.uploadFile(id, file);

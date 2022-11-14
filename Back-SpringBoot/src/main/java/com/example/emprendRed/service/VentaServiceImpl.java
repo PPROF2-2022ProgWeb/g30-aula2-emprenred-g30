@@ -72,7 +72,7 @@ public class VentaServiceImpl implements VentaService {
         carrito.setProductos(new ArrayList<>());
         carritoRepositorio.save(carrito);
 
-        updateStrockProducto(venta.getProductos());
+        updateStrockProducto(venta.getProductos(),true);
         return newVenta.getId();
     }
 
@@ -93,7 +93,7 @@ public class VentaServiceImpl implements VentaService {
         venta.setEstado(VENTA_STATUS.CANCELADO);
 
         ventaRepositorio.save(venta);
-        updateStrockProducto(venta.getProductos());
+        updateStrockProducto(venta.getProductos(),false);
     }
 
     @Override
@@ -137,10 +137,15 @@ public class VentaServiceImpl implements VentaService {
         return venta;
     }
 
-    private void  updateStrockProducto (List<Productos> productos){
+    private void  updateStrockProducto (List<Productos> productos, Boolean isVenta){
 
         for ( Productos producto : productos) {
-            producto.setStock(producto.getStock()-ventaRepositorio.countStocKProducto(producto.getId()));
+            if (isVenta){
+                producto.setStock(producto.getStock()-ventaRepositorio.countStocKProducto(producto.getId()));
+
+            } else{
+                producto.setStock(producto.getStock()+ventaRepositorio.countStocKProducto(producto.getId()));
+            }
             productosRepositorio.save(producto);
         }
 

@@ -12,35 +12,23 @@ export class CarritoComponent implements OnInit {
 
 
   categoria = "";
-productos: Producto[] = [];
+productos: Producto[];
 email = localStorage.getItem('username');
 
+idUsuario:number = +localStorage.getItem('id')
   constructor(private activatedRoute : ActivatedRoute,
              private marketplaceService: MarketplaceService) { }
 
   ngOnInit(): void {
 
-    this.marketplaceService.listarProductos()
-    .subscribe( (productos) => {
-    
-      this.productos = productos.data; 
-      console.log("Query OK");  
+
+   this.marketplaceService.consultarCarrito(this.idUsuario).subscribe((carrito)=>{
+     
+      this.productos = carrito[0].productos;
 
       console.log(this.productos)
-    
-     
-    }, (err) => {
 
-      this.productos= [];
-      console.log("error")
-    })
-
-    this.activatedRoute.params.subscribe(({categoria})=>{
-      if(categoria != ''){
-        this.categoria = categoria; 
-      }
-  
-    });
+   })  
    
 
 }

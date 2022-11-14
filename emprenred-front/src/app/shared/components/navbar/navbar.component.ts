@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 export class NavbarComponent implements OnInit {
 
   role: rol;
-
+  termino: string = '';
 
   categorias: TipoProducto[] = [];
 
@@ -87,5 +87,8 @@ cerrarSesion(){
 
 }
 
+buscar(termino){
+console.log(termino)
+}
 
 }

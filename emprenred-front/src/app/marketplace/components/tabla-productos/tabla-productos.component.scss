@@ -49,8 +49,12 @@
 .filtro-item:hover{
     text-decoration: underline;
 }
-.col-3{
-    width: 400px;
+.resultados{
+    width: 350px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   
     }
     
 .card{
@@ -60,7 +64,7 @@
 
 .imagencontainer{
     width: 100%x;
-    height: 400px;
+    height: 200px;
     }
 .card-img-top {
     object-fit: cover;

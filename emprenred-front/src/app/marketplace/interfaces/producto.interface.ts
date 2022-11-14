@@ -40,3 +40,32 @@ export interface RespuestaProductos {
         vendedor:     Vendedor;
         imagen:       null;
     }
+export interface UpdateProducto
+    {
+        descripcion: string,
+    id: number,
+        id_tipo_producto: number,
+        imagen: string,
+    nombre: string,
+        precio: number,
+        stock: number
+      }
+
+      export interface Carrito {
+        id:        number;
+        persona:   Persona;
+        productos: Producto[];
+        precio:    number;
+    }
+    
+    export interface Persona {
+        id:          number;
+        nombre:      string;
+        apellido:    string;
+        localidad:   null;
+        fechaNac:    Date;
+        fechaDeBaja: null;
+    }
+    
+
+    

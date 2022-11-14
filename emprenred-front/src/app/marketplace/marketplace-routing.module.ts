@@ -8,6 +8,10 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'busqueda/:params',
+        component: ProductosComponent
+      },
+      {
         path: ':categoria',
         component: ProductosComponent
       }, 

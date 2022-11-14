@@ -8,7 +8,7 @@ import {PanelModule} from 'primeng/panel';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
-
+import {RippleModule} from 'primeng/ripple';
 
 @NgModule({
   declarations: [],
@@ -21,7 +21,8 @@ import {DialogModule} from 'primeng/dialog';
     PanelModule,
     InputNumberModule,
     TableModule,
-    DialogModule
+    DialogModule,
+    RippleModule
 
   ]
 })

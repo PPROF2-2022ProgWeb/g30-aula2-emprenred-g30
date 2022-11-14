@@ -10,7 +10,7 @@ import java.util.Optional;
 import com.example.emprendRed.Enum.DIRECTION;
 import com.example.emprendRed.Enum.FILTERS;
 import com.example.emprendRed.Enum.ORDER_BY;
-import com.example.emprendRed.exceptions.BadRequestException;
+import com.example.emprendRed.Jwt.exceptions.BadRequestException;
 import com.example.emprendRed.model.DTO.BasicResponseDTO;
 import com.example.emprendRed.model.DTO.ProductoDTO;
 import com.example.emprendRed.model.TipoProducto;
@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

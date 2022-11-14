@@ -1,3 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~bootstrap-icons/font/bootstrap-icons.css';
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #e0d915 #ebebeb;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ebebeb;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #e0d915;
+    border-radius: 10px;
+    border: 0px ridge #199486;
+  }

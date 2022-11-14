@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import { Producto, ProductoCreado, RespuestaProductos, TipoProducto } from '../interfaces/producto.interface';
+import { Carrito, Producto, ProductoCreado, RespuestaProductos, TipoProducto, UpdateProducto } from '../interfaces/producto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,11 @@ import { Producto, ProductoCreado, RespuestaProductos, TipoProducto } from '../i
 export class MarketplaceService {
 
   baseUrl = 'http://localhost:8080/api' 
+  baseUrl0 = 'http://localhost:8080/'
   
   constructor(private http: HttpClient) { }
   productos: Producto[] = [];
+
 
   listarProductos( ): Observable<RespuestaProductos>{
    
@@ -91,6 +93,52 @@ deleteCategoria(id:number) {
   .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
 
   return this.http.delete(url, {headers})
+}
+
+
+getMyProducts(id:number): Observable<Producto[]> {
+
+  const url = `${ this.baseUrl}/productos/search?filtro=${id}`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+
+return this.http.get<Producto[]>(url, {headers})
+
+}
+
+
+updateProduct(id:number, producto: UpdateProducto): Observable<UpdateProducto> {
+
+  const url = `${ this.baseUrl}/productos/${id}`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+  
+
+return this.http.put<UpdateProducto>(url, producto, {headers})
+
+}
+
+
+consultarCarrito(idUsuario: number): Observable<Carrito> {
+
+  const url = `${ this.baseUrl}/carrito/search?personaId=${idUsuario}`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+return this.http.get<Carrito>(url, {headers})
+
+
+}
+
+
+  buscarProducto(busqueda:string ): Observable<RespuestaProductos>{
+   
+    const url = `${ this.baseUrl}/productos?filter=DESCRIPCION&value=${busqueda}`;
+
+   return this.http.get<RespuestaProductos>(url)
+
+
 }
 
 }

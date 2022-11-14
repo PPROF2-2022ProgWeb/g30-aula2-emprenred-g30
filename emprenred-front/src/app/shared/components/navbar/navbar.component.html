@@ -5,21 +5,19 @@
 
     <section class="header-main border-bottom bg-white">
         <div class="container-fluid">
-           <div class="row p-2 pt-3 pb-3 d-flex align-items-center">
-               <div class="col-md-2">
-                   <a class="volver" routerLink=""><img  class="d-none d-md-flex" src="./assets/img/EmprenRED.png" width="250"></a>
+           <div class="row pr-4 pt-2 pb-2 d-flex align-items-center">
+            
+               <div class="col-md-3"> 
+                   <a class="volver" routerLink=""><img class="d-flex d-md-flex CENTRADO" src="./assets/img/EmprenRED.png" width="250"></a>
                    
                </div>
-               <div class="col-md-6">
-            <div class="d-flex form-inputs">
-            <input class="form-control" type="text" placeholder="Buscá cualquier producto">
-            <i class="bx bx-search"></i>
-            </div>
+               <!---Buscador-->
+               <div class="col-md-5 align-items-center" >
+                     <app-buscador  (onEnter)="buscar($event)"></app-buscador>
                </div>
-               
                <div class="col-md-2">
                    <div class="d-flex d-none d-md-flex flex-row align-items-left">
-                       <span class="shop-bag"><a class="carritornlace" routerLink="carrito"><i class='bx bxs-shopping-bag'></i></a></span>
+                       <span class="shop-bag"><a class="carritornlace" routerLink="dashboard/carrito"><i class='bx bxs-shopping-bag'></i></a></span>
                        <div class="d-flex flex-column ms-2">
                            <span class="qty">2 productos</span>
                            <span class="fw-bold">$2500</span>
@@ -45,8 +43,11 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                           <li><a class="dropdown-item" href="/dashboard">Mi Cuenta</a></li>
                           <li><a class="dropdown-item" 
-                            *ngIf="rol=='VENDEDOR'"
+                            *ngIf="rol=='VENDEDOR' || 'ADMINISTRADOR'"
                             routerLink="/dashboard/subir-producto">Publicar Producto</a></li>
+                            <li><a class="dropdown-item" 
+                              *ngIf="rol=='VENDEDOR' || 'ADMINISTRADOR'"
+                              routerLink="/dashboard/misproductos">Ver Mis Productos</a></li>
                             <li><a class="dropdown-item" 
                               *ngIf="rol=='ADMINISTRADOR'"
                               routerLink="/dashboard/categoria">Panel Categorias</a></li>
@@ -86,7 +87,7 @@
           <ul class="navbar-nav"
           *ngFor="let categoria of categorias">
             <li class=" -item">
-              <a class="nav-link" href="#">{{categoria.descripcion}}</a>
+              <a class="nav-link" href="/productos/{{categoria.descripcion}}">{{categoria.descripcion}}</a>
             </li>
           </ul>
         </div>

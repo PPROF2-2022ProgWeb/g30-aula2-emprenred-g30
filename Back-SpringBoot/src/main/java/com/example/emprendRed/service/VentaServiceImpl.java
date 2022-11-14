@@ -27,6 +27,9 @@ public class VentaServiceImpl implements VentaService {
 
     @Autowired
     private CarritoRepositorio carritoRepositorio;
+
+    @Autowired
+    private ProductosRepositorio productosRepositorio;
     @Autowired
     private Utils utils;
     @Override
@@ -43,6 +46,13 @@ public class VentaServiceImpl implements VentaService {
                 !paymentType.equalsIgnoreCase(PAYMENT_TYPE.MERCADO_PAGO.toString())){
             throw new BadRequestException("forma de pago invalido");
         }
+        for (Productos producto : carrito.getProductos()) {
+            if (producto.getStock()<=0){
+                throw new BadRequestException(" El producto " + producto.getNombre() + " no tiene stock");
+            }
+
+        }
+
         Persona vendedor = carrito.getProductos().get(0).getVendedor();
 
         Venta venta = new Venta();
@@ -59,10 +69,12 @@ public class VentaServiceImpl implements VentaService {
         carrito.setProductos(new ArrayList<>());
         carritoRepositorio.save(carrito);
 
+        updateStrockProducto(venta.getProductos(),true);
         return newVenta.getId();
     }
 
     @Override
+    @Transactional
     public void cancelVenta(Long id) {
         Persona persona = utils.getPersonContext();
         Venta venta = ventaRepositorio.findById(id).orElseThrow(()->new BadRequestException("No se encontro la venta id " + id));
@@ -78,6 +90,7 @@ public class VentaServiceImpl implements VentaService {
         venta.setEstado(VENTA_STATUS.CANCELADO);
 
         ventaRepositorio.save(venta);
+        updateStrockProducto(venta.getProductos(),false);
     }
 
     @Override
@@ -119,6 +132,20 @@ public class VentaServiceImpl implements VentaService {
         }
 
         return venta;
+    }
+
+    private void  updateStrockProducto (List<Productos> productos, Boolean isVenta){
+
+        for ( Productos producto : productos) {
+            if (isVenta){
+                producto.setStock(producto.getStock()-ventaRepositorio.countStocKProducto(producto.getId()));
+
+            } else{
+                producto.setStock(producto.getStock()+ventaRepositorio.countStocKProducto(producto.getId()));
+            }
+            productosRepositorio.save(producto);
+        }
+
     }
 
 }

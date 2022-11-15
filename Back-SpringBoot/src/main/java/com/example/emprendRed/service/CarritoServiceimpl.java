@@ -124,7 +124,7 @@ public class CarritoServiceimpl implements CarritoService {
 		List<Productos> productos = productosRepositorio.getProductosByCarrito(carrito.getId());
 		CarritoDTO carritoResponse = new CarritoDTO();
 		carritoResponse.setId(carrito.getId());
-		carritoResponse.setPrecio(carritoResponse.getPrecio());
+		carritoResponse.setPrecio(carrito.getPrecio());
 
 		for (Productos producto : productos ) {
 			ProductoResponseDTO productoResponseDTO = new ProductoResponseDTO();

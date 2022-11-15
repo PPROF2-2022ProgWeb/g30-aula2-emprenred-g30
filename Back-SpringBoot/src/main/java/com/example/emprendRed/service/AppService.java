@@ -5,6 +5,7 @@ import com.example.emprendRed.Enum.ROLE;
 import com.example.emprendRed.Jwt.JwtDto;
 import com.example.emprendRed.Jwt.JwtProvider;
 import com.example.emprendRed.Jwt.JwtUtils;
+import com.example.emprendRed.exceptions.BadRequestException;
 import com.example.emprendRed.model.DTO.EditUserDTO;
 import com.example.emprendRed.model.Persona;
 import com.example.emprendRed.model.DTO.PersonaUsuarioDto;
@@ -12,10 +13,12 @@ import com.example.emprendRed.model.Usuario;
 import com.example.emprendRed.repository.PersonaRepositorio;
 import com.example.emprendRed.repository.UsuarioRepositorio;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.example.emprendRed.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,6 +41,9 @@ public class AppService implements UserDetailsService{
     UsuarioRepositorio usuarioRepositorio;
     @Autowired
     JwtUtils jwtUtils;
+
+    @Autowired
+     private Utils utils;
     
     @Autowired
     private BCryptPasswordEncoder encoder;
@@ -157,11 +163,55 @@ public class AppService implements UserDetailsService{
         List<Object[]>objects =usuarioRepositorio.getAllUsers();
         List<EditUserDTO> editUserDTOList = new ArrayList<>();
         for (Object[] obj: objects) {
-            editUserDTOList.add(new EditUserDTO(obj));
+            editUserDTOList.add(mapObjectToDTO(obj));
         }
     return editUserDTOList;
     }
 
-    
+    public EditUserDTO getUserById(Long id){
+
+       Object[] obj = usuarioRepositorio.getUserById(id).get(0);
+
+        if (obj.length > 0) {
+            return mapObjectToDTO(obj);
+        }
+        return null;
+    }
+
+    public Long putUserById(Long id, EditUserDTO editUserDTO){
+
+        Usuario usuario = usuarioRepositorio.findById(id).orElseThrow(()-> new BadRequestException("No se encontro el usuario id " + id));
+
+        String role = utils.getRoleContext();
+        if (!role.equals(ROLE.ADMINISTRADOR.toString()) &&
+            id != utils.getUserContext().getId()){
+            throw  new BadRequestException("No tiene lso permisos para editar este usuario");
+        }
+
+        usuario.getPersona().setNombre(editUserDTO.getNombre());
+        usuario.getPersona().setApellido(editUserDTO.getApellido());
+        usuario.getPersona().setLocalidad(editUserDTO.getLocalidad());
+        usuario.getPersona().setFechaNac(editUserDTO.getFechaNac());
+        if (role.equals(ROLE.ADMINISTRADOR.toString())){
+            usuario.setRole(editUserDTO.getRole());
+        }
+
+        usuarioRepositorio.save(usuario);
+
+        return id;
+    }
+
+    public EditUserDTO mapObjectToDTO (Object[] objet) {
+        EditUserDTO editUserDTO = new EditUserDTO();
+        editUserDTO.setId( ((BigInteger) objet[0]).longValue());
+        editUserDTO.setNombre( (String) objet[1]);
+        editUserDTO.setApellido( (String) objet[2]);
+        editUserDTO.setLocalidad( (String) objet[3]);
+        editUserDTO.setFechaNac( (Date) objet[4]);
+        editUserDTO.setEmail( (String) objet[5]);
+        editUserDTO.setRole( (Enum.valueOf(ROLE.class,(String) objet[6])));
+
+        return editUserDTO;
+    }
     
 }

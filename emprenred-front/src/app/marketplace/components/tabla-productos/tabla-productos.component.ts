@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Producto } from '../../interfaces/producto.interface';
 import { MarketplaceService } from '../../services/marketplace.service';
+import { TipoProducto } from '../../../marketplace/interfaces/producto.interface';
 
 @Component({
   selector: 'app-tabla-productos',
@@ -21,7 +22,7 @@ export class TablaProductosComponent implements OnInit {
     this.isMenuOpened = !this.isMenuOpened;
  }
 
-
+ categorias: TipoProducto[] = [];
   categoria: string;
 productos: Producto[] = [];
 productosFilter: Producto[] = [];
@@ -34,6 +35,20 @@ busqueda: string;
 
   ngOnInit(): void {
     
+    this.marketplaceService.getCategorias()
+    .subscribe( (categorias) => {
+    
+      this.categorias = categorias;
+      console.log("Query OK"); 
+
+      console.log(this.categorias)
+    
+     
+    }, (err) => {
+
+      this.categorias= [];
+      console.log("error")
+    })
 
 
     this.activatedRoute.params.subscribe((param) =>{

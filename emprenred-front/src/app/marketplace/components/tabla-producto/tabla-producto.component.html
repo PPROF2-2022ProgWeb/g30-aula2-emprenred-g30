@@ -13,7 +13,9 @@
             <div class="texto">
                 <p class="card-text">{{producto.descripcion}}</p>
                 <p class="card-precio">${{producto.precio}}</p>
+                <p class="card-stock">Stock disponible: {{producto.stock}} unidades.</p>
                 <div class="botones">
+                
                 <button class=" btn btn-danger botonfavoritos" name="btnFav" value="Agregar">Agregar a favoritos<i class="bi bi-suit-heart-fill"></i> </button>
                 <button class="btn btn-warning botoncarrito" name="btnAccion" value="Agregar" onclick="llamarCategoria()">Agregar al carrito</button>
             </div>

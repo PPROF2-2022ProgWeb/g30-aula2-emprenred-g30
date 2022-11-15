@@ -1,6 +1,7 @@
 package com.example.emprendRed.utils;
 
 import com.example.emprendRed.model.Persona;
+import com.example.emprendRed.model.Usuario;
 import com.example.emprendRed.repository.UsuarioRepositorio;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class Utils {
     public String getRoleContext (){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
      return userDetails.getAuthorities().toArray()[0].toString();
+    }
+
+    public Usuario getUserContext(){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return usuarioRepositorio.buscarUsuarioPorEmail(userDetails.getUsername());
     }
 }

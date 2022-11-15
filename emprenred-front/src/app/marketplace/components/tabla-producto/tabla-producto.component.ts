@@ -10,9 +10,10 @@ import { MarketplaceService } from '../../services/marketplace.service';
 export class TablaProductoComponent implements OnInit {
 
 
-
+productos: Producto[] = [];
 categoria = "";
 idProducto = 0;
+stock= '';
 
 producto: Producto;
 
@@ -22,7 +23,14 @@ producto: Producto;
   ngOnInit(): void {
 
 
-
+    this.activatedRoute.params.subscribe(({stock})=>{
+   
+      
+      if(stock != ''){
+        this.stock = stock; 
+      }
+  
+    });
     this.activatedRoute.params.subscribe(({categoria})=>{
    
       

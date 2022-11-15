@@ -1,8 +1,8 @@
 .titulo {
     background-color: #2a2927;
-    padding: 2em 0 2em 3em;
-    margin-bottom: 3em;
     color: #f0f8ff;
+    height: 100px;
+    padding: 20px 40px;
     }
 
 .titulo h2{
@@ -11,43 +11,74 @@
 
 .container{
     text-align: center;
-    margin-bottom: 5em;
+    margin: 0;
+    padding: 0;
+
     }
     
+/*  lateral */
 
-/*filtro */
+.lateral{
+    margin-left: 0;
+    width: 280px;
+    float: left;    
+    background-color:rgba(206, 203, 203, 0.336);
+}
+.categorias h4 {
+    padding: 15px;
+}
+.categorias-lista{
+    margin: 0;
+    padding: 10px;
+    border-top: 1px solid rgb(221, 218, 218);
+}
+.categorias-lista:hover{
+    background-color: #e2dede;
+}
+.categorias-item{
+    text-decoration: none;
+    list-style: none;
+    text-align: justify;
+    padding: 5px;
+}
+
+
+/*filtro ordenar*/
+
 .filtros{
     width: 200px;
-    background:#ffe60034;
-    border: 2px solid #00000031;
+    border: 1px solid #f0ebeb60;
     font-size: 20px;
     cursor:pointer;
-    margin: 20px auto;
-    padding: 10px;
-    height: 100%;
+    height: 40px;
+    float:right;
+    background:#d6d5d5cb;
+    margin: 20px 40px ;
+    text-align: center;
+}
+.filtros:hover{
+    background-color: #88858560;
 }
 
 .menufiltro{
     padding: 10px;
-    margin-bottom: 10px;
+    
 }
-
-.opcionfiltro{
-    background: #333;
-    color: #fff;
-    padding: 10px;
+.primero{
+    margin-top: 10px;
 }
-
 .filtro-item{
+    width: 200px;
+    padding:10px;
     cursor: pointer;
-    padding: 5px 0;
     border-bottom: 1px solid #00000027;
     font-size: 15px;
-    display: block;
+    background-color:#f0ebeb60;
 }
 
 .filtro-item:hover{
     text-decoration: underline;
+    background-color:#f0ebebcb;
 }
 .resultados{
     width: 350px;
@@ -56,7 +87,14 @@
     margin-right: auto;
    
     }
+
+/*tarjetas producto*/
     
+
+.row{
+    padding-top: 50px;
+}
+
 .card{
     margin: 15px 5px 30px;
     background-color: rgba(240, 240, 226, 0.315);
@@ -110,3 +148,41 @@
     margin:0 0 5px 15px;
     float: left;
     }
+
+@media (max-width:1024px){
+    .botoncarrito{
+        margin: 0;
+        font-size: 12px;
+    }
+    .detallesproducto{
+        margin: 0;
+        font-size: 12px;
+    }
+    }
+
+@media (max-width:876px){
+    .botoncarrito{
+        width: 100%;
+        margin-top: 10px;
+    }
+    .detallesproducto{
+        width: 100%;
+        }
+
+    .filtros{
+        width: 150px;
+        height: 30px;
+        font-size: 15px;
+    }
+    .filtro-item{
+        width: 150px;
+    } 
+    .lateral{
+        width: 200px;
+    }
+}
+@media (max-width:768px){
+    .lateral{
+        width: 150px;
+    }
+}

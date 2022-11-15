@@ -17,15 +17,18 @@ public class EditUserDTO {
 
     public EditUserDTO() {
     }
-    public EditUserDTO(Object[] objet) {
-    this.id = ((BigInteger) objet[0]).longValue();
-    this.nombre = (String) objet[1];
-    this.apellido = (String) objet[2];
-    this.localidad = (String) objet[3];
-    this.fechaNac = (Date) objet[4];
-    this.email = (String) objet[5];
-    this.role = (Enum.valueOf(ROLE.class,(String) objet[6]));
+
+    public EditUserDTO(Long id, String nombre, String apellido, String localidad, Date fechaNac, String email, ROLE role) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.localidad = localidad;
+        this.fechaNac = fechaNac;
+        this.email = email;
+        this.role = role;
     }
+
+ 
     public String getNombre() {
         return nombre;
     }
@@ -81,4 +84,6 @@ public class EditUserDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }

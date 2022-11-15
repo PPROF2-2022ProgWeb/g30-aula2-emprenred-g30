@@ -55,13 +55,13 @@ total(): number{
 
   let sum=0;
   this.productos.forEach(producto => {
-    sum += 1 * producto.producto.precio
+    sum += producto.cantidad * producto.producto.precio
   });
   return sum;
 
 
 }
- /*en suma cambiar el 1 por producto cantidad cuando este ok*/ 
+
 
 
 

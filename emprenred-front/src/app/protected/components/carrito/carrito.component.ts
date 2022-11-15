@@ -13,7 +13,7 @@ import { MarketplaceService } from '../../../marketplace/services/marketplace.se
 })
 export class CarritoComponent implements OnInit {
 
-
+role: string; 
 
 isLoading: boolean = false; 
 
@@ -38,6 +38,7 @@ compra: Compra = {
 
   ngOnInit(): void {
 
+this.role = localStorage.getItem('role')
    this.marketplaceService.consultarCarrito().subscribe((carrito)=>{
      
     this.productos = carrito.productos

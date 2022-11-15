@@ -1,4 +1,5 @@
-<div class="carrito">
+<div class="carrito"
+*ngIf="role!='ADMINISTRADOR'">
     <h2>Carrito de Compras</h2>
     <div class="botonvolver">
         <button class="btn"><a class="enlacevolver" routerLink="">Seguir comprando</a></button>
@@ -125,5 +126,13 @@
 
 	<img src="assets/img/loading.gif" alt="PROCESANDO... ESPERE">
 	<p>Procesando... espere</p>
+
+</p-dialog>
+</div>
+
+
+<p-dialog *ngIf="role==='ADMINISTRADOR'" visible="true" [closable]="true" >
+
+	Vista de Carrito solo apta para Clientes. 
 
 </p-dialog>

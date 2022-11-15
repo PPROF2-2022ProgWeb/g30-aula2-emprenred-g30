@@ -88,6 +88,8 @@ registro() {
 
   const {nombre,apellido,email,localidad,password,password2} = this.formularioRegistro.value;
 
+  console.log(this.formularioRegistro.value)
+
   this.authService.register(nombre,apellido,email,localidad,fechaNac1,password,password2)
 
 }

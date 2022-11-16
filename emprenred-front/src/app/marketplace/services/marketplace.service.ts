@@ -206,6 +206,7 @@ generarCompraMP(idCarrito: number, paymentType: string): Observable<VentaMP> {
 
 }
 
+
 depurarVenta(id:number, estado: string) {
 
   const url = `${ this.baseUrl}/ventas/cancel/${id}?status=${estado}`;
@@ -217,6 +218,17 @@ depurarVenta(id:number, estado: string) {
 
 
 }
+
+actualizarPerfil(id:number, body:any){
+
+  const url = `${ this.baseUrl0}users/${id}`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+  return this.http.put(url, body, {headers})
+
+  }
+
 
 
 }

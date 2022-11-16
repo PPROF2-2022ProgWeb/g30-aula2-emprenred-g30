@@ -5,6 +5,8 @@ import { ProductoComponent } from './pages/producto/producto.component';
 import { MarketplaceRoutingModule } from './marketplace-routing.module';
 import { TablaProductosComponent } from './components/tabla-productos/tabla-productos.component';
 import { TablaProductoComponent } from './components/tabla-producto/tabla-producto.component';
+import { OrdenarPipe } from './pipes/ordenar.pipe';
+import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
 
 
@@ -13,11 +15,16 @@ import { TablaProductoComponent } from './components/tabla-producto/tabla-produc
     ProductosComponent,
     ProductoComponent,
     TablaProductosComponent,
-    TablaProductoComponent
+    TablaProductoComponent,
+    OrdenarPipe
   ],
   imports: [
     CommonModule,
-    MarketplaceRoutingModule
+    MarketplaceRoutingModule,
+    PrimeNgModule
+  ],
+  exports: [
+    OrdenarPipe
   ]
 })
 export class MarketplaceModule { }

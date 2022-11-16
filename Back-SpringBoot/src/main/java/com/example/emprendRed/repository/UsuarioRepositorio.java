@@ -20,6 +20,12 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario,Long>{
     Usuario buscarUsuarioPorEmail(@Param("username") String username);
 
      @Query(value = "SELECT p.id , p.nombre ,p.apellido,p.localidad,p.fecha_nac,u.username,u.role FROM usuario u " +
-             "inner join personas p ON p.id = u.persona_id " , nativeQuery = true)
+             "inner join personas p ON p.id = u.persona_id " +
+             "WHERE u.fecha_de_baja IS NULL " , nativeQuery = true)
      List<Object[]> getAllUsers();
+
+ @Query(value = "SELECT p.id , p.nombre ,p.apellido,p.localidad,p.fecha_nac,u.username,u.role FROM usuario u " +
+         " inner join personas p ON p.id = u.persona_id " +
+         " WHERE u.id = :id AND u.fecha_de_baja IS NULL ; " , nativeQuery = true)
+  List< Object[] >getUserById(@Param("id") Long id);
 }

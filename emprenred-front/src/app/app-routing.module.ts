@@ -7,6 +7,7 @@ import { ValidarTokenGuard } from './guards/validar-token.guard';
 import { HomeComponent } from './shared/pages/home/home.component';
 import { ProductosComponent } from './marketplace/pages/productos/productos.component';
 import { ProductoComponent } from './marketplace/pages/producto/producto.component';
+import { NotfoundComponent } from './shared/pages/notfound/notfound.component';
 
 const routes: Routes = [
   {
@@ -29,8 +30,21 @@ const routes: Routes = [
   path: '',
   component: HomeComponent
 },
-{path: 'productos',component:ProductosComponent},
-{path: 'producto',component:ProductoComponent}
+{path: 'productos',
+component:ProductosComponent},
+{path: 'producto',
+component:ProductoComponent},
+{
+  path: 'carrito',
+  loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule),
+  canActivate: [
+   ValidarTokenGuard
+  ]
+    
+},
+
+{ path: '**', pathMatch: 'full', 
+component: NotfoundComponent },
 ];
 
 

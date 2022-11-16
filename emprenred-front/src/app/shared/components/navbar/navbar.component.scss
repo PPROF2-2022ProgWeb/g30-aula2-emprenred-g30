@@ -1,6 +1,13 @@
 body{
     background-color:purple;
 }
+.totalcarrito{
+    width: 50px;
+}
+.carritoenlace{
+    text-decoration: none;
+    text-transform: none;
+}
 .form-inputs{
     position:relative;
 }
@@ -33,4 +40,15 @@ body{
 
 .qty{
     font-size:12px;
+}
+
+.CENTRADO{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.clickeable{
+
+    cursor: pointer;
 }

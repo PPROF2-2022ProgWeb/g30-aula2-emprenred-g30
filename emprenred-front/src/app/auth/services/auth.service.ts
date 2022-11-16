@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { LoginResponse } from '../interfaces/login-response.interface';
 import { async, catchError, map, Observable, of } from 'rxjs';
 import { rol } from '../interfaces/rol.interface';
+import { Usuario } from '../interfaces/users.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,9 +12,9 @@ export class AuthService {
 
 
 
-  // URL DEL BACK 
+  // URL DEL BACK
 
-private baseUrl: string = "http://localhost:8080"; 
+private baseUrl: string = "http://localhost:8080";
   private _user: { username: any; } | undefined;
 
 
@@ -25,12 +26,12 @@ private baseUrl: string = "http://localhost:8080";
 
   // REGISTRO
 
-  register(nombre: string ,apellido: string ,email: string ,localidad: string ,fechaNac: string ,password:string ,password2:string ) {
+  register(apellido: string, email: string, fechaNac: string, localidad: string, nombre: string, password: string) {
 
-   let role = "USUARIO"; 
+
 
     const url = `${ this.baseUrl}/registro`;
-    const body = { nombre,apellido,email,localidad,password,fechaNac,password2, role};
+    const body = { apellido,email,fechaNac,localidad,nombre,password};
 
    return this.http.post(url, body).subscribe(resp => {
     Swal.fire({
@@ -42,7 +43,7 @@ private baseUrl: string = "http://localhost:8080";
       function() {window.location.href = '/auth/login';
     }
     )
-      
+
 
     },err => {
 
@@ -53,7 +54,7 @@ private baseUrl: string = "http://localhost:8080";
         footer: "Intente nuevamente"
       })
     })
-  
+
 
 
     }
@@ -62,12 +63,12 @@ private baseUrl: string = "http://localhost:8080";
 
       login(username: string , password:string ){
 
-   
+
         const url = `${ this.baseUrl}/login`;
         const body = { username , password };
-    
+
        return this.http.post<LoginResponse>(url, body).subscribe(resp => {
-       
+
         localStorage.setItem('token', 'Bearer '+resp.token)
         localStorage.setItem('username', resp.username)
         localStorage.setItem('role', resp.role )
@@ -78,14 +79,14 @@ private baseUrl: string = "http://localhost:8080";
           text: '¡Bienvenid@!',
           confirmButtonText: 'ir al Dashboard'
         }).then(
-         
+
           function() {window.location.href = '/dashboard';
         }
         )
-          
-    
+
+
         },err => {
-    
+
           Swal.fire({
             icon: 'error',
             title: 'Error al Loguearse',
@@ -93,9 +94,9 @@ private baseUrl: string = "http://localhost:8080";
             footer: "Intente nuevamente"
           })
         })
-      
-    
-    
+
+
+
         }
 
 
@@ -107,29 +108,41 @@ private baseUrl: string = "http://localhost:8080";
 
           const url = `${this.baseUrl}/valid`;
           const headers = new HttpHeaders()
-          .set('Authorization',localStorage.getItem('token') || ''); // o String vacio. 
-    
-          
-          
+          .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+
+
     return this.http.get(url, { headers })
     .pipe(
       map( () => {
 
         return true
       }), catchError (err => of(false))
-    );    
+    );
 }
+
 
 getRole():Observable<rol[]>{
 
   const url = `${this.baseUrl}/valid`;
   const headers = new HttpHeaders()
-  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio. 
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
 
 return this.http.get<rol[]>(url, { headers })
 
 }
 
+
+
+getUsuarios():Observable<Usuario[]>{
+
+  const url = `${ this.baseUrl}/users`;
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+  return this.http.get<Usuario[]>(url, {headers})
+  
+}
 
 
 }

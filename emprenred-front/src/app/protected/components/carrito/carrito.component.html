@@ -1,2 +1,152 @@
-<p>carrito works!</p>
-ASDASDASDASD
+<div class="carrito"
+*ngIf="role!='ADMINISTRADOR'">
+    <h2>Carrito de Compras</h2>
+    <div class="botonvolver">
+        <button class="btn"><a class="enlacevolver" routerLink="">Seguir comprando</a></button>
+    </div>
+	<div class="tablacarrito">
+		<table class="table table-light table-striped carritocontainer">
+  			<thead>
+    			<tr>
+					<td>#</td>
+      				<th>Imagen</th> 
+      				<th>Producto</th>
+      				<th>Precio Unitario</th>
+				    	<th>Cantidad</th>
+			
+    			</tr>
+  			</thead>
+			<tbody>
+    			<ng-container *ngFor="let producto of productos">
+    				<tr>
+						<td>1</td>
+      					<td class="tdimagen"><img class="imagentabla" src="{{producto.producto.imagen}}"></td>
+      					<td>{{producto.producto.nombre}}</td>
+						  <td>{{producto.producto.precio | currency:'$'}}</td>
+                 
+      					<td> 
+                  <div *ngIf="isLoading===false">
+                  <button class="delete btn" (click)="borrarProducto(producto.producto.id)"> - </button>  
+                  <input type="number" class="cantidadtabla" disabled min="1" value="{{producto.cantidad}}">
+                  	<button class="delete btn" (click)="aumentarProducto(producto.producto.id, producto.producto.stock, producto.cantidad)"> + </button> 
+                  </div>
+                <div *ngIf="isLoading">
+
+                  <smalL>Realizando operación... aguarde</smalL>
+                </div>
+                  </td>
+                  
+						</tr>
+    		</ng-container>
+  		</tbody>
+	</table>
+	<p class="totalcarrito">Total {{total() | currency:'$'}}</p>
+
+
+  <div class="datospersonales">
+    <h4>Datos Personales</h4>
+    <div class="row g-3">
+      <div class="p-inputgroup dato-email">
+          <span class="p-inputgroup-addon">Email</span>
+          <input type="email" pInputText [(ngModel)]="email">         
+      </div>
+      <div class="p-inputgroup dato-direccion"> 
+        <span class="p-inputgroup-addon">Dirección</span>
+        <input type="text" placeholder="Ingresa tu dirección">   
+      </div>
+      <div class="p-inputgroup dato-provincia"> 
+        <span class="p-inputgroup-addon">Provincia</span>
+        <input type="text">   
+      </div>
+    </div>
+  </div>  
+          <div class="formadepago">
+          <h4 class="mb-3">Forma de pago</h4>
+
+
+          <div class="my-3">
+           
+            <button pButton (click)="mp()">MercadoPago</button> &nbsp; &nbsp;
+            <button pButton (click)="acordar()">Acordar con el Vendedor</button>
+
+            <div *ngIf="this.compra.paymentType!='No seleccionado'"> 
+              <small> Metodo Seleccionado : {{this.compra.paymentType}}</small>
+            
+            </div>
+
+            </div>
+    
+          <div class="row gy-3">
+            <div class="col-md-6">
+              <label for="cc-name" class="form-label">Titular de la tarjeta </label>
+              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <small class="text-muted">Nombre tal cual aparece en la tarjeta</small>
+              <div class="invalid-feedback">
+                Campo requerido
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="cc-number" class="form-label">Número de tarjeta</label>
+              <input type="text" class="form-control" id="cc-number" placeholder="" required>
+              <div class="invalid-feedback">
+                Campo requerido
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="cc-expiration" class="form-label">Expiration</label>
+              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+              <div class="invalid-feedback">
+                Vencimiento (MM/AA)
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="cc-cvv" class="form-label">CVV</label>
+              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+              <div class="invalid-feedback">
+                Codigo de seguridad requerido
+              </div>
+            </div>
+          </div>
+  </div>
+
+	<div class="text-end" *ngIf="this.compra.paymentType=='No seleccionado' || this.productos.length <=0">
+    	<button class="botoncomprar" disabled>Comprar</button>
+	</div>
+
+  <div class="text-end" *ngIf="this.compra.paymentType!='No seleccionado' && this.productos.length > 0 ">
+    <button class="botoncomprar" (click)="generarCompra()">Comprar</button>
+</div>
+</div>
+
+
+<p-dialog [visible]="isLoading" >
+
+	<img src="assets/img/loading.gif" alt="PROCESANDO... ESPERE">
+	<p>Procesando... espere</p>
+
+</p-dialog>
+</div>
+
+
+<p-dialog *ngIf="role==='ADMINISTRADOR'" visible="true" [closable] >
+
+	Vista de Carrito solo apta para Clientes. 
+
+</p-dialog>
+
+<p-dialog  [visible]="compraEnCurso" [closable]="false" >
+
+ Procesando la Compra... Espere...
+</p-dialog>
+
+<p-dialog  [visible]="modalmp" >
+
+  <p>Excelente, hemos generado tu orden de compra, pagá a continuación en MercadoPago</p>
+  <br>
+  <a href="{{this.linkpagomp}}" target="_blank"><button pButton> Pagar en MercadoPago</button></a>
+  
+
+ </p-dialog>

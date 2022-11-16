@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.emprendRed.exceptions.BadRequestException;
+import com.example.emprendRed.model.DTO.CarritoDTO;
+import com.example.emprendRed.model.DTO.ProductoResponseDTO;
 import com.example.emprendRed.model.Persona;
 import com.example.emprendRed.model.Productos;
+import com.example.emprendRed.repository.ProductosRepositorio;
 import com.example.emprendRed.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +30,9 @@ public class CarritoServiceimpl implements CarritoService {
 
 	@Autowired
 	private ProductosService productosService;
+
+	@Autowired
+	private ProductosRepositorio productosRepositorio;
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -80,6 +86,11 @@ public class CarritoServiceimpl implements CarritoService {
 			carrito.setPersona(persona);
 		}
 
+		if (carrito.getProductos().size()>0
+				&& producto.getVendedor().getId()!= carrito.getProductos().get(0).getVendedor().getId() ){
+			throw new BadRequestException("Producto de vendedor diferente. ");
+		}
+
 		carrito.getProductos().add(producto);
 
 		carritoRepositorio.save(carrito);
@@ -92,11 +103,41 @@ public class CarritoServiceimpl implements CarritoService {
 		Persona persona = utils.getPersonContext();
 		Carrito carrito = searchNativo(persona.getId()).size()==0? null:searchNativo(persona.getId()).get(0);
 
-		carritoRepositorio.deleteProducts(carrito.getId(),productoIds);
+		for (Long id: productoIds ) {
+			carrito.getProductos().remove(productosRepositorio.getById(id));
+		}
+		carritoRepositorio.save(carrito);
 		updatePrecioCarrito(persona.getId());
 
 
 	}
+
+	@Override
+	public CarritoDTO getCarritoByContext() throws Exception {
+		Persona persona = utils.getPersonContext();
+		Carrito carrito = searchNativo(persona.getId()).size()>0 ? searchNativo(persona.getId()).get(0): null;
+
+		if (carrito == null) {
+			return new CarritoDTO();
+		}
+
+		List<Productos> productos = productosRepositorio.getProductosByCarrito(carrito.getId());
+		CarritoDTO carritoResponse = new CarritoDTO();
+		carritoResponse.setId(carrito.getId());
+		carritoResponse.setPrecio(carrito.getPrecio());
+
+		for (Productos producto : productos ) {
+			ProductoResponseDTO productoResponseDTO = new ProductoResponseDTO();
+			productoResponseDTO.setProducto(producto);
+			productoResponseDTO.setCantidad(carritoRepositorio.countProducts(carrito.getId(), producto.getId()).intValue());
+
+			carritoResponse.getProductos().add(productoResponseDTO);
+
+		}
+
+		return carritoResponse;
+	}
+
 	private void updatePrecioCarrito (Long personaId) throws Exception {
 		Double precioCarrito = carritoRepositorio.getPrecioByPersona(personaId).orElse(0.0);
 

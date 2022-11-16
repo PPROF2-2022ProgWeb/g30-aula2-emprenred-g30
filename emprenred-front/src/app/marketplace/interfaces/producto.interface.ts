@@ -16,7 +16,7 @@ export interface RespuestaProductos {
     }
     
     export interface TipoProducto {
-        idTipoProducto: number;
+        id_TipoProducto: number;
         descripcion:    string;
     }
     
@@ -28,4 +28,48 @@ export interface RespuestaProductos {
         fechaNac:    Date;
         fechaDeBaja: string | null;
     }
+    
+    export interface ProductoCreado {
+        id:           number;
+        descripcion:  string;
+        nombre:       string;
+        precio:       number;
+        fechaDeBaja:  null;
+        stock:        number;
+        tipoProducto: TipoProducto;
+        vendedor:     Vendedor;
+        imagen:       null;
+    }
+export interface UpdateProducto
+    {
+        descripcion: string,
+    id: number,
+        id_tipo_producto: number,
+        imagen: string,
+    nombre: string,
+        precio: number,
+        stock: number
+      }
+
+    export interface Persona {
+        id:          number;
+        nombre:      string;
+        apellido:    string;
+        localidad:   null;
+        fechaNac:    Date;
+        fechaDeBaja: null;
+    }
+
+    export interface Carrito {
+        id:        number;
+        productos: ProductosCarrito[];
+        precio:    null | number;
+    }
+    
+    export interface ProductosCarrito{
+        producto: Producto
+        cantidad: number;
+    }
+    
+
     

@@ -34,7 +34,7 @@ public class ProductosController {
 
 	//Crear Producto
 	@PostMapping
-	@PreAuthorize("hasAuthority('VENDEDOR')")
+	@PreAuthorize("hasAnyAuthority('VENDEDOR', 'ADMINISTRADOR')")
 	public ResponseEntity<?> create(@RequestBody ProductoDTO producto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(productosService.save(producto));
 	}
@@ -59,7 +59,7 @@ public class ProductosController {
 						}
 	//Actualizar
 	@PutMapping("/{id}")
-	@PreAuthorize("hasAuthority('VENDEDOR')")
+	@PreAuthorize("hasAnyAuthority('VENDEDOR', 'ADMINISTRADOR')")
 	public ResponseEntity<?> update (@RequestBody ProductoDTO productosDetails, @PathVariable(value="id") Long id){
 		Optional<Productos> productos = productosService.findById(id);
 		if(!productos.isPresent()) {
@@ -76,7 +76,7 @@ public class ProductosController {
 	} 
 	//Borrar Usuario
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasAuthority('VENDEDOR')")
+	@PreAuthorize("hasAnyAuthority('VENDEDOR', 'ADMINISTRADOR')")
 	public ResponseEntity <?> delete (@PathVariable(value="id")Long id){
 	
 		if(!productosService.findById(id).isPresent())	{

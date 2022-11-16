@@ -16,6 +16,12 @@
 .container .containerProductos .col-md-3 .cardsProductos div {
     cursor: pointer;
 }
+
+.botoncategorias{
+    text-decoration: none;
+    text-transform: none;
+    color: #000000;
+}
 @media(max-width: 991.98px){
 .container .containerProductos .col-md-3 .cardsProductos div img{
     width: 50px;
@@ -24,4 +30,6 @@
 
 }
 }
+
+
 

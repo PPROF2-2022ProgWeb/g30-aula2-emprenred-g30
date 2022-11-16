@@ -5,6 +5,9 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { HomeComponent } from './pages/home/home.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { FeatureComponent } from './components/feature/feature.component';
+import { BuscadorComponent } from './components/buscador/buscador.component';
+import { FormsModule } from '@angular/forms';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 
 
@@ -13,17 +16,21 @@ import { FeatureComponent } from './components/feature/feature.component';
     NavbarComponent,
     HomeComponent,
     CategoriasComponent,
-    FeatureComponent
+    FeatureComponent,
+    BuscadorComponent,
+    NotfoundComponent
   ],
   imports: [
     CommonModule,
-    PrimeNgModule
+    PrimeNgModule,
+    FormsModule
   ],
   exports: [
   NavbarComponent,
   CategoriasComponent,
   FeatureComponent,
-  HomeComponent
+  HomeComponent,
+  NotfoundComponent
   ]
 })
 export class SharedModule { }

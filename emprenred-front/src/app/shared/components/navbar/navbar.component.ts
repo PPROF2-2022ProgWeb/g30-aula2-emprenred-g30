@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import {MenuItem} from 'primeng/api';
 import { delay } from 'rxjs';
-import { TipoProducto } from 'src/app/marketplace/interfaces/producto.interface';
+import { rol } from 'src/app/auth/interfaces/rol.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { ProductosCarrito, TipoProducto } from 'src/app/marketplace/interfaces/producto.interface';
 import { MarketplaceService } from 'src/app/marketplace/services/marketplace.service';
 import Swal from 'sweetalert2';
 
@@ -14,18 +16,54 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
 
+  numeroProductos: number = 0;
+  costoTotal: number = 0; 
+  role: rol;
+  termino: string = '';
+  nologueado: boolean = false;
+  productos: ProductosCarrito[];
+  precioCarrito: number;
   categorias: TipoProducto[] = [];
 
     usuario: string = ""
   items!: MenuItem[];
+rol: string = localStorage.getItem('role')
+  constructor(private marketplaceService: MarketplaceService,
+              private authService: AuthService) { }
 
-  constructor(private marketplaceService: MarketplaceService) { }
-
+             
   ngOnInit() {
-   
+    this.consultarCarrito();
+
+  this.authService.validarToken().subscribe((resp)=>{
+
+if(resp===false)  {
+  this.nologueado = true; 
+  localStorage.clear()
+ 
+
+}
+    
+  },(err) =>{
+
+   console.log('error de validacion de token - no se puede conectar al BACK')
+    
+  }
+  
+  
+  )
+
     this.usuario = localStorage.getItem('username')!
 
+    this.authService.getRole().subscribe((rol => {
 
+      console.log( rol[0].authority)
+     // this.role.authority=rol[0].authority
+      setTimeout(function(){
+        localStorage.setItem('role' , rol[0].authority)
+     }, 3000);
+
+    }))
     this.marketplaceService.getCategorias()
     .subscribe( (categorias) => {
     
@@ -40,6 +78,8 @@ export class NavbarComponent implements OnInit {
       this.categorias= [];
       console.log("error")
     })
+  
+ 
   
 
 
@@ -60,7 +100,7 @@ cerrarSesion(){
             localStorage.clear();
           Swal.fire('Su sesión ha sido cerrada', '', 'success')
           setTimeout(function(){
-            window.location.reload();
+            location.href = '/';
          }, 2000);
           
         } else if (result.isDenied) {
@@ -71,5 +111,23 @@ cerrarSesion(){
 
 }
 
+buscar(termino){
+console.log(termino)
+}
+
+consultarCarrito(){
+
+
+  this.marketplaceService.consultarCarrito().subscribe((carrito)=>{
+     
+    this.productos = carrito.productos
+    this.precioCarrito = carrito.precio!
+   
+
+   })  
+}
+
 
 }
+
+

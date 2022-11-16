@@ -1,6 +1,7 @@
 
 package com.example.emprendRed.controller;
 
+import com.example.emprendRed.model.DTO.EditUserDTO;
 import com.example.emprendRed.model.DTO.PersonaUsuarioDto;
 import com.example.emprendRed.model.Usuario;
 import com.example.emprendRed.repository.UsuarioRepositorio;
@@ -16,12 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -58,13 +54,8 @@ public class AppControlador {
    
   
    @GetMapping("/{id}")
-   public ResponseEntity<?> getByid (@PathVariable Long id){
-       
-//        HttpHeaders headers = new HttpHeaders();
-//     headers.add("Access-Control-Allow-Origin", "http://localhost:5500/");
-//    headers.add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS");
-//    headers.add("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-System.out.println("");
+   public ResponseEntity<?> getPersonByid (@PathVariable Long id){
+
        return new ResponseEntity (service.mostraPorId(id),HttpStatus.OK);
    }
 
@@ -89,5 +80,26 @@ System.out.println("");
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
     public ResponseEntity<?> getUsers (){
        return new ResponseEntity<>(service.getUsers(), HttpStatus.OK);
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<?> getUserById (@PathVariable Long id){
+
+        return new ResponseEntity (service.getUserById(id),HttpStatus.OK);
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<?> getUserById (@PathVariable ("id") Long id,
+                                          @RequestBody EditUserDTO editUserDTO){
+
+        return new ResponseEntity (service.putUserById(id,editUserDTO),HttpStatus.OK);
+    }
+
+    @PutMapping("/users/{id}/delete")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    public ResponseEntity<?> deleteUserById (@PathVariable ("id") Long id){
+
+        service.deleteUSer(id);
+        return new ResponseEntity (HttpStatus.OK);
     }
 }

@@ -18,5 +18,7 @@ public Iterable<TipoProducto> findAll();
 	public TipoProducto save(TipoProducto producto);
 	
 	public void deleteById(Long id);
+
+	public TipoProducto update(TipoProducto producto);
 }
 

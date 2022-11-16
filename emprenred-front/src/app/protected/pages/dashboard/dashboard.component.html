@@ -8,7 +8,9 @@
                 <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Mi Cuenta</span> 
                 </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                <hr>
+                <!---Si es USUARIO-->
+                <ul *ngIf="role=='USUARIO'" class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a routerLink="perfil"  class="nav-link align-middle px-0">
                             <i class="bi bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Mis Datos</span>
@@ -18,13 +20,73 @@
                     <li class="nav-item">
                         <a routerLink="carrito"  class="nav-link align-middle px-0">
                  
-                            <i class="bi bi-bag-fill"></i> <span class="ms-1 d-none d-sm-inline">Carrito</span>
+                            <i class="bi bi-cart"></i> <span class="ms-1 d-none d-sm-inline">Carrito</span>
+                        </a>
+                    </li>  
+                    <li class="nav-item">
+                        <a routerLink="compras"  class="nav-link align-middle px-0">
+                 
+                            <i class="bi bi-bag-fill"></i> <span class="ms-1 d-none d-sm-inline">Mis Compras</span>
                         </a>
                     </li>  
 
                 </ul>
-                <hr>
 
+                  <!---Si es ADMIN -->
+
+                  <ul *ngIf="role=='ADMINISTRADOR'" class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a routerLink="perfil"  class="nav-link align-middle px-0">
+                            <i class="bi bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Mis Datos</span>
+                        </a>
+                    </li>       
+
+                    <li class="nav-item">
+                        <a routerLink="admin/usuarios"  class="nav-link align-middle px-0">
+                 
+                            <i class="bi bi-people"></i> <span class="ms-1 d-none d-sm-inline">Control de Usuarios</span>
+                        </a>
+                    </li>  
+                    <li class="nav-item">
+                        <a routerLink="ventas"  class="nav-link align-middle px-0">
+                 
+                            <i class="bi bi-bag-fill"></i> <span class="ms-1 d-none d-sm-inline">Ventas Totales</span>
+                        </a>
+                    </li>  
+                    <li class="nav-item">
+                        <a routerLink="categoria"  class="nav-link align-middle px-0">
+                 
+                            <i class="bi bi-tags-fill"></i> <span class="ms-1 d-none d-sm-inline">Control Categorias</span>
+                        </a>
+                    </li>  
+                    <li class="nav-item">
+                        <a routerLink="misproductos"  class="nav-link align-middle px-0">
+                 
+                            <i class="bi bi-basket"></i> <span class="ms-1 d-none d-sm-inline">Control Productos</span>
+                        </a>
+                    </li>  
+                </ul>
+<!---Si es Vendedor -->
+<ul *ngIf="role=='VENDEDOR'" class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+    <li class="nav-item">
+        <a routerLink="perfil"  class="nav-link align-middle px-0">
+            <i class="bi bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Mis Datos</span>
+        </a>
+    </li>       
+
+      <li class="nav-item">
+        <a routerLink="ventas"  class="nav-link align-middle px-0">
+ 
+            <i class="bi bi-bag-fill"></i> <span class="ms-1 d-none d-sm-inline">Mis Ventas</span>
+        </a>
+    </li>   
+    <li class="nav-item">
+        <a routerLink="misproductos"  class="nav-link align-middle px-0">
+ 
+            <i class="bi bi-basket"></i> <span class="ms-1 d-none d-sm-inline">Mis Productos</span>
+        </a>
+    </li>  
+</ul>
             </div>
         </div>
         <div class="col py-3">

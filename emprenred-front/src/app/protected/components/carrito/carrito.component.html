@@ -1,4 +1,5 @@
-<div class="carrito">
+<div class="carrito"
+*ngIf="role!='ADMINISTRADOR'">
     <h2>Carrito de Compras</h2>
     <div class="botonvolver">
         <button class="btn"><a class="enlacevolver" routerLink="">Seguir comprando</a></button>
@@ -11,7 +12,7 @@
       				<th>Imagen</th> 
       				<th>Producto</th>
       				<th>Precio Unitario</th>
-					<th>Cantidad</th>
+				    	<th>Cantidad</th>
 			
     			</tr>
   			</thead>
@@ -111,11 +112,32 @@
           </div>
   </div>
 
-	<div class="text-end" *ngIf="this.compra.paymentType=='No seleccionado'">
+	<div class="text-end" *ngIf="this.compra.paymentType=='No seleccionado' || this.productos.length <=0">
     	<button class="botoncomprar" disabled>Comprar</button>
 	</div>
 
   <div class="text-end" *ngIf="this.compra.paymentType!='No seleccionado' && this.productos.length > 0 ">
-    <button class="botoncomprar">Comprar</button>
+    <button class="botoncomprar" (click)="generarCompra()">Comprar</button>
 </div>
 </div>
+
+
+<p-dialog [visible]="isLoading" >
+
+	<img src="assets/img/loading.gif" alt="PROCESANDO... ESPERE">
+	<p>Procesando... espere</p>
+
+</p-dialog>
+</div>
+
+
+<p-dialog *ngIf="role==='ADMINISTRADOR'" visible="true" [closable]="true" >
+
+	Vista de Carrito solo apta para Clientes. 
+
+</p-dialog>
+
+<p-dialog  [visible]="compraEnCurso" [closable]="false" >
+
+ Procesando la Compra... Espere...
+</p-dialog>

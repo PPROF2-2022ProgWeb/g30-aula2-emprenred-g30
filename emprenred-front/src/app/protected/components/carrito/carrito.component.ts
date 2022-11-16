@@ -13,16 +13,18 @@ import { MarketplaceService } from '../../../marketplace/services/marketplace.se
 })
 export class CarritoComponent implements OnInit {
 
-
+role: string; 
 
 isLoading: boolean = false; 
 
-
+compraEnCurso: boolean = false;
 categoria = "";
 productos: ProductosCarrito[];
 precioCarrito: number;
 email = localStorage.getItem('username');
 idUsuario:number = +localStorage.getItem('id')
+
+
 compra: Compra = {
 
   carritoId: 0,
@@ -38,6 +40,7 @@ compra: Compra = {
 
   ngOnInit(): void {
 
+this.role = localStorage.getItem('role')
    this.marketplaceService.consultarCarrito().subscribe((carrito)=>{
      
     this.productos = carrito.productos
@@ -102,15 +105,35 @@ this.marketplaceService.consultarCarrito().subscribe((carrito)=>{
 
   generarCompra(){ 
 
+    this.compraEnCurso = true; 
     this.marketplaceService.generarCompra(this.compra.carritoId, this.compra.paymentType).subscribe((resp)=>{
 
-    console.log(resp)
+      this.compraEnCurso = false;
+      Swal.fire({
+        title: 'Compra realizada con éxito',
+        text: 'El estado de la misma puede ser revisada en la sección "Mis Compras" ',
+        showDenyButton: true,
+        confirmButtonText: 'Ir a Mis Compras',
+        denyButtonText: `Seguir Comprando`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          
+          window.location.href = "/dashboard/compras";
+    
+        } else if (result.isDenied) {
+         
+          window.location.href = "/";
+    
+        }
+      })
 
-    }),(err) =>{
+    },(err) =>{
 
+      this.compraEnCurso = false; 
       alert(err)
     }
-  
+    )
 
   }
 

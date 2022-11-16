@@ -4,7 +4,7 @@ import {MenuItem} from 'primeng/api';
 import { delay } from 'rxjs';
 import { rol } from 'src/app/auth/interfaces/rol.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { TipoProducto } from 'src/app/marketplace/interfaces/producto.interface';
+import { ProductosCarrito, TipoProducto } from 'src/app/marketplace/interfaces/producto.interface';
 import { MarketplaceService } from 'src/app/marketplace/services/marketplace.service';
 import Swal from 'sweetalert2';
 
@@ -16,9 +16,13 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
 
+  numeroProductos: number = 0;
+  costoTotal: number = 0; 
   role: rol;
   termino: string = '';
-
+  nologueado: boolean = false;
+  productos: ProductosCarrito[];
+  precioCarrito: number;
   categorias: TipoProducto[] = [];
 
     usuario: string = ""
@@ -29,7 +33,26 @@ rol: string = localStorage.getItem('role')
 
              
   ngOnInit() {
-   
+    this.consultarCarrito();
+
+  this.authService.validarToken().subscribe((resp)=>{
+
+if(resp===false)  {
+  this.nologueado = true; 
+  localStorage.clear()
+ 
+
+}
+    
+  },(err) =>{
+
+   console.log('error de validacion de token - no se puede conectar al BACK')
+    
+  }
+  
+  
+  )
+
     this.usuario = localStorage.getItem('username')!
 
     this.authService.getRole().subscribe((rol => {
@@ -57,6 +80,7 @@ rol: string = localStorage.getItem('role')
     })
   
  
+  
 
 
 }
@@ -76,7 +100,7 @@ cerrarSesion(){
             localStorage.clear();
           Swal.fire('Su sesión ha sido cerrada', '', 'success')
           setTimeout(function(){
-            window.location.reload();
+            location.href = '/';
          }, 2000);
           
         } else if (result.isDenied) {
@@ -91,4 +115,19 @@ buscar(termino){
 console.log(termino)
 }
 
+consultarCarrito(){
+
+
+  this.marketplaceService.consultarCarrito().subscribe((carrito)=>{
+     
+    this.productos = carrito.productos
+    this.precioCarrito = carrito.precio!
+   
+
+   })  
 }
+
+
+}
+
+

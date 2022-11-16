@@ -9,6 +9,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
 import {RippleModule} from 'primeng/ripple';
+import {BadgeModule} from 'primeng/badge';
 
 @NgModule({
   declarations: [],
@@ -22,7 +23,8 @@ import {RippleModule} from 'primeng/ripple';
     InputNumberModule,
     TableModule,
     DialogModule,
-    RippleModule
+    RippleModule,
+    BadgeModule
 
   ]
 })

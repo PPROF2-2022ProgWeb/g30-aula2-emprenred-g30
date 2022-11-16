@@ -15,12 +15,14 @@
                <div class="col-md-5 align-items-center" >
                      <app-buscador  (onEnter)="buscar($event)"></app-buscador>
                </div>
+
+               <!---Carrito -->
                <div class="col-md-2">
-                   <div class="d-flex d-none d-md-flex flex-row align-items-left">
+                   <div class="d-flex d-none d-md-flex flex-row align-items-left" *ngIf="rol==='USUARIO'">
                        <span class="shop-bag"><a class="carritornlace" routerLink="dashboard/carrito"><i class='bx bxs-shopping-bag'></i></a></span>
                        <div class="d-flex flex-column ms-2">
-                            <span class="qty">2 productos</span>
-                           <span class="fw-bold">$2500</span>
+                            <span class="qty" *ngIf="productos.length>0">{{productos.length}} productos</span>
+                           <span class="fw-bold" *ngIf="precioCarrito>0">{{precioCarrito | currency}}</span>
                        </div>    
                    </div>           
                </div>
@@ -30,7 +32,7 @@
          
 
                     <ul class="navbar-nav d-flex align-items-center"
-                    *ngIf="this.usuario!=null">
+                    *ngIf="nologueado==false">
                       <li class="nav-item">
                           <div class="d-flex flex-row">
                               <img src="https://i.imgur.com/EYFtR83.jpg" class="rounded-circle" width="30">
@@ -59,7 +61,7 @@
                       </ul>
 
                       <ul class="navbar-nav d-flex align-items-center"
-                      *ngIf="this.usuario===null">
+                      *ngIf="nologueado==true">
                         <li class="nav-item">
                             <div class="d-flex flex-row">
                                 <button pButton onclick="location.href='/auth/login'" > Iniciar Sesion / Registrarse </button>

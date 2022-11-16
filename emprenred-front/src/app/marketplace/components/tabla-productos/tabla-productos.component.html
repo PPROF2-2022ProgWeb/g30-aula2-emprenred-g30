@@ -31,13 +31,18 @@
 					<img title="" alt="titulo"class="card-img-top" src="{{producto.imagen}}">
 				</div>
 				<div class="card-body">
+					<p-badge value="Vendedor/a: {{producto.vendedor.nombre}} {{producto.vendedor.apellido}}"  severity="success" styleClass="mr-2"></p-badge>
+					
 					<h5 class="card-title">{{producto.nombre}}</h5>
 					<p class="card-text">{{producto.descripcion}}</p>
 					<p class="card-precio">{{producto.precio | currency}}</p>
+					<p style="color: green" *ngIf="producto.stock>0">Disponible</p>
+					<p style="color:#FF0000" *ngIf="producto.stock<=0">Sin Stock</p>
 					<a class="btn btn-primary detallesproducto" routerLink="/productos/{{producto.tipoProducto.descripcion}}/{{producto.id}}">Detalles</a>
-					<button class="btn btn-primary botoncarrito" name="btnAccion" value="Agregar" (click)="evaluarStock(producto.id,producto.nombre)" [disabled]="isLoading">Agregar al carrito</button>
+					<button *ngIf="logueado && role=='USUARIO' && producto.stock>0" class="btn btn-warning botoncarrito" name="btnAccion" value="Agregar" (click)="evaluarStock(producto.id,producto.nombre)" [disabled]="isLoading">Agregar al carrito</button>
+					<button *ngIf="!logueado" class="btn btn-warning botoncarrito" name="btnAccion" value="Agregar" (click)="noLogueado()" [disabled]="isLoading">Agregar al carrito</button>
+					
 				</div>
-			</div>
 		</div>
 	</div>
 

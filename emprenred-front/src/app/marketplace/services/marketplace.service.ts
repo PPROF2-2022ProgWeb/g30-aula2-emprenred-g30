@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { Venta } from '../interfaces/compra.interface';
 import { Carrito, Producto, ProductoCreado, RespuestaProductos, TipoProducto, UpdateProducto } from '../interfaces/producto.interface';
 
 @Injectable({
@@ -166,7 +167,7 @@ generarCompra(idCarrito: number, paymentType: string) {
 }
 
 
-agregarProductoCarrito(id: number) {
+agregarProductoCarrito(id: number): Observable<any>{
 
   const url = `${ this.baseUrl}/carrito/add-product?productoId=${id}`;
 
@@ -174,9 +175,24 @@ agregarProductoCarrito(id: number) {
   const headers = new HttpHeaders()
   .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
 
-  console.log(headers)
-  return this.http.post(url, body, {headers} )
+  
+  return this.http.post<any>(url, body, {headers} )
 
 }
+
+
+consultarVentas(): Observable<Venta>{
+
+  const url = `${ this.baseUrl}/ventas`;
+
+ 
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+  
+  return this.http.get<Venta>(url, {headers} )
+
+}
+
 
 }

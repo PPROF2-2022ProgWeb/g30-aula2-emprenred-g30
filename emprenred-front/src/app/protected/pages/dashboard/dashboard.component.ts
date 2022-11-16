@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  role: string; 
   constructor() { }
 
   ngOnInit(): void {
+ 
+    this.role = localStorage.getItem('role')
+    
   }
 
 }

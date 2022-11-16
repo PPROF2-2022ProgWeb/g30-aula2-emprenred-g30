@@ -7,6 +7,7 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { FeatureComponent } from './components/feature/feature.component';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 import { FormsModule } from '@angular/forms';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 
 
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     CategoriasComponent,
     FeatureComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    NotfoundComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { FormsModule } from '@angular/forms';
   NavbarComponent,
   CategoriasComponent,
   FeatureComponent,
-  HomeComponent
+  HomeComponent,
+  NotfoundComponent
   ]
 })
 export class SharedModule { }

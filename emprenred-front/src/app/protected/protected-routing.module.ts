@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotfoundComponent } from '../shared/pages/notfound/notfound.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { ComprasComponent } from './components/compras/compras.component';
@@ -18,6 +19,8 @@ const routes: Routes = [
       path: '',
 component: DashboardComponent,
       children: [
+        {path: '',
+      component: DefaultComponent},
         {
           path: 'carrito',
           component: CarritoComponent
@@ -50,10 +53,8 @@ component: DashboardComponent,
           path: 'misproductos',
           component: MisProductosComponent
         },
-        {
-          path: '**',
-          component: DefaultComponent
-        }
+        { path: '**', pathMatch: 'full', 
+        component: NotfoundComponent }
       ]
 
 

@@ -1,1 +1,41 @@
-<p>ventas works!</p>
+<p-panel header="Ventas" >
+    <p-table [value]="compras.content" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID de Venta</th>
+                <th>Fecha</th>
+                <th>Comprador</th>
+                <th>Detalle Productos</th>
+                <th>Estado</th>
+                <th>Costo total</th>
+                <th>Acciones</th>
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-compras>
+            <tr>
+                <td>{{compras.id}}</td>
+                <td>{{compras.fechaDeCreacion}}</td>
+                <td>{{compras.comprador.nombre}} {{compras.comprador.apellido}}</td>
+                <td><ul>
+                <li *ngFor="let producto of compras.productos">
+                 {{producto.nombre}} -- Precio $ {{producto.precio}}   
+                 </li>  </ul> </td>
+                <td>{{compras.estado}} - {{compras.tipoDePago}}</td>
+                 <td>{{compras.precioTotal | currency}} ARS</td>
+                 <td> <button pButton>Cambiar Estado</button>  </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+
+<!----
+<p-dialog header="{{nombreCategoria}}" [(visible)]="display" (closable)="true">
+    <small>Nuevo nombre para categoria <b>{{nombreCategoria}}</b></small>
+    <br><br>
+    <form  (ngSubmit)="enviar()" autocomplete="off" [formGroup]="cambioCategoria">
+    <input type="text" pInputText formControlName="descripcion" >  
+    &nbsp; <button type="submit" pButton>Guardar</button>   &nbsp;&nbsp;<button pButton (click)="display=false">Cancelar</button> 
+</form>
+</p-dialog>
+--->

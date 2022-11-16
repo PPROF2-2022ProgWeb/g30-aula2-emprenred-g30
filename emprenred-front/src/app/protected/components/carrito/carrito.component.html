@@ -112,12 +112,12 @@
           </div>
   </div>
 
-	<div class="text-end" *ngIf="this.compra.paymentType=='No seleccionado'">
+	<div class="text-end" *ngIf="this.compra.paymentType=='No seleccionado' || this.productos.length <=0">
     	<button class="botoncomprar" disabled>Comprar</button>
 	</div>
 
   <div class="text-end" *ngIf="this.compra.paymentType!='No seleccionado' && this.productos.length > 0 ">
-    <button class="botoncomprar">Comprar</button>
+    <button class="botoncomprar" (click)="generarCompra()">Comprar</button>
 </div>
 </div>
 
@@ -135,4 +135,9 @@
 
 	Vista de Carrito solo apta para Clientes. 
 
+</p-dialog>
+
+<p-dialog  [visible]="compraEnCurso" [closable]="false" >
+
+ Procesando la Compra... Espere...
 </p-dialog>

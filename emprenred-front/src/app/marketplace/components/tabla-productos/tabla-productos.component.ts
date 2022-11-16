@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Producto, ProductosCarrito } from '../../interfaces/producto.interface';
 import { MarketplaceService } from '../../services/marketplace.service';
 import { TipoProducto } from '../../../marketplace/interfaces/producto.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-tabla-productos',
@@ -23,8 +24,11 @@ export class TablaProductosComponent implements OnInit {
     this.isMenuOpened = !this.isMenuOpened;
  }
 
- categorias: TipoProducto[] = [];
-  categoria: string;
+ role: string;
+logueado: boolean = false;
+
+categorias: TipoProducto[] = [];
+categoria: string;
 productos: Producto[];
 productosCarrito: ProductosCarrito[];
 encontrado: ProductosCarrito;
@@ -34,10 +38,32 @@ busqueda: string;
 
   constructor(private activatedRoute : ActivatedRoute,
              private marketplaceService: MarketplaceService,
-             private titleCase: TitleCasePipe) { }
+             private titleCase: TitleCasePipe,
+             private authService: AuthService,
+           ) { }
 
   ngOnInit(): void {
     
+
+//validando si el usuario esta logueado, es admin, etc
+
+this.role = localStorage.getItem('role')
+    this.authService.validarToken().subscribe((resp)=>{
+
+      if(resp)  {
+        this.logueado = true; 
+     
+
+        console.log(this.logueado)
+      }}, (err)=>{
+        this.logueado = false
+        console.log(this.logueado)
+      });
+
+
+
+
+
     this.marketplaceService.getCategorias()
     .subscribe( (categorias) => {
     
@@ -150,8 +176,8 @@ agregarAlCarrito(id:number,nombre:string) {
   this.isLoading=true
   
     this.marketplaceService.agregarProductoCarrito(id).subscribe((resp)=>{
-this.isLoading=false
-      Swal.fire({
+      this.isLoading=false
+     Swal.fire({
         icon: 'success',
         position: 'top-end',
         title: 'Producto Agregado al Carrito',
@@ -161,14 +187,21 @@ this.isLoading=false
       })
    
  
-    }),(err) =>{
+    },error =>{
       this.isLoading=false
-console.log(err)
+      console.log(error)
+      Swal.fire({
+        icon: 'error',
+        position: 'top-end',
+        title: 'No se puede agregar al carrito',
+        text: error.error.message,
+        showConfirmButton: false,
+        timer: 2000
+      })
 
     }
 
-  
-
+    )
 
 }
 
@@ -220,4 +253,27 @@ this.agregarAlCarrito(id,nombre)
 
 }
 
+
+
+noLogueado(){
+  Swal.fire({
+    title: 'No estás Logueado, tu sesión Caducó, o no estás Registrado',
+    showDenyButton: true,
+    confirmButtonText: 'Ir al Login',
+    denyButtonText: `Registrarme`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      
+      window.location.href = "/auth/login";
+
+    } else if (result.isDenied) {
+     
+      window.location.href = "/auth/register";
+
+    }
+  })
+
+
+}
 }

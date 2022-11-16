@@ -30,6 +30,8 @@ compra: Compra = {
   carritoId: 0,
   paymentType: 'No seleccionado'
 }
+  linkpagomp: string;
+  modalmp: boolean;
 
 
   constructor(private activatedRoute : ActivatedRoute,
@@ -104,14 +106,34 @@ this.marketplaceService.consultarCarrito().subscribe((carrito)=>{
 
 
   generarCompra(){ 
-
     this.compraEnCurso = true; 
+
+    if(this.compra.paymentType === 'MERCADO_PAGO'){
+
+this.marketplaceService.generarCompraMP(this.compra.carritoId, this.compra.paymentType).subscribe((resp)=>{
+
+  this.compraEnCurso = false; 
+  this.modalmp = true; 
+  this.linkpagomp = resp.initPoint;
+
+}, (err)=>{
+
+  this.compraEnCurso = false; 
+ alert('problema en el servidor, intente en otro momento. ')
+
+
+})
+
+
+
+    } else { 
+
     this.marketplaceService.generarCompra(this.compra.carritoId, this.compra.paymentType).subscribe((resp)=>{
 
       this.compraEnCurso = false;
       Swal.fire({
         title: 'Compra realizada con éxito',
-        text: 'El estado de la misma puede ser revisada en la sección "Mis Compras" ',
+        text: 'El estado de la misma puede ser revisada en la sección "Mis Compras". El vendedor se pondrá en contacto con vos via email para concretar la venta ',
         showDenyButton: true,
         confirmButtonText: 'Ir a Mis Compras',
         denyButtonText: `Seguir Comprando`,
@@ -134,7 +156,7 @@ this.marketplaceService.consultarCarrito().subscribe((carrito)=>{
       alert(err)
     }
     )
-
+  }
   }
 
   aumentarProducto(id:number, stock: number, cantidad: number ){ 

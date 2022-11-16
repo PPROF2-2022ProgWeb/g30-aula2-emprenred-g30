@@ -26,12 +26,12 @@ private baseUrl: string = "http://localhost:8080";
 
   // REGISTRO
 
-  register(nombre: string ,apellido: string ,email: string ,localidad: string ,fechaNac: string ,password:string ,password2:string ) {
+  register(apellido: string, email: string, fechaNac: string, localidad: string, nombre: string, password: string) {
 
 
 
     const url = `${ this.baseUrl}/registro`;
-    const body = { nombre,apellido,email,localidad,password,fechaNac,password2};
+    const body = { apellido,email,fechaNac,localidad,nombre,password};
 
    return this.http.post(url, body).subscribe(resp => {
     Swal.fire({

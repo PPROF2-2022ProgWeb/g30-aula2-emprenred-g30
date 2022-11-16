@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Venta } from '../interfaces/compra.interface';
+import { VentaMP } from '../interfaces/mercadopago.interface';
 import { Carrito, Producto, ProductoCreado, RespuestaProductos, TipoProducto, UpdateProducto } from '../interfaces/producto.interface';
 
 @Injectable({
@@ -191,6 +192,29 @@ consultarVentas(): Observable<Venta>{
 
   
   return this.http.get<Venta>(url, {headers} )
+
+}
+
+generarCompraMP(idCarrito: number, paymentType: string): Observable<VentaMP> { 
+
+  const url = `${ this.baseUrl}/ventas?carritoId=${idCarrito}&paymentType=${paymentType}`;
+ const body = "";
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+  return this.http.post<VentaMP>(url, body, {headers} )
+
+}
+
+depurarVenta(id:number, estado: string) {
+
+  const url = `${ this.baseUrl}/ventas/cancel/${id}?status=${estado}`;
+ const body = "";
+  const headers = new HttpHeaders()
+  .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+
+  return this.http.put(url, body, {headers} )
+
 
 }
 

@@ -23,7 +23,7 @@
                  </li>  </ul> </td>
                 <td>{{compras.estado}} - {{compras.tipoDePago}}</td>
                  <td>{{compras.precioTotal | currency}} ARS</td>
-                 <td> <button pButton>Cambiar Estado</button>  </td>
+                 <td> <button pButton (click)="depurarVenta(compras.id, 'PAGADO')">Marcar como Pagada</button> <button pButton (click)="depurarVenta(compras.id, 'CANCELADO')" >Cancelar Venta</button>   </td>
             </tr>
         </ng-template>
     </p-table>

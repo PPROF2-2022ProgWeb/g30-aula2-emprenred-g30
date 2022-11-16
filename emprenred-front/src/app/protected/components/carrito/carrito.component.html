@@ -131,7 +131,7 @@
 </div>
 
 
-<p-dialog *ngIf="role==='ADMINISTRADOR'" visible="true" [closable]="true" >
+<p-dialog *ngIf="role==='ADMINISTRADOR'" visible="true" [closable] >
 
 	Vista de Carrito solo apta para Clientes. 
 
@@ -141,3 +141,12 @@
 
  Procesando la Compra... Espere...
 </p-dialog>
+
+<p-dialog  [visible]="modalmp" >
+
+  <p>Excelente, hemos generado tu orden de compra, pagá a continuación en MercadoPago</p>
+  <br>
+  <a href="{{this.linkpagomp}}" target="_blank"><button pButton> Pagar en MercadoPago</button></a>
+  
+
+ </p-dialog>

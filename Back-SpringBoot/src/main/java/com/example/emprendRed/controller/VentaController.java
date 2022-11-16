@@ -3,6 +3,7 @@ package com.example.emprendRed.controller;
 import com.example.emprendRed.model.DTO.VentaDTO;
 import com.example.emprendRed.model.Venta;
 import com.example.emprendRed.service.VentaService;
+import com.mercadopago.resources.preference.Preference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -20,14 +21,15 @@ public class VentaController {
     private VentaService ventaService;
 
     @PostMapping("")
-    public ResponseEntity<Long> createVenta(@RequestParam  Long carritoId,
-                                            @RequestParam String paymentType){
+    public ResponseEntity<Preference> createVenta(@RequestParam  Long carritoId,
+                                                  @RequestParam String paymentType){
 
         return new ResponseEntity<>(ventaService.createVenta(carritoId,paymentType), HttpStatus.CREATED);
     }
     @PutMapping("/cancel/{id}")
-    public ResponseEntity<Void> cancelVenta(@PathVariable Long id){
-        ventaService.cancelVenta(id);
+    public ResponseEntity<Void> cancelVenta(@PathVariable Long id,
+                                            @RequestParam ("status") String status){
+        ventaService.cancelVenta(id, status);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("")
@@ -43,5 +45,10 @@ public class VentaController {
     @GetMapping("{id}")
     public ResponseEntity<Venta> getVentaById (@PathVariable Long id){
         return new ResponseEntity<>(ventaService.getVentaById(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/preference/{id}")
+    public ResponseEntity<Preference> getPreferenceByVentaId (@PathVariable Long id){
+        return new ResponseEntity<>(ventaService.getPreferenceByVentaId(id),HttpStatus.OK);
     }
 }

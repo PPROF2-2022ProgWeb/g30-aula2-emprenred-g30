@@ -28,7 +28,7 @@ public class EditUserDTO {
         this.role = role;
     }
 
- 
+
     public String getNombre() {
         return nombre;
     }

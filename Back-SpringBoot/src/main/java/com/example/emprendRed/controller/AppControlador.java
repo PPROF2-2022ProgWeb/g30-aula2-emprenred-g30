@@ -94,4 +94,12 @@ public class AppControlador {
 
         return new ResponseEntity (service.putUserById(id,editUserDTO),HttpStatus.OK);
     }
+
+    @PutMapping("/users/{id}/delete")
+    @PreAuthorize("hasAuthority('ADMINISTRADOR')")
+    public ResponseEntity<?> deleteUserById (@PathVariable ("id") Long id){
+
+        service.deleteUSer(id);
+        return new ResponseEntity (HttpStatus.OK);
+    }
 }

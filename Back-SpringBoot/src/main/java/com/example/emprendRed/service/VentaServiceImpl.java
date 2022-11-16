@@ -4,14 +4,16 @@ import com.example.emprendRed.Enum.PAYMENT_TYPE;
 import com.example.emprendRed.Enum.ROLE;
 import com.example.emprendRed.Enum.VENTA_STATUS;
 import com.example.emprendRed.exceptions.BadRequestException;
-import com.example.emprendRed.model.Carrito;
-import com.example.emprendRed.model.Persona;
-import com.example.emprendRed.model.Productos;
-import com.example.emprendRed.model.Venta;
+import com.example.emprendRed.model.*;
 import com.example.emprendRed.repository.CarritoRepositorio;
+import com.example.emprendRed.repository.PreferenceMPRepositorio;
 import com.example.emprendRed.repository.ProductosRepositorio;
 import com.example.emprendRed.repository.VentaRepositorio;
 import com.example.emprendRed.utils.Utils;
+import com.mercadopago.client.preference.PreferenceClient;
+import com.mercadopago.exceptions.MPApiException;
+import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.preference.Preference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -33,11 +35,17 @@ public class VentaServiceImpl implements VentaService {
 
     @Autowired
     private ProductosRepositorio productosRepositorio;
+
+    @Autowired
+    private MPService mpService;
+
+    @Autowired
+    private PreferenceMPRepositorio preferenceMPRepositorio;
     @Autowired
     private Utils utils;
     @Override
     @Transactional
-    public Long createVenta(Long carritoId, String paymentType) {
+    public Preference createVenta(Long carritoId, String paymentType) {
         Persona comprador = utils.getPersonContext();
         Carrito carrito = carritoRepositorio.findById(carritoId).orElseThrow(()->new BadRequestException("Id de carrito invalido"));
 
@@ -73,23 +81,46 @@ public class VentaServiceImpl implements VentaService {
         carritoRepositorio.save(carrito);
 
         updateStrockProducto(venta.getProductos(),true);
-        return newVenta.getId();
+        Preference preference= null;
+        if (venta.getTipoDePago().equals(PAYMENT_TYPE.MERCADO_PAGO)){
+            try {
+                preference = mpService.create(venta);
+                newVenta.setEstado(VENTA_STATUS.REDIRECT_MP);
+
+                PreferenceMP preferenceMP = new PreferenceMP();
+                preferenceMP.setPreferenceId(preference.getId());
+                preferenceMP.setVentaId(newVenta.getId());
+
+                preferenceMPRepositorio.save(preferenceMP);
+                ventaRepositorio.save(newVenta);
+            } catch (MPException e) {
+                throw new RuntimeException(e);
+            } catch (MPApiException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        return preference;
     }
 
     @Override
     @Transactional
-    public void cancelVenta(Long id) {
+    public void cancelVenta(Long id, String status ) {
         Persona persona = utils.getPersonContext();
         Venta venta = ventaRepositorio.findById(id).orElseThrow(()->new BadRequestException("No se encontro la venta id " + id));
         String role = utils.getRoleContext();
         if (venta.getComprador().getId()!= persona.getId() &&
             venta.getVendedor().getId()!= persona.getId() &&
-          role.equalsIgnoreCase(ROLE.ADMINISTRADOR.toString())){
+          !role.equalsIgnoreCase(ROLE.ADMINISTRADOR.toString())){
             new BadRequestException("No tiene accesoa esta venta");
         }
         if (venta.getEstado().equals(VENTA_STATUS.PAGADO)){
             new BadRequestException("No se puede cancelar una venta en estado pagado");
         }
+        if (venta.getTipoDePago().equals(PAYMENT_TYPE.MERCADO_PAGO)){
+            new BadRequestException("No  puede hacer cambios de estado en esta venta");
+        }
+        VENTA_STATUS statusFinal = status.equals(VENTA_STATUS.PAGADO.toString())?VENTA_STATUS.PAGADO:VENTA_STATUS.CANCELADO;
         venta.setEstado(VENTA_STATUS.CANCELADO);
 
         ventaRepositorio.save(venta);
@@ -137,6 +168,23 @@ public class VentaServiceImpl implements VentaService {
         return venta;
     }
 
+     @Override
+     public Preference getPreferenceByVentaId (Long id){
+        String preferenceId = preferenceMPRepositorio.getPreferenceMPByVentaId(id).getPreferenceId();
+
+         PreferenceClient client = new PreferenceClient();
+         Preference preference;
+         try {
+
+          preference =  client.get(preferenceId);
+         } catch (MPException e) {
+             throw new RuntimeException(e);
+         } catch (MPApiException e) {
+             throw new RuntimeException(e);
+         }
+        return preference;
+     }
+
     private void  updateStrockProducto (List<Productos> productos, Boolean isVenta){
 
         for ( Productos producto : productos) {
@@ -150,5 +198,6 @@ public class VentaServiceImpl implements VentaService {
         }
 
     }
+
 
 }

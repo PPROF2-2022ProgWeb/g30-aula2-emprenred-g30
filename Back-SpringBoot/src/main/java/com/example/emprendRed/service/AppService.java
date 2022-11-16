@@ -213,5 +213,13 @@ public class AppService implements UserDetailsService{
 
         return editUserDTO;
     }
+
+    public void deleteUSer (Long id){
+        Usuario usuario = usuarioRepositorio.findById(id).orElseThrow(()-> new BadRequestException("no se econtro usuario"));
+
+        usuario.setFechaDeBaja(new Date());
+
+        usuarioRepositorio.save(usuario);
+    }
     
 }

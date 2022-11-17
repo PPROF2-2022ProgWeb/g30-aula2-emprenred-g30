@@ -1,13 +1,17 @@
 <p-panel header="Mis Productos">
-    <select class="form-control" >
-        <option [disabled]="true">Ordenar por: </option>
-        <option (click)="filtro='precioAsc'">Precio: Mayor a menor </option>
-        <option >Precio: Menor a mayor </option>
-        <option >Fecha: Mas Recientes </option>
-        <option >Fecha: Mas Antiguos </option>
-    </select>
+  
+
+<p>Ordenar:  <p-badge value="Precio Ascendente" class="clickeable" (click)="filtro='precioAsc'" styleClass="mr-2"></p-badge>
+    <p-badge class="clickeable" value="Precio Descendente"  (click)="filtro='precioDsc'" severity="info" styleClass="mr-2"></p-badge>
+    <p-badge class="clickeable" value="Mas Recientes" (click)="filtro='fechaAsc'"  severity="success" styleClass="mr-2"></p-badge>
+    <p-badge class="clickeable" value="Mas Antiguos" (click)="filtro='fechaDsc'"  severity="danger" styleClass="mr-2"></p-badge>
+
+</p>
+
+
+    
     <p-table [value]="misproductos | ordenar:filtro" responsiveLayout="scroll">
-     
+    
         <ng-template pTemplate="header">
             <tr>
                 <th>Identificador</th>
@@ -28,7 +32,7 @@
                 <td>{{misproductos.precio | currency}}</td>
                  <td> 
                     <button pButton (click)="productoSeleccionado(misproductos.id)" label="Modificar"></button> &nbsp;  &nbsp;
-                    <button pButton type="button" label="Eliminar" class="p-button-danger"></button>
+                    <button pButton type="button" label="Eliminar" (click)="eliminarProducto(misproductos.id, misproductos.nombre)" class="p-button-danger"></button>
                  </td>
             </tr>
         </ng-template>
@@ -108,5 +112,4 @@ class="file-upload">
      <mat-icon>attach_file</mat-icon>
  </button>
 </div>
-    
 </p-dialog>

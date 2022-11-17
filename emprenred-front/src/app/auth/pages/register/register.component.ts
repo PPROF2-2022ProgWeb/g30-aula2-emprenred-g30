@@ -86,11 +86,11 @@ registro() {
  const fechaNac1 = this.datePipe.transform(this.formularioRegistro.get('fechaNac').value, 'dd-MM-yyyy')
 
 
-  const {apellido,email,fechaNac,localidad,nombre,password} = this.formularioRegistro.value;
+  const {apellido,email,localidad,nombre,password} = this.formularioRegistro.value;
 
   console.log(this.formularioRegistro.value)
 
-  this.authService.register(apellido,email,fechaNac, localidad,nombre,password)
+  this.authService.register(apellido,email,fechaNac1, localidad,nombre,password)
 
 }
 repitaPassword() {

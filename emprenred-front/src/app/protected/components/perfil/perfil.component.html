@@ -52,7 +52,8 @@
 </div>
 <br>
 
-<p-button label="Guardar Cambios" type="submit" icon="pi pi-check" iconPos="left"></p-button>
+<p-button label="Guardar Cambios" *ngIf="rol.authority!='ADMINISTRADOR'" type="submit" icon="pi pi-check" iconPos="left"></p-button>
+<small *ngIf="rol.authority=='ADMINISTRADOR'">Los cambios en cuentas Administrador solo pueden ser realizados desde el Backend.</small>
 <br>
 </form>
 </p-panel>
@@ -89,7 +90,7 @@
     </div>
 <br>
 <div class="izquierdo">
-    <p-button  label="Cambiar Contraseña" (disabled)="true" icon="pi pi-check" iconPos="left"></p-button>
+    <p-button  [disabled]="true" label="Cambiar Contraseña" (disabled)="true" icon="pi pi-check" iconPos="left"></p-button>
     </div>
     <br>
 

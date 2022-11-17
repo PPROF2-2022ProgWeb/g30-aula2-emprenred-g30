@@ -120,7 +120,7 @@ actualizarPerfil: FormGroup = this.formBuilder.group({
 
         const body = this.actualizarPerfil.value;
 
-        this.marketplaceService.actualizarPerfil(id,body).subscribe((resp)=>{
+        this.authService.actualizarPerfil(id,body).subscribe((resp)=>{
         
         alert('Actualizado OK')
         

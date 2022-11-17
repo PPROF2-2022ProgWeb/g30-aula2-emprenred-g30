@@ -20,7 +20,7 @@ const routes: Routes = [
 component: DashboardComponent,
       children: [
         {path: '',
-      component: DefaultComponent},
+      component: PerfilComponent},
         {
           path: 'carrito',
           component: CarritoComponent

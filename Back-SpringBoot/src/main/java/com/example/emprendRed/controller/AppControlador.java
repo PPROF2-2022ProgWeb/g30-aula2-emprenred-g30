@@ -73,7 +73,7 @@ public class AppControlador {
     @ApiOperation(value = "Retorna lista de usaurios")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a lista de usuarios"),
-            @ApiResponse(code = 403, message = "No autorizado para hacer la transacsion"),
+            @ApiResponse(code = 403, message = "No autorizado para hacer la transaccion"),
             @ApiResponse(code = 500, message = "Ups! error de sistema "),
     })
     @GetMapping("users")

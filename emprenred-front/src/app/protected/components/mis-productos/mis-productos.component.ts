@@ -203,5 +203,43 @@ onFileSelected(event) {
   }
 }
 
+eliminarProducto(id:number, nombre:string) {
+
+
+  Swal.fire({
+    title: 'Eliminar Producto',
+    text: "Confirma la eliminación del producto "+ nombre +"?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, eliminar',
+    cancelButtonText: 'No, mantener'
+  }).then((result) => {
+    if (result.isConfirmed) {
+     
+
+      this.marketplaceService.eliminarProducto(id).subscribe(()=>{
+        Swal.fire({
+          icon: 'error',
+          title: 'Producto Eliminado',
+          text: 'El producto ' + nombre +' ha sido eliminado'
+        })
+      
+      },(err)=>{
+      
+      alert('Error del servidor')
+      
+      })
+
+
+    }
+  })
+
+
+
+
+
+}
 
 }

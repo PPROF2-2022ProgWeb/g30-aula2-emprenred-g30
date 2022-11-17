@@ -1,8 +1,10 @@
+
 <div class="titulo">
-	<h2>Productos | {{categoria}}</h2>
+	<h4 *ngIf="categoria==null || '' || undefined"> <i class="bi bi-shop"></i> Productos</h4>
+	<h4 *ngIf="categoria!=null"> <i class="bi bi-shop"></i> Productos | {{categoria}}</h4>
 </div>
 <div class="filtros">
-	<div class=" menufiltros" (click)="filtromenu() ">Ordenar por:</div>
+	<div class=" menufiltros" (click)="filtromenu() "><i class="bi bi-arrow-down-circle"></i> Ordenar por:</div>
 	<div class="opcionesfiltro" *ngIf="isMenuOpened">
 		<div class="filtro-item primero" (click)="filtro='precioDsc'">Precio:menor a mayor</div>
 		<div class="filtro-item" (click)="filtro='precioAsc'">Precio:mayor a menor</div>
@@ -11,6 +13,7 @@
 	</div>
 </div>
 <div class="container">
+
 	<div class="lateral">
 		<div class="categorias">
 			<h4>Categorias</h4>
@@ -24,8 +27,11 @@
 	</div>
 	
 	<div class="row" >
+		<p-message severity="info" text="Por el momento solo es posible agregar a tu carrito productos del mismo vendedor."></p-message>
+
 		<div class="col-4 resultados" 
 		*ngFor="let producto of productos | ordenar:filtro">
+		
 			<div class="card">
 				<div class="imagencontainer">
 					<img title="" alt="titulo"class="card-img-top" src="{{producto.imagen}}">

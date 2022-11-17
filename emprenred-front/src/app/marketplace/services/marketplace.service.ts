@@ -219,15 +219,17 @@ depurarVenta(id:number, estado: string) {
 
 }
 
-actualizarPerfil(id:number, body:any){
 
-  const url = `${ this.baseUrl0}users/${id}`;
+eliminarProducto(id:number){
+
+  const url = `${ this.baseUrl}/productos/${id}`;
   const headers = new HttpHeaders()
   .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
 
-  return this.http.put(url, body, {headers})
+  return this.http.delete(url, {headers})
 
-  }
+
+}
 
 
 

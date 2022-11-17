@@ -3,7 +3,7 @@ export interface Usuario {
     nombre:    string;
     apellido:  string;
     localidad: string;
-    fechaNac:  Date;
+    fechaNac:  Date | string;
     email:     string;
     role:      string;
 

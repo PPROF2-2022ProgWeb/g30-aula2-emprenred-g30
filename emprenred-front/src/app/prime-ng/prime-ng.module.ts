@@ -10,6 +10,8 @@ import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
 import {RippleModule} from 'primeng/ripple';
 import {BadgeModule} from 'primeng/badge';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message'
 
 @NgModule({
   declarations: [],
@@ -24,8 +26,10 @@ import {BadgeModule} from 'primeng/badge';
     TableModule,
     DialogModule,
     RippleModule,
-    BadgeModule
-
+    BadgeModule,
+    MessageModule,
+    MessagesModule
+    
   ]
 })
 export class PrimeNgModule { }

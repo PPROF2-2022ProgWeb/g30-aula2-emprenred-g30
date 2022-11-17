@@ -144,5 +144,25 @@ getUsuarios():Observable<Usuario[]>{
   
 }
 
+bajaUsuario(id:number){
+  //agrega 'Fecha de baja' 
+    const url = `${ this.baseUrl}/users/${id}/delete`;
+    const body = '';
+    const headers = new HttpHeaders()
+    .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+  
+    return this.http.put(url, body, {headers})
+  
+  }
+
+  actualizarPerfil(id:number, body:any){
+
+    const url = `${ this.baseUrl}/users/${id}`;
+    const headers = new HttpHeaders()
+    .set('Authorization',localStorage.getItem('token') || ''); // o String vacio.
+  
+    return this.http.put(url, body, {headers})
+  
+    }
 
 }

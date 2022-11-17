@@ -276,4 +276,21 @@ noLogueado(){
 
 
 }
+
+updateRouter(){
+
+
+  this.activatedRoute.params.subscribe(({categoria})=>{        
+      
+
+
+    this.categoria = categoria;
+    console.log(this.categoria)
+    this.marketplaceService.listarProductos()
+
+
+});
+
+}
+
 }

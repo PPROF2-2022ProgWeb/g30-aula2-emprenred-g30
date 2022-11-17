@@ -22,7 +22,7 @@
                        <span class="shop-bag"><a class="carritornlace" routerLink="dashboard/carrito"><i class='bx bxs-shopping-bag'></i></a></span>
                        <div class="d-flex flex-column ms-2">
                             <span class="qty" *ngIf="productos.length>0">{{productos.length}} productos</span>
-                           <span class="fw-bold" *ngIf="precioCarrito>0">{{precioCarrito | currency}}</span>
+                           <span class="fw-bold" *ngIf="precioCarrito>0 && productos.length>0">{{precioCarrito | currency}}</span>
                        </div>    
                    </div>           
                </div>

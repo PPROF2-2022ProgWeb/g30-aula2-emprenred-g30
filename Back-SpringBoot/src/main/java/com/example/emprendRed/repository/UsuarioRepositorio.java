@@ -19,7 +19,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario,Long>{
      @Query("SELECT u FROM Usuario u WHERE u.username = :username AND u.fechaDeBaja IS NULL")
     Usuario buscarUsuarioPorEmail(@Param("username") String username);
 
-     @Query(value = "SELECT p.id , p.nombre ,p.apellido,p.localidad,p.fecha_nac,u.username,u.role FROM usuario u " +
+     @Query(value = "SELECT p.id , p.nombre ,p.apellido,p.localidad,p.fecha_nac,u.username, u.role FROM usuario u " +
              "inner join personas p ON p.id = u.persona_id " +
              "WHERE u.fecha_de_baja IS NULL " , nativeQuery = true)
      List<Object[]> getAllUsers();

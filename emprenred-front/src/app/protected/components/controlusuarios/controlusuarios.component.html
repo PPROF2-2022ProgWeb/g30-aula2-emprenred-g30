@@ -6,8 +6,9 @@
                     <th>Email</th>
                     <th>Nombre y Apellido</th>
                     <th>Tipo de Cuenta</th>
+                    <th>Baja</th>
                     <th>Acciones</th>
-                  
+                    
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-usuarios>
@@ -16,12 +17,23 @@
                     <td>{{usuarios.email}}</td>
                     <td>{{usuarios.nombre+' '+usuarios.apellido}}</td>
                     <td>{{usuarios.role}}</td>
+                    <td>{{usuarios.fechaDeBaja}}</td>
                      <td> 
-                        <button pButton label="Modificar"></button> &nbsp;  &nbsp;
-                        <button pButton type="button" label="Eliminar" class="p-button-danger"></button>
+                        <button pButton label="Modificar"  (click)="setearUsuario(usuarios.id,usuarios.nombre,usuarios.apellido, usuarios.email, usuarios.fechaNac, usuarios.localidad, usuarios.role)" (click)="dialogoRol=true"></button> &nbsp;  &nbsp;
+                        <button pButton type="button" (click)="bajaUsuario(usuarios.id)" label="Dar de baja" class="p-button-danger"></button>
                      </td>
                 </tr>
             </ng-template>
         </p-table>
 
     </p-panel>
+
+    <p-dialog  [(visible)]="dialogoRol" [closable]="true" [closeOnEscape]="true" [header]="usuarioSelect.email">
+
+        <p> Rol Actual: </p> <p>{{usuarioSelect.role}}</p>
+        <br>
+
+        <p-button *ngIf="usuarioSelect.role!='VENDEDOR'" (click)="cambiarRol(this.usuarioSelect.id, 'VENDEDOR')">Cambiar a Vendedor</p-button>
+        <p-button  *ngIf="usuarioSelect.role!='USUARIO'" (click)="cambiarRol(this.usuarioSelect.id, 'USUARIO')">Cambiar a Usuario</p-button>
+        
+    </p-dialog>

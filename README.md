@@ -6,6 +6,9 @@
     `------' `--'   `--' `--'      `--' '--' `------' `--'  `--' `--' '--' `------' `-------'  
                                        2  0  2  2 
                                       
+                          Marketplace en Angular-MySQL-SpringBoot
+                                   Integrado a MercadoPago
+                                      
  Celeste Miranda(backend) - Noelia Cabral (frontend) - Oscar Gallardo(backend) - Felipe Rebolledo(frontend)
       @Celeste-Miranda         @dakoo096                  @OscarGallardo35              @rebofel  
                         

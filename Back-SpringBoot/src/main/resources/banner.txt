@@ -1,0 +1,14 @@
+,------.                                             ,------.  ,------. ,------.   
+|  .---' ,--,--,--.  ,---.  ,--.--.  ,---.  ,--,--,  |  .--. ' |  .---' |  .-.  \  
+|  `--,  |        | | .-. | |  .--' | .-. : |      \ |  '--'.' |  `--,  |  |  \  : 
+|  `---. |  |  |  | | '-' ' |  |    \   --. |  ||  | |  |\  \  |  `---. |  '--'  / 
+`------' `--`--`--' |  |-'  `--'     `----' `--''--' `--' '--' `------' `-------'  
+                    `--'                                                           
+           Back: Celeste Miranda
+                 Oscar Gallardo
+
+           Front: Felipe Rebolledo
+                  Noelia Cabral
+
+${application.title} ${application.version}
+Powered by Spring Boot ${spring-boot.version}

@@ -31,7 +31,7 @@
                                - Vendedor:       jackiechan@gmail.com     pw: 12345678
                                - Usuario:        usuariocomun@gmail.com   pw: 12345678
                                
-       5. Si deseas ver los endpoint, podés entrar a Swagger. 
+       5. Si deseas ver los endpoint, podés entrar a Swagger. http://localhost:8080/swagger-ui/index.html#/
        6. Proyecto que seguirá siendo mantenido, este es un Work In Progress,
                                                               ... seguiremos trabajando para aprender más
                                                           

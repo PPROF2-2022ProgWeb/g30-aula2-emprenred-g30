@@ -16,7 +16,7 @@
                            Proyecto Final Modulo Programador Web 
                                2°Año-Cohorte2021-TDWAD-ISPC
                   
-                      *** Video Grupal: https://youtu.be/6xU1QxX_Vc0 ***
+                      *** Video Grupal: https://youtu.be/_m-AmYDlAe8 ***
                     
                                     Instrucciones
                                     
